@@ -16,5 +16,9 @@ namespace AccountingOfSales.Models.ModelDB
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Model { get; set; }
+        public string Color { get; set; }
+        public string Size { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
     }
 }
