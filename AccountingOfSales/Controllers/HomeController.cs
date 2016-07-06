@@ -9,8 +9,9 @@ namespace AccountingOfSales.Controllers
 {
     public class HomeController : Controller
     {
+        SalesDBEntities db = new SalesDBEntities();
         public ActionResult Index()
-        {            
+        {
             return View();
         }
 
