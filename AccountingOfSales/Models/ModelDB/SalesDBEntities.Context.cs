@@ -26,5 +26,6 @@ namespace AccountingOfSales.Models.ModelDB
         }
     
         public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Providers> Providers { get; set; }
     }
 }

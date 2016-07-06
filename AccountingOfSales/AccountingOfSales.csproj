@@ -137,6 +137,9 @@
     <Compile Include="Models\ModelDB\Products.cs">
       <DependentUpon>SalesDBEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModelDB\Providers.cs">
+      <DependentUpon>SalesDBEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ModelDB\SalesDBEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

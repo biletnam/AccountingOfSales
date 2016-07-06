@@ -12,16 +12,19 @@ namespace AccountingOfSales.Models.ModelDB
     using System;
     using System.Collections.Generic;
     
-    public partial class Products
+    public partial class Providers
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Providers()
+        {
+            this.Products = new HashSet<Products>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Model { get; set; }
-        public string Color { get; set; }
-        public string Size { get; set; }
-        public System.DateTime CreateDate { get; set; }
-        public Nullable<int> ProviderId { get; set; }
+        public string City { get; set; }
     
-        public virtual Providers Providers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Products> Products { get; set; }
     }
 }

@@ -5,7 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2b9bf7a09a60482d8f5a83e24ecc5a33" Name="Diagram1">
-        <EntityTypeShape EntityType="SalesDBModel.Products" Width="1.5" PointX="1" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalesDBModel.Products" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalesDBModel.Providers" Width="1.5" PointX="3.125" PointY="0.5" />
+        <AssociationConnector Association="SalesDBModel.FK_Providers_Products" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
