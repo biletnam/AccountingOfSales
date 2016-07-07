@@ -132,7 +132,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Products.cs" />
+    <Compile Include="Migrations\201607071635094_AddTables.cs" />
+    <Compile Include="Migrations\201607071635094_AddTables.Designer.cs">
+      <DependentUpon>201607071635094_AddTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Admission.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Provider.cs" />
+    <Compile Include="Models\Return.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Sale.cs" />
+    <Compile Include="Models\TypeProduct.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -185,7 +199,11 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
+      <DependentUpon>201607071635094_AddTables.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
