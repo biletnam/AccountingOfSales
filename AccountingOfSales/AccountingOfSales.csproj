@@ -136,16 +136,23 @@
     <Compile Include="Migrations\201607071635094_AddTables.Designer.cs">
       <DependentUpon>201607071635094_AddTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607080749449_NewDB.cs" />
+    <Compile Include="Migrations\201607080749449_NewDB.Designer.cs">
+      <DependentUpon>201607080749449_NewDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\OtherCosts.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Provider.cs" />
     <Compile Include="Models\Return.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Salary.cs" />
     <Compile Include="Models\Sale.cs" />
     <Compile Include="Models\TypeProduct.cs" />
+    <Compile Include="Models\TypeReturn.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -202,6 +209,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
       <DependentUpon>201607071635094_AddTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607080749449_NewDB.resx">
+      <DependentUpon>201607080749449_NewDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
