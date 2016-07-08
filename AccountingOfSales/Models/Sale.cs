@@ -11,11 +11,23 @@ namespace AccountingOfSales.Models
     {
         [ScaffoldColumn(false)]
         public int Id { get; set; }
-        public double RetailPrice { get; set; } //розничная цена
-        public double Discount { get; set; }    //скидка
-        public double SalePrice { get; set; }   //цена продажи
+        /// <summary>
+        /// Розничная цена
+        /// </summary>
+        public double RetailPrice { get; set; }
+        /// <summary>
+        /// Скидка
+        /// </summary>
+        public double Discount { get; set; }
+        /// <summary>
+        /// Цена продажи
+        /// </summary>
+        public double SalePrice { get; set; }
         public DateTime CreateDate { get; set; }
-        public DateTime SaleDate { get; set; }  //дата продажи
+        /// <summary>
+        /// Дата продажи
+        /// </summary>
+        public DateTime SaleDate { get; set; }
 
         [ScaffoldColumn(false)]
         public int UserId { get; set; }
