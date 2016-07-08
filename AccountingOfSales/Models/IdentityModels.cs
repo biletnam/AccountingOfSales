@@ -19,6 +19,9 @@ namespace AccountingOfSales.Models
         public DbSet<Role> Roles { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<Return> Returns { get; set; }
+        public DbSet<TypeReturn> TypeReturns { get; set; }
+        public DbSet<OtherCosts> OtherCosts { get; set; }
+        public DbSet<Salary> Salaries { get; set; }
 
     }
 }
