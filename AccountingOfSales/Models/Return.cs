@@ -13,10 +13,15 @@ namespace AccountingOfSales.Models
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime ReturnDate { get; set; }
+        public double Price { get; set; }
 
         [ScaffoldColumn(false)]
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
+
+        [ScaffoldColumn(false)]
+        public int TypeReturnId { get; set; }
+        public virtual TypeReturn TypeReturn { get; set; }
 
         [ScaffoldColumn(false)]
         public int UserId { get; set; }
