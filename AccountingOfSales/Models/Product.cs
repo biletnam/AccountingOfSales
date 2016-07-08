@@ -17,7 +17,10 @@ namespace AccountingOfSales.Models
         public string Size { get; set; }
         public DateTime CreateDate { get; set; }
         public int Count { get; set; }
-        public double RetailPrice { get; set; } //розничная цена
+        /// <summary>
+        /// Розничная цена
+        /// </summary>
+        public double RetailPrice { get; set; }
 
         [ScaffoldColumn(false)]
         public int? ProviderId { get; set; }
