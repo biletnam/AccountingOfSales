@@ -1,0 +1,54 @@
+﻿@using PagedList.Mvc;
+@using AccountingOfSales.Models;
+@model PagedList.IPagedList<Product>
+
+@{
+    ViewBag.Title = "Продукты";
+}
+
+<h2>Продукты</h2>
+
+<table class="table">
+    <tr>
+        <th>Наименование</th>
+        <th>Модель</th>
+        <th>Цвет</th>
+        <th>Размер</th>
+        <th>Количество</th>
+        <th>Розничная цена</th>
+        <th>Дата создания</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Model</td>
+            <td>
+                @item.Color
+            </td>
+            <td>
+                @item.Size
+            </td>
+            <td>
+                @item.Count
+            </td>
+            <td>
+                @item.RetailPrice
+            </td>
+            <td>
+                @item.CreateDate
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id }) | 
+                @Html.ActionLink("Подробности", "Details", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
