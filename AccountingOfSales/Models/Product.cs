@@ -43,8 +43,8 @@ namespace AccountingOfSales.Models
         public int Count { get; set; }
         
         [Display(Name = "Розничная цена")]
-        [StringLength(10, ErrorMessage = "Количество символов не должно превышать 10")]
         [RegularExpression(@"[\d\s.]*", ErrorMessage = "Текст содержит запрещающие символы")]
+        [Range(0, 1000000000, ErrorMessage = "Недопустимое число")]
         /// <summary>
         /// Розничная цена
         /// </summary>
