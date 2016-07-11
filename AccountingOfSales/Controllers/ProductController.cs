@@ -12,15 +12,20 @@ namespace AccountingOfSales.Controllers
     public class ProductController : Controller
     {
         SalesDbContext db = new SalesDbContext();
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string name = "")
         {
             int pageSize = 20;
             int pageNumber = (page ?? 1);
-            //List<Product> products = new List<Product>();
+            List<Product> products = new List<Product>();
 
-            //products = db.Products.ToList();
+            products = db.Products.ToList();
 
-            return View(db.Products.OrderBy(n => n.Name).ToPagedList(pageNumber, pageSize));
+            if (name != "")
+            {
+                products = products.Where(n => n.Name.Contains(name)).ToList();
+            }
+
+            return View(products.OrderBy(n => n.Name).ToPagedList(pageNumber, pageSize));
         }
         protected override void Dispose(bool disposing)
         {
