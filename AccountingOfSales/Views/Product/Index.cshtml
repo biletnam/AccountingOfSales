@@ -8,14 +8,27 @@
 
 <h2>Продукты</h2>
 
-<table class="table">
+<p>@Html.ActionLink("Создать продукт", "Create")</p>
+<br />
+@using (Html.BeginForm("Index", "Product", FormMethod.Get))
+{
+    <div class="form-inline">
+        <label class="control-label">Наименование: </label>
+        @Html.TextBox("name", "", htmlAttributes: new { @class = "form-control" })
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+    </div>
+}
+<br />
+<table class="table table-striped">
     <tr>
         <th>Наименование</th>
         <th>Модель</th>
+        <th>Тип</th>   @*новый*@
         <th>Цвет</th>
         <th>Размер</th>
         <th>Количество</th>
         <th>Розничная цена</th>
+        <th>Поставщик</th>  @*новый*@
         <th>Дата создания</th>
         <th></th>
     </tr>
@@ -23,32 +36,23 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.Name</td>
+            <td valign="middle">@item.Name</td>
             <td>@item.Model</td>
+            <td>@item.TypeProduct.Name</td>
+            <td>@item.Color</td>
+            <td>@item.Size</td>
+            <td>@item.Count</td>
+            <td>@item.RetailPrice</td>
+            <td>@item.Provider.Name</td>
+            <td>@item.CreateDate</td>
             <td>
-                @item.Color
-            </td>
-            <td>
-                @item.Size
-            </td>
-            <td>
-                @item.Count
-            </td>
-            <td>
-                @item.RetailPrice
-            </td>
-            <td>
-                @item.CreateDate
-            </td>
-            <td>
-                @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Удалить", "Delete", new { id = item.Id }) | 
-                @Html.ActionLink("Подробности", "Details", new { id = item.Id })
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |<br />
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id }) <br /><br />
             </td>
         </tr>
     }
 
 </table>
 
-Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+<label class="control-label">Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount</label>
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
