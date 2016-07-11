@@ -30,6 +30,9 @@ namespace AccountingOfSales.Controllers
 
         public ActionResult Create()
         {
+            SelectList providers = new SelectList(db.Providers.OrderBy(n => n.Name), "Id", "Name");
+            ViewBag.Providers = providers;
+
             return View();
         }
         [HttpPost]
