@@ -27,6 +27,18 @@ namespace AccountingOfSales.Controllers
 
             return View(products.OrderBy(n => n.Name).ToPagedList(pageNumber, pageSize));
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Name, Model, Color, Size, RetailPrice, ProviderId, TypeProductId, ImageId")] Product product)
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
