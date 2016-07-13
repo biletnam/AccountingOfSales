@@ -41,7 +41,7 @@ namespace AccountingOfSales.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name, Model, Color, Size, RetailPrice, ProviderId, TypeProductId, ImageId")] Product product, HttpPostedFileBase image)
+        public ActionResult Create([Bind(Include = "Name, Model, Color, Size, RetailPrice, ProviderId, TypeProductId")] Product product, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
