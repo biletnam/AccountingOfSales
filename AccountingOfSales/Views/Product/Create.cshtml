@@ -7,7 +7,7 @@
 <h2>Создание продукта</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -57,7 +57,21 @@
         <div class="form-group">
             @Html.Label("Поставщик", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ProviderId", ViewBag.Providers as SelectList, new { @class = "form-control" })                
+                @Html.DropDownListFor(model => model.ProviderId, ViewBag.Providers as SelectList, new { @class = "form-control" })                
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Тип", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TypeProductId, ViewBag.TypeProducts as SelectList, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Фото", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="image" />
             </div>
         </div>
 
