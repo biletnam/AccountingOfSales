@@ -7,6 +7,7 @@ using AccountingOfSales.Models;
 using PagedList.Mvc;
 using PagedList;
 using System.IO;
+using System.Net;
 
 namespace AccountingOfSales.Controllers
 {
@@ -64,6 +65,30 @@ namespace AccountingOfSales.Controllers
             }
 
             return View(product);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            //добавить дату редактирования
+            Product product = db.Products.Find(id);
+            if(product != null)
+            {
+                ViewBag.Providers = new SelectList(db.Providers.OrderBy(n => n.Name), "Id", "Name", product.ProviderId);
+                ViewBag.TypeProducts = new SelectList(db.TypeProducts.OrderBy(n => n.Name), "Id", "Name", product.TypeProductId);
+                return View(product);
+            }
+
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Product newProduct)
+        {
+            return View();
         }
 
         public JsonResult CheckName(string Name)
