@@ -41,6 +41,9 @@ namespace AccountingOfSales.Models
         [Display(Name = "Дата создания")]
         public DateTime CreateDate { get; set; }
 
+        [Display(Name = "Дата изменения")]
+        public DateTime? EditDate { get; set; }
+
         [Display(Name = "Количество")]
         public int Count { get; set; }
 
