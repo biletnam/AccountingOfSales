@@ -8,6 +8,7 @@ using PagedList.Mvc;
 using PagedList;
 using System.IO;
 using System.Net;
+using AccountingOfSales.Models.ViewModel;
 
 namespace AccountingOfSales.Controllers
 {
@@ -73,7 +74,7 @@ namespace AccountingOfSales.Controllers
             {
                 return HttpNotFound();
             }
-            //добавить дату редактирования
+            
             Product product = db.Products.Find(id);
             if(product != null)
             {
@@ -86,7 +87,7 @@ namespace AccountingOfSales.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product newProduct)
+        public ActionResult Edit([Bind(Include = "Id, Name, Model, Color, Size, RetailPrice, ProviderId, TypeProductId")] Product newProduct)
         {
             return View();
         }
@@ -98,7 +99,6 @@ namespace AccountingOfSales.Controllers
 
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
