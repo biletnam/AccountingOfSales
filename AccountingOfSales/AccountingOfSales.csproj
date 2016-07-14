@@ -152,6 +152,10 @@
     <Compile Include="Migrations\201607101841552_AddAttribute.Designer.cs">
       <DependentUpon>201607101841552_AddAttribute.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607140832485_addEditDate.cs" />
+    <Compile Include="Migrations\201607140832485_addEditDate.Designer.cs">
+      <DependentUpon>201607140832485_addEditDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -166,6 +170,7 @@
     <Compile Include="Models\TypeProduct.cs" />
     <Compile Include="Models\TypeReturn.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ViewModel\ProductEditViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607101841552_AddAttribute.resx">
       <DependentUpon>201607101841552_AddAttribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607140832485_addEditDate.resx">
+      <DependentUpon>201607140832485_addEditDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
