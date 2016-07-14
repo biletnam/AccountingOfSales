@@ -31,6 +31,7 @@
         <th>Розничная цена</th>
         <th>Поставщик</th>
         <th>Дата создания</th>
+        <th>Дата изменения</th>
         <th></th>
     </tr>
 
@@ -52,7 +53,8 @@
             <td>@item.RetailPrice</td>
             <td>@item.Provider.Name</td>
             <td>@item.CreateDate</td>
-            <td align="center">
+            <td>@item.EditDate</td>
+            <td align="center" width="80">
                 <a href="@Url.Action("Edit", "Product", new { id = item.Id })" title="Редактировать"><img src="~/Images/icons/edit.png" width="30"/></a>   
                 <a href="@Url.Action("Delete", "Product", new { id = item.Id })" title="Удалить"><img src="~/Images/icons/delete.png" width="30" /></a>                        
             </td>
