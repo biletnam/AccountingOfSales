@@ -6,7 +6,7 @@
 
 <h2>Редактирование продукта</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -65,6 +65,17 @@
             @Html.Label("Тип", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.TypeProductId, ViewBag.TypeProducts as SelectList, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Фото", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Model.ImageId != null)
+                {
+                    <a href="~/Images/@Model.Image.Name" target="_blank"><img src="~/Images/@Model.Image.Name" height="100" class="img-rounded" /></a>
+                }
+                <input type="file" name="image" accept="image/*" />
             </div>
         </div>
 
