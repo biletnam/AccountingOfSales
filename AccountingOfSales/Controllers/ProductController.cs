@@ -8,7 +8,6 @@ using PagedList.Mvc;
 using PagedList;
 using System.IO;
 using System.Net;
-using AccountingOfSales.Models.ViewModel;
 
 namespace AccountingOfSales.Controllers
 {
@@ -33,8 +32,6 @@ namespace AccountingOfSales.Controllers
 
         public ActionResult Create()
         {
-            //SelectList providers = new SelectList(db.Providers.OrderBy(n => n.Name), "Id", "Name");
-            //ViewBag.Providers = providers;
             //для заполнения выпадающих списков
             ViewBag.Providers = new SelectList(db.Providers.OrderBy(n => n.Name), "Id", "Name");
             ViewBag.TypeProducts = new SelectList(db.TypeProducts.OrderBy(n => n.Name), "Id", "Name");
@@ -72,32 +69,49 @@ namespace AccountingOfSales.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             
             Product product = db.Products.Find(id);
-            if(product != null)
+            if (product != null)
             {
                 ViewBag.Providers = new SelectList(db.Providers.OrderBy(n => n.Name), "Id", "Name", product.ProviderId);
                 ViewBag.TypeProducts = new SelectList(db.TypeProducts.OrderBy(n => n.Name), "Id", "Name", product.TypeProductId);
                 return View(product);
             }
-
-            return RedirectToAction("Index");
+            else
+                return HttpNotFound();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, Name, Model, Color, Size, RetailPrice, ProviderId, TypeProductId")] Product newProduct)
+        public ActionResult Edit([Bind(Include = "Id, Name, Model, Color, Size, RetailPrice, ProviderId, TypeProductId")] Product editProduct, HttpPostedFileBase image)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                Product product = db.Products.Find(editProduct.Id);
+
+                if (product == null)
+                    return HttpNotFound();
+
+                product.Name = editProduct.Name;
+                product.Model = editProduct.Model;
+                product.Color = editProduct.Color;
+                product.Size = editProduct.Size;
+                product.RetailPrice = editProduct.RetailPrice;
+                product.ProviderId = editProduct.ProviderId;
+                product.TypeProductId = editProduct.TypeProductId;
+                product.EditDate = DateTime.Now;
+
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(editProduct);
         }
 
-        public JsonResult CheckName(string Name)
+        public JsonResult CheckName(string Name, int? Id)
         {
-            if (db.Products.Any(m => m.Name == Name))
-                return Json(false, JsonRequestBehavior.AllowGet);
-
-            return Json(true, JsonRequestBehavior.AllowGet);
+            return Json(!db.Products.Any(m => m.Name == Name && m.Id != Id), JsonRequestBehavior.AllowGet);
         }
         protected override void Dispose(bool disposing)
         {
