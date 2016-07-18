@@ -6,7 +6,14 @@
     ViewBag.Title = "Продукты";
 }
 
-<h2>Продукты</h2>
+@if (!ViewBag.Archive)
+{
+    <h2>Список продуктов</h2>
+}
+else
+{
+    <h2>Архив продуктов</h2>
+}
 
 <p>@Html.ActionLink("Создать продукт", "Create") | @Html.ActionLink("Архив", "Index", new { archive =  true})</p>
 <br />
@@ -62,7 +69,7 @@
                 }
                 else
                 {
-                    <a href="@Url.Action("Archive", "Product", new { id = item.Id })" title="Извлечь из архива"><img src="~/Images/icons/unarchive.png" width="30" /></a>
+                    <a href="@Url.Action("Archive", "Product", new { id = item.Id, unarchive = true })" title="Извлечь из архива"><img src="~/Images/icons/unarchive.png" width="30" /></a>
                 }
 
             </td>
