@@ -47,14 +47,7 @@ namespace AccountingOfSales.Controllers
             {
                 if (image != null)
                 {
-                    Image dbImage = new Image();
-                    dbImage.Extension = Path.GetExtension(image.FileName).TrimStart(new char[] { '.' });
-                    db.Images.Add(dbImage);
-                    db.SaveChanges();
-
-                    image.SaveAs(Server.MapPath("~/Images/" + dbImage.Name));
-
-                    product.Image = dbImage;
+                    product.Image = SaveAsImage(image);
                 }
 
                 product.CreateDate = DateTime.Now;
@@ -94,6 +87,12 @@ namespace AccountingOfSales.Controllers
                 if (product == null)
                     return HttpNotFound();
 
+                if(image != null)
+                {
+                    System.IO.File.Delete(Server.MapPath("~/Images/" + product.Image.Name));
+                    product.Image = SaveAsImage(image);
+                }
+
                 product.Name = editProduct.Name;
                 product.Model = editProduct.Model;
                 product.Color = editProduct.Color;
@@ -108,6 +107,17 @@ namespace AccountingOfSales.Controllers
             }
 
             return View(editProduct);
+        }
+        Image SaveAsImage(HttpPostedFileBase image)
+        {
+            Image dbImage = new Image();
+            dbImage.Extension = Path.GetExtension(image.FileName).TrimStart(new char[] { '.' });
+            db.Images.Add(dbImage);
+            db.SaveChanges();
+
+            image.SaveAs(Server.MapPath("~/Images/" + dbImage.Name));
+
+            return dbImage;
         }
 
         public JsonResult CheckName(string Name, int? Id)
