@@ -8,13 +8,13 @@
 
 <h2>Продукты</h2>
 
-<p>@Html.ActionLink("Создать продукт", "Create")</p>
+<p>@Html.ActionLink("Создать продукт", "Create") | @Html.ActionLink("Архив", "Index", new { archive =  true})</p>
 <br />
 @using (Html.BeginForm("Index", "Product", FormMethod.Get))
 {
     <div class="form-inline">
         <label class="control-label">Наименование: </label>
-        @Html.TextBox("name", "", htmlAttributes: new { @class = "form-control" })
+        @Html.TextBox("filterName", "", htmlAttributes: new { @class = "form-control" })
         <input type="submit" value="Фильтр" class="btn btn-default" />
     </div>
 }
@@ -55,8 +55,16 @@
             <td>@item.CreateDate</td>
             <td>@item.EditDate</td>
             <td align="center" width="80">
-                <a href="@Url.Action("Edit", "Product", new { id = item.Id })" title="Редактировать"><img src="~/Images/icons/edit.png" width="30"/></a>   
-                <a href="@Url.Action("Delete", "Product", new { id = item.Id })" title="Удалить"><img src="~/Images/icons/delete.png" width="30" /></a>                        
+                <a href="@Url.Action("Edit", "Product", new { id = item.Id })" title="Редактировать"><img src="~/Images/icons/edit.png" width="30"/></a>
+                @if (!ViewBag.Archive)
+                {
+                    <a href="@Url.Action("Archive", "Product", new { id = item.Id })" title="Переместить в архив"><img src="~/Images/icons/archive.png" width="30" /></a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Archive", "Product", new { id = item.Id })" title="Извлечь из архива"><img src="~/Images/icons/unarchive.png" width="30" /></a>
+                }
+
             </td>
         </tr>
     }
