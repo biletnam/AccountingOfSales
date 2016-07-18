@@ -55,6 +55,7 @@ namespace AccountingOfSales.Models
         /// Розничная цена
         /// </summary>
         public double RetailPrice { get; set; }
+        public bool Archive { get; set; } = false;
 
         [ScaffoldColumn(false)]
         public int? ProviderId { get; set; }
