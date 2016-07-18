@@ -156,6 +156,10 @@
     <Compile Include="Migrations\201607140832485_addEditDate.Designer.cs">
       <DependentUpon>201607140832485_addEditDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607180653140_AddArchive.cs" />
+    <Compile Include="Migrations\201607180653140_AddArchive.Designer.cs">
+      <DependentUpon>201607180653140_AddArchive.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -195,8 +199,10 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Images\icons\archive.png" />
     <Content Include="Images\icons\delete.png" />
     <Content Include="Images\icons\edit.png" />
+    <Content Include="Images\icons\unarchive.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -237,6 +243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607140832485_addEditDate.resx">
       <DependentUpon>201607140832485_addEditDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607180653140_AddArchive.resx">
+      <DependentUpon>201607180653140_AddArchive.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
