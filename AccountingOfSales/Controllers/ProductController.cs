@@ -14,7 +14,7 @@ namespace AccountingOfSales.Controllers
     public class ProductController : Controller
     {
         SalesDbContext db = new SalesDbContext();
-        public ActionResult Index(int? page, string filterName = "", bool? archive = false)
+        public ActionResult Index(int? page, string filterName = "", bool archive = false)
         {
             int pageSize = 20;
             int pageNumber = (page ?? 1);
@@ -108,6 +108,27 @@ namespace AccountingOfSales.Controllers
 
             return View(editProduct);
         }
+
+        public ActionResult Archive(int? id, bool unarchive = false)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Product product = db.Products.Find(id);
+
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            product.Archive = (unarchive == false) ? true : false;
+            db.SaveChanges();
+
+            return (unarchive == false) ? RedirectToAction("Index") : RedirectToAction("Index", new { archive = true });
+        }
+
         Image SaveAsImage(HttpPostedFileBase image)
         {
             Image dbImage = new Image();
