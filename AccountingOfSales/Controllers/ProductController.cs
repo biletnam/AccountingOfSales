@@ -14,17 +14,18 @@ namespace AccountingOfSales.Controllers
     public class ProductController : Controller
     {
         SalesDbContext db = new SalesDbContext();
-        public ActionResult Index(int? page, string name = "")
+        public ActionResult Index(int? page, string filterName = "", bool? archive = false)
         {
             int pageSize = 20;
             int pageNumber = (page ?? 1);
             List<Product> products = new List<Product>();
 
-            products = db.Products.ToList();
+            ViewBag.Archive = archive;
+            products = (archive == false) ? db.Products.Where(f => f.Archive == false).ToList() : db.Products.Where(f => f.Archive == true).ToList();
 
-            if (name != "")
+            if (filterName != "")
             {
-                products = products.Where(n => n.Name.Contains(name)).ToList();
+                products = products.Where(n => n.Name.Contains(filterName)).ToList();
             }
 
             return View(products.OrderByDescending(n => n.Count).ThenBy(c => c.Name).ToPagedList(pageNumber, pageSize));
