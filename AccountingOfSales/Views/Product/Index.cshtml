@@ -15,10 +15,10 @@ else
     <h2>Архив продуктов</h2>
 }
 
-<div>
+@*<div>
     @Html.ActionLink("Создать продукт", "Create", "", new { @class = "btn btn-default" })
     @Html.ActionLink("Архив", "Index", new { archive = true }, new { @class = "btn btn-default" })
-</div>
+</div>*@
 <br />
 @using (Html.BeginForm("Index", "Product", FormMethod.Get))
 {
