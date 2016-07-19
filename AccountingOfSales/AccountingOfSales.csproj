@@ -138,6 +138,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
+    <Compile Include="Controllers\TypeProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -164,6 +165,14 @@
     <Compile Include="Migrations\201607181248039_AddArchiveForProvider.cs" />
     <Compile Include="Migrations\201607181248039_AddArchiveForProvider.Designer.cs">
       <DependentUpon>201607181248039_AddArchiveForProvider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607190755137_addAttributeForTypeProduct.cs" />
+    <Compile Include="Migrations\201607190755137_addAttributeForTypeProduct.Designer.cs">
+      <DependentUpon>201607190755137_addAttributeForTypeProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607190818541_AddArchiveForTypeProduct.cs" />
+    <Compile Include="Migrations\201607190818541_AddArchiveForTypeProduct.Designer.cs">
+      <DependentUpon>201607190818541_AddArchiveForTypeProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
@@ -258,6 +267,12 @@
     <EmbeddedResource Include="Migrations\201607181248039_AddArchiveForProvider.resx">
       <DependentUpon>201607181248039_AddArchiveForProvider.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607190755137_addAttributeForTypeProduct.resx">
+      <DependentUpon>201607190755137_addAttributeForTypeProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607190818541_AddArchiveForTypeProduct.resx">
+      <DependentUpon>201607190818541_AddArchiveForTypeProduct.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -266,6 +281,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\ViewModel\" />
+    <Folder Include="Views\TypeProduct\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
