@@ -137,6 +137,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -159,6 +160,10 @@
     <Compile Include="Migrations\201607180653140_AddArchive.cs" />
     <Compile Include="Migrations\201607180653140_AddArchive.Designer.cs">
       <DependentUpon>201607180653140_AddArchive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607181248039_AddArchiveForProvider.cs" />
+    <Compile Include="Migrations\201607181248039_AddArchiveForProvider.Designer.cs">
+      <DependentUpon>201607181248039_AddArchiveForProvider.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
@@ -230,6 +235,9 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Provider\Index.cshtml" />
+    <Content Include="Views\Provider\Create.cshtml" />
+    <Content Include="Views\Provider\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
@@ -246,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607180653140_AddArchive.resx">
       <DependentUpon>201607180653140_AddArchive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607181248039_AddArchiveForProvider.resx">
+      <DependentUpon>201607181248039_AddArchiveForProvider.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
