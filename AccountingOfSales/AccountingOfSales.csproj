@@ -229,6 +229,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ShowElement.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -247,6 +248,8 @@
     <Content Include="Views\Provider\Index.cshtml" />
     <Content Include="Views\Provider\Create.cshtml" />
     <Content Include="Views\Provider\Edit.cshtml" />
+    <Content Include="Views\TypeProduct\Index.cshtml" />
+    <Content Include="Views\TypeProduct\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
@@ -281,7 +284,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\ViewModel\" />
-    <Folder Include="Views\TypeProduct\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
