@@ -28,9 +28,27 @@ namespace AccountingOfSales.Controllers
             }
             return View(typeProduct.OrderBy(c => c.Name).ToPagedList(pageNumber, pageSize));
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Name")] TypeProduct typeProduct)
+        {
+            if (ModelState.IsValid)
+            {                
+                db.TypeProducts.Add(typeProduct);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(typeProduct);
+        }
         public JsonResult CheckName(string Name, int? Id)
         {
-            return Json(!db.Products.Any(m => m.Name == Name && m.Id != Id), JsonRequestBehavior.AllowGet);
+            return Json(!db.TypeProducts.Any(m => m.Name == Name && m.Id != Id), JsonRequestBehavior.AllowGet);
         }
         protected override void Dispose(bool disposing)
         {
