@@ -3,6 +3,7 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -46,6 +47,61 @@ namespace AccountingOfSales.Controllers
 
             return View(typeProduct);
         }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            TypeProduct typeProduct = db.TypeProducts.Find(id);
+
+            if (typeProduct == null)
+                return HttpNotFound();
+
+            return View(typeProduct);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id, Name")] TypeProduct editTypeProduct)
+        {
+            if (ModelState.IsValid)
+            {
+                TypeProduct typeProduct = db.TypeProducts.Find(editTypeProduct.Id);
+
+                if (typeProduct == null)
+                    return HttpNotFound();
+
+                typeProduct.Name = editTypeProduct.Name;
+
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(editTypeProduct);
+        }
+
+        public ActionResult Archive(int? id, bool unarchive = false)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            TypeProduct typeProduct = db.TypeProducts.Find(id);
+
+            if (typeProduct == null)
+            {
+                return HttpNotFound();
+            }
+
+            typeProduct.Archive = (unarchive == false) ? true : false;
+            db.SaveChanges();
+
+            return (unarchive == false) ? RedirectToAction("Index") : RedirectToAction("Index", new { archive = true });
+        }
+
         public JsonResult CheckName(string Name, int? Id)
         {
             return Json(!db.TypeProducts.Any(m => m.Name == Name && m.Id != Id), JsonRequestBehavior.AllowGet);
