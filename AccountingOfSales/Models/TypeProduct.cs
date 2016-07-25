@@ -17,7 +17,7 @@ namespace AccountingOfSales.Models
         [Display(Name = "Наименование")]
         [StringLength(150, ErrorMessage = "Количество символов не должно превышать 150")]
         [RegularExpression(@"[\w\d\sА-яёЁ:!?,.()%-]*", ErrorMessage = "Текст содержит запрещающие символы")]
-        [Remote("CheckName", "TypeProduct", ErrorMessage = "Товар с таким наименованием уже имеется", AdditionalFields = "Id")]
+        [Remote("CheckName", "TypeProduct", ErrorMessage = "Тип продукта с таким наименованием уже имеется", AdditionalFields = "Id")]
         public string Name { get; set; }
         public bool Archive { get; set; } = false;
         public virtual ICollection<Product> Products { get; set; } = new List<Product>();
