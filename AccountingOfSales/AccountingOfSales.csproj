@@ -250,6 +250,7 @@
     <Content Include="Views\Provider\Edit.cshtml" />
     <Content Include="Views\TypeProduct\Index.cshtml" />
     <Content Include="Views\TypeProduct\Create.cshtml" />
+    <Content Include="Views\TypeProduct\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
