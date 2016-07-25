@@ -18,14 +18,13 @@ else
 <div>
     @if (!ViewBag.Archive)
     {
-        @Html.ActionLink("Архив", "Index", new { archive = true }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Архив", "Index", new { archive = true }, new { @class = "btn btn-default" })<br /><br />
+        @Html.Partial("Create", new TypeProduct { })
     }
     else
     {
         @Html.ActionLink("Не архив", "Index", "", new { @class = "btn btn-default" })
     }
-    <br /><br />
-    @Html.Partial("Create", new TypeProduct { })
 </div>
 <br />
 @using (Html.BeginForm("Index", "TypeProduct", FormMethod.Get))
