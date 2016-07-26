@@ -27,7 +27,7 @@ else
     }
 </div>
 <br />
-@using (Html.BeginForm("Index", "TypeProduct", FormMethod.Get))
+@using (Html.BeginForm("Index", "TypeProduct", new { archive = ViewBag.Archive }, FormMethod.Post))
 {
     <div class="form-inline">
         <label class="control-label">Наименование: </label>
