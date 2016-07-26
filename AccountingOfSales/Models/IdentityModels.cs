@@ -1,33 +1,27 @@
-﻿using System.Data.Entity;
-using System.Security.Claims;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace AccountingOfSales.Models
 {
-    // Чтобы добавить данные профиля для пользователя, можно добавить дополнительные свойства в класс ApplicationUser. Дополнительные сведения см. по адресу: http://go.microsoft.com/fwlink/?LinkID=317594.
-    public class ApplicationUser : IdentityUser
+    class SalesDbContext : DbContext
     {
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
-        {
-            // Обратите внимание, что authenticationType должен совпадать с типом, определенным в CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Здесь добавьте утверждения пользователя
-            return userIdentity;
-        }
-    }
+        public SalesDbContext(): base("DefaultConnection") { }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Provider> Providers { get; set; }
+        public DbSet<TypeProduct> TypeProducts { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Admission> Admissions { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Sale> Sales { get; set; }
+        public DbSet<Return> Returns { get; set; }
+        public DbSet<TypeReturn> TypeReturns { get; set; }
+        public DbSet<OtherCosts> OtherCosts { get; set; }
+        public DbSet<Salary> Salaries { get; set; }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
     }
 }

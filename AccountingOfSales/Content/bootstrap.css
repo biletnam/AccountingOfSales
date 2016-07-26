@@ -1603,6 +1603,11 @@ pre code {
     width: 1170px;
   }
 }
+@media (min-width: 1300px) {
+  .container {
+    width: 1300px;
+  }
+}
 .container-fluid {
   padding-right: 15px;
   padding-left: 15px;
@@ -2274,7 +2279,7 @@ th {
 .table > tfoot > tr > td {
   padding: 8px;
   line-height: 1.42857143;
-  vertical-align: top;
+  vertical-align: middle;  
   border-top: 1px solid #ddd;
 }
 .table > thead > tr > th {

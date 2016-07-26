@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountingOfSales", "AccountingOfSales\AccountingOfSales.csproj", "{D17271F9-7A7D-4275-8304-FFA9E445A9B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountingOfSales", "AccountingOfSales\AccountingOfSales.csproj", "{9B3C7920-0F1C-4B8F-83D6-F72AC945639E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D17271F9-7A7D-4275-8304-FFA9E445A9B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D17271F9-7A7D-4275-8304-FFA9E445A9B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D17271F9-7A7D-4275-8304-FFA9E445A9B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D17271F9-7A7D-4275-8304-FFA9E445A9B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B3C7920-0F1C-4B8F-83D6-F72AC945639E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B3C7920-0F1C-4B8F-83D6-F72AC945639E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B3C7920-0F1C-4B8F-83D6-F72AC945639E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B3C7920-0F1C-4B8F-83D6-F72AC945639E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
