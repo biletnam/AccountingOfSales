@@ -15,7 +15,7 @@ else
     <h2>Архив поставщиков</h2>
 }
 <br />
-@using (Html.BeginForm("Index", "Provider", FormMethod.Get))
+@using (Html.BeginForm("Index", "Provider", new { archive = ViewBag.Archive }, FormMethod.Post))
 {
     <div class="form-inline">
         <label class="control-label">Наименование: </label>
