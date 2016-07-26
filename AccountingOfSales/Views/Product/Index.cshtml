@@ -19,7 +19,7 @@ else
     @Html.ActionLink("Типы продуктов", "Index", "TypeProduct", "", new { @class = "btn btn-default" })
 </div>
 <br />
-@using (Html.BeginForm("Index", "Product", FormMethod.Get))
+@using (Html.BeginForm("Index", "Product", new { archive = ViewBag.Archive }, FormMethod.Post))
 {
     <div class="form-inline">
         <label class="control-label">Наименование: </label>
