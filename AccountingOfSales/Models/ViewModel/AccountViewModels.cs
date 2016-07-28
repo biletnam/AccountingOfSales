@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace AccountingOfSales.Models.ViewModel
 {
@@ -26,6 +27,7 @@ namespace AccountingOfSales.Models.ViewModel
         [Required]
         [Display(Name = "Логин")]
         [RegularExpression(@"[\w\d]*", ErrorMessage = "Логин должен содержать только алфавитно-цифровые символы.")]
+        [Remote("CheckLogin", "Account", ErrorMessage = "Пользователь с таким логином уже имеется", AdditionalFields = "Id")]
         public string Login { get; set; }
 
         [Required]
@@ -43,7 +45,7 @@ namespace AccountingOfSales.Models.ViewModel
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Подтверждение пароля")]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword { get; set; }
     }
 }
