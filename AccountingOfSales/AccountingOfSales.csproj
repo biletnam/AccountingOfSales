@@ -136,6 +136,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\TypeProductController.cs" />
@@ -176,6 +177,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
+    <Compile Include="Models\CryptHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\OtherCosts.cs" />
@@ -252,6 +254,8 @@
     <Content Include="Views\TypeProduct\Index.cshtml" />
     <Content Include="Views\TypeProduct\Create.cshtml" />
     <Content Include="Views\TypeProduct\Edit.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
