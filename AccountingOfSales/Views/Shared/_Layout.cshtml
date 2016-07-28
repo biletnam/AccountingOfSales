@@ -17,22 +17,37 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>
-                    @Html.ActionLink("Продукты", "Index", "Product")
-                    <ul class="submenu">
-                        <li>@Html.ActionLink("Создать", "Create", "Product")</li>
-                        <li>@Html.ActionLink("Архив", "Index", "Product", new { archive = true }, "")</li>
-                    </ul>
-                </li>
-                <li>@Html.ActionLink("Поставщики", "Index", "Provider")
-                    <ul class="submenu">
-                        <li>@Html.ActionLink("Создать", "Create", "Provider")</li>
-                        <li>@Html.ActionLink("Архив", "Index", "Provider", new { archive = true }, "")</li>
-                    </ul>
-                </li>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        @Html.ActionLink("Продукты", "Index", "Product")
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Создать", "Create", "Product")</li>
+                            <li>@Html.ActionLink("Архив", "Index", "Product", new { archive = true }, "")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Поставщики", "Index", "Provider")
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Создать", "Create", "Provider")</li>
+                            <li>@Html.ActionLink("Архив", "Index", "Provider", new { archive = true }, "")</li>
+                        </ul>
+                    </li>
                 </ul>
+                @if (Request.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink(User.Identity.Name, "LogOff", "Account")</li>
+                        <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Регистрация", "Register", "Account")</li>
+                        <li>@Html.ActionLink("Выполнить вход", "Login", "Account")</li>
+                    </ul>
+                }                
             </div>
         </div>
     </div>
