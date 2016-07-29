@@ -6,8 +6,6 @@ using System.Web.Mvc;
 using AccountingOfSales.Models.ViewModel;
 using AccountingOfSales.Models;
 using System.Web.Security;
-using System.Text;
-using System.Security.Cryptography;
 
 namespace AccountingOfSales.Controllers
 {
@@ -30,7 +28,7 @@ namespace AccountingOfSales.Controllers
 
                 if (user != null)
                 {
-                    FormsAuthentication.SetAuthCookie(model.Login, false);
+                    FormsAuthentication.SetAuthCookie(model.Login, model.RememberMe);
                     return RedirectToAction("Index", "Product");
                 }
                 else
@@ -57,7 +55,6 @@ namespace AccountingOfSales.Controllers
                 Role role = db.Roles.FirstOrDefault(u => u.Name == "user");
 
                 string hashPassword = CryptHelper.CreateHashMD5(model.Password);
-
                 newUser.Login = model.Login;
                 newUser.FIO = model.FIO;
                 newUser.Password = hashPassword;
@@ -70,7 +67,7 @@ namespace AccountingOfSales.Controllers
                 // если пользователь удачно добавлен в бд
                 if (newUser != null)
                 {
-                    FormsAuthentication.SetAuthCookie(model.Login, false);
+                    FormsAuthentication.SetAuthCookie(model.Login, true);
                     return RedirectToAction("Index", "Product");
                 }
                 else
