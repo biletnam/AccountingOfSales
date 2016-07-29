@@ -15,6 +15,9 @@ namespace AccountingOfSales.Models.ViewModel
         [RegularExpression(@"[\w\d]*", ErrorMessage = "Логин должен содержать только алфавитно-цифровые символы.")]
         public string Login { get; set; }
 
+        [Display(Name = "Запомнить меня")]
+        public bool RememberMe { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
