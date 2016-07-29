@@ -137,6 +137,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdmissionController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\TypeProductController.cs" />
@@ -174,6 +175,14 @@
     <Compile Include="Migrations\201607190818541_AddArchiveForTypeProduct.cs" />
     <Compile Include="Migrations\201607190818541_AddArchiveForTypeProduct.Designer.cs">
       <DependentUpon>201607190818541_AddArchiveForTypeProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607291430165_AddAtributeForAdmission.cs" />
+    <Compile Include="Migrations\201607291430165_AddAtributeForAdmission.Designer.cs">
+      <DependentUpon>201607291430165_AddAtributeForAdmission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607291439432_AddAtributeForAdmissionCount.cs" />
+    <Compile Include="Migrations\201607291439432_AddAtributeForAdmissionCount.Designer.cs">
+      <DependentUpon>201607291439432_AddAtributeForAdmissionCount.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
@@ -256,6 +265,7 @@
     <Content Include="Views\TypeProduct\Edit.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Admission\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
@@ -281,6 +291,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607190818541_AddArchiveForTypeProduct.resx">
       <DependentUpon>201607190818541_AddArchiveForTypeProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607291430165_AddAtributeForAdmission.resx">
+      <DependentUpon>201607291430165_AddAtributeForAdmission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607291439432_AddAtributeForAdmissionCount.resx">
+      <DependentUpon>201607291439432_AddAtributeForAdmissionCount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
