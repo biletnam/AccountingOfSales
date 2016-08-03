@@ -13,19 +13,20 @@
     <div class="form-inline">
         @Html.TextBox("filterDateAdmissionFrom", "", htmlAttributes: new { @class = "form-control datepicker", placeholder = "Дата поступления С" })
         @Html.TextBox("filterDateAdmissionTo", "", htmlAttributes: new { @class = "form-control datepicker", placeholder = "Дата поступления По" })
-        @Html.TextBox("userName", "", htmlAttributes: new { @class = "form-control", placeholder = "Пользователь" })
+        @Html.DropDownList("filterProvider", ViewBag.Providers as SelectList, new { @class = "form-control" })
+        @Html.DropDownList("filterUser", ViewBag.Users as SelectList, new { @class = "form-control" })
         <input type="submit" value="Фильтр" class="btn btn-default" />
-    </div>
+        </div>
 }
 <br />
 <table class="table table-striped table-hover">
     <tr>
-        <th>Дата создания</th>
-        <th>Дата поступления</th>
-        <th>Поставщик</th>
         <th>Продукт</th>
         <th>Оптовая цена</th>
         <th>Доп. расходы</th>
+        <th>Дата создания</th>
+        <th>Дата поступления</th>
+        <th>Поставщик</th>
         <th>Количество</th>
         <th>Пользователь</th>
     </tr>
@@ -33,12 +34,12 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.CreateDate</td>
-            <td>@item.AdmissionDate.ToShortDateString()</td>
-            <td>@item.Provider.Name</td>
             <td>@item.Product.Name</td>
             <td>@item.TradePrice</td>
             <td>@item.AdditionalCosts</td>
+            <td>@item.CreateDate</td>
+            <td>@item.AdmissionDate.ToShortDateString()</td>
+            <td>@item.Provider.Name</td>
             <td>@item.Count</td>
             <td>@item.User.Login</td>
         </tr>
@@ -57,5 +58,6 @@
         autoclose: true,
         todayHighlight: true
     });
+
 </script>
 }
