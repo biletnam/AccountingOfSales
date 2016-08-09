@@ -34,6 +34,10 @@ namespace AccountingOfSales.Controllers
         }
         public ActionResult Create()
         {
+            int selectedValue = 1;
+            ViewBag.Providers = new SelectList(db.Providers, "Id", "Name", selectedValue);
+            ViewBag.Products = new SelectList(db.Products.Where(i => i.ProviderId == selectedValue), "Id", "Name");
+
             return View();
         }
         [HttpPost]
@@ -41,6 +45,10 @@ namespace AccountingOfSales.Controllers
         public ActionResult Create([Bind(Include = "AdmissionDate, ProviderId, AdditionalCosts, TradePrice, ProductId, Count")] Admission admission)
         {
             return View();
+        }
+        public ActionResult GetProducts(int id)
+        {
+            return PartialView(db.Products.Where(c => c.ProviderId == id).ToList());
         }
         protected override void Dispose(bool disposing)
         {
