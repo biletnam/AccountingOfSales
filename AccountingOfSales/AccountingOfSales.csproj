@@ -354,6 +354,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Admission\Index.cshtml" />
     <Content Include="Views\Admission\Create.cshtml" />
+    <Content Include="Views\Admission\GetProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
