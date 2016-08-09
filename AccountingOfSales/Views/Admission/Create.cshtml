@@ -1,14 +1,41 @@
-﻿
+﻿@using AccountingOfSales.Models;
+@model PagedList.IPagedList<Admission>
+
 @{
     ViewBag.Title = "Создание поступления";
 }
 
 <h2>Создание поступления</h2>
 
-@*<select id="filterProvider" name="filterProvider">
-        <option value="0"></option>
-        @foreach (var item in ViewBag.Providers)
-        {
-            <option value="@item.Id">@item.Name</option>
-        }
-    </select>*@
+@using (Html.BeginForm("Create", "Admission", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <h3>Выберите поставщика</h3>
+    @Html.DropDownList("ProviderId", ViewBag.Providers as SelectList, new { @class = "form-control", id = "provider" })
+
+    <h3>Выберите товар</h3>
+    @Html.DropDownList("ProductId", ViewBag.Products as SelectList, new { @class = "form-control", id = "product" })
+    <input type="submit" value="Создать" class="btn btn-primary" />
+}
+
+@section scripts{
+<script type="text/javascript">
+        $(function () {
+
+            $('#provider').change(function () {
+                // получаем выбранный id
+                var id = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetProducts")/' + id,
+                    success: function (data) {
+
+                        // заменяем содержимое присланным частичным представлением
+                        $('#product').replaceWith(data);
+                    }
+                });
+            });
+        })
+</script>
+}
