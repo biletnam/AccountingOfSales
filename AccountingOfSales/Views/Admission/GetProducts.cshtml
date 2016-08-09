@@ -1,0 +1,9 @@
+﻿@using AccountingOfSales.Models;
+@model IEnumerable<Product>
+
+<select id="product" name="ProductId" class="form-control">
+    @foreach (var item in Model)
+    {
+        <option value="@item.Id">@item.Name</option>
+    }
+</select>
