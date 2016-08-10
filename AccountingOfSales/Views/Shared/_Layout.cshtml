@@ -15,7 +15,8 @@
     @Scripts.Render("~/Scripts/ShowElement.js")
     @Scripts.Render("~/Scripts/bootstrap-datepicker.js")
     @Scripts.Render("~/Scripts/locales/bootstrap-datepicker.ru.min.js")
-
+    @Scripts.Render("~/scripts/jquery-1.10.2.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -36,7 +37,12 @@
                             <li>@Html.ActionLink("Архив", "Index", "Provider", new { archive = true }, "")</li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("Поступления", "Index", "Admission")</li>
+                    <li>
+                        @Html.ActionLink("Поступления", "Index", "Admission")
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Создать", "Create", "Admission")</li>
+                        </ul>
+                    </li>
                 </ul>
                 @if (Request.IsAuthenticated)
                 {
