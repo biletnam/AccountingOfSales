@@ -6,12 +6,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AccountingOfSales.Models.Entities;
+using AccountingOfSales.Models.ViewModel;
 
 namespace AccountingOfSales.Controllers
 {
     public class AdmissionController : Controller
     {
         SalesDbContext db = new SalesDbContext();
+        List<Admission> createdAdmissions = new List<Admission>();
         public ActionResult Index(int? page, DateTime? filterDateAdmissionFrom, DateTime? filterDateAdmissionTo, int? filterUser, int? filterProvider)
         {
             int pageSize = 20;
@@ -32,23 +34,47 @@ namespace AccountingOfSales.Controllers
 
             return View(admissions.OrderByDescending(d => d.AdmissionDate).ToPagedList(pageNumber, pageSize));
         }
+        [Authorize]
         public ActionResult Create()
         {
-            int selectedValue = 1;
-            ViewBag.Providers = new SelectList(db.Providers, "Id", "Name", selectedValue);
-            ViewBag.Products = new SelectList(db.Products.Where(i => i.ProviderId == selectedValue), "Id", "Name");
+            List<Provider> providers = db.Providers.Where(a => a.Archive == false).OrderBy(n => n.Name).ToList();
+
+            int? selectedValue = null; //нал, чтобы списки были пустыми
+            if (providers.Count != 0)
+                selectedValue = providers.First().Id;
+
+            ViewBag.Providers = new SelectList(providers, "Id", "Name", selectedValue);
+            ViewBag.Products = new SelectList(db.Products.Where(i => i.ProviderId == selectedValue).OrderBy(n => n.Name), "Id", "Name");
 
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AdmissionDate, ProviderId, AdditionalCosts, TradePrice, ProductId, Count")] Admission admission)
+        public ActionResult Create([Bind(Include = "AdmissionDate, ProviderId, AdditionalCosts, TradePrice, ProductId, Count")] AdmissionCreateViewModels newAdmission)
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult ListAddAdmissions([Bind(Include = "AdmissionDate, ProviderId, AdditionalCosts, TradePrice, ProductId, Count")] AdmissionCreateViewModels newAdmission)
+        {
+            Admission admission = new Admission();
+            admission.CreateDate = DateTime.Now;
+            admission.AdmissionDate = newAdmission.AdmissionDate;
+            admission.Provider = db.Providers.Where(i => i.Id == newAdmission.ProviderId).FirstOrDefault();
+            admission.User = db.Users.Where(n => n.Login == User.Identity.Name).FirstOrDefault();
+            admission.TradePrice = newAdmission.TradePrice;
+            admission.Product = db.Products.Where(i => i.Id == newAdmission.ProductId).FirstOrDefault();
+            admission.Count = newAdmission.Count;
+
+            createdAdmissions.Add(admission);
+
+            return PartialView(createdAdmissions);
+        }
+        
         public ActionResult GetProducts(int id)
         {
-            return PartialView(db.Products.Where(c => c.ProviderId == id).ToList());
+            return PartialView(db.Products.Where(c => c.ProviderId == id).OrderBy(n => n.Name).ToList());
         }
         protected override void Dispose(bool disposing)
         {
