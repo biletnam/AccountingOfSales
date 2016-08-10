@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PagedList.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace AccountingOfSales.Models.ViewModel
 {
@@ -13,5 +14,46 @@ namespace AccountingOfSales.Models.ViewModel
         public DateTime FilterDateAdmissionTo { get; set; }
         public string UserName { get; set; }
         PagedList.IPagedList<Admission> Admissions { get; set; }
+    }
+
+    public class AdmissionCreateViewModels
+    {
+        [Display(Name = "Дата создания")]
+        public DateTime CreateDate { get; set; }
+
+        [Display(Name = "Дата поступления")]
+        [Required(ErrorMessage = "Дата поступления не может быть пустым")]
+        /// <summary>
+        /// Дата поступления
+        /// </summary>
+        public DateTime AdmissionDate { get; set; }
+
+        [Display(Name = "Дополнительные расходы")]
+        [RegularExpression(@"[\d.]*", ErrorMessage = "Поле дополнительных расходов содержит запрещающие символы")]
+        [Range(0, 1000000000, ErrorMessage = "В поле дополнительных расходов содержится недопустимое число")]
+        /// <summary>
+        /// Дополнительные расходы
+        /// </summary>
+        public double? AdditionalCosts { get; set; }
+
+        [Required(ErrorMessage = "Поле оптовой цены не может быть пустым")]
+        [Display(Name = "Оптовая цена")]
+        [RegularExpression(@"[\d.]*", ErrorMessage = "Поле оптовой цены содержит запрещающие символы")]
+        [Range(0, 1000000000, ErrorMessage = "В поле оптовой цены содержится недопустимое число")]
+        /// <summary>
+        /// Оптовая цена
+        /// </summary>
+        public double TradePrice { get; set; }
+
+        [Required(ErrorMessage = "Поле количества не должно быть пустым")]
+        [Display(Name = "Количество")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "В поле количества вводить разрешено только целые числа")]
+        public int Count { get; set; }
+
+        [ScaffoldColumn(false)]
+        public int ProductId { get; set; }
+
+        [ScaffoldColumn(false)]
+        public int ProviderId { get; set; }
     }
 }
