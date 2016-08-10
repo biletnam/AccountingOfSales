@@ -185,6 +185,10 @@
     <Compile Include="Migrations\201607291439432_AddAtributeForAdmissionCount.Designer.cs">
       <DependentUpon>201607291439432_AddAtributeForAdmissionCount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608100608163_EditAdmission..cs" />
+    <Compile Include="Migrations\201608100608163_EditAdmission..Designer.cs">
+      <DependentUpon>201608100608163_EditAdmission..cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\CryptHelper.cs" />
@@ -255,6 +259,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -355,6 +361,7 @@
     <Content Include="Views\Admission\Index.cshtml" />
     <Content Include="Views\Admission\Create.cshtml" />
     <Content Include="Views\Admission\GetProducts.cshtml" />
+    <Content Include="Views\Admission\ListAddAdmissions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
@@ -386,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607291439432_AddAtributeForAdmissionCount.resx">
       <DependentUpon>201607291439432_AddAtributeForAdmissionCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608100608163_EditAdmission..resx">
+      <DependentUpon>201608100608163_EditAdmission..cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
