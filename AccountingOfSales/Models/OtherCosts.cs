@@ -15,9 +15,9 @@ namespace AccountingOfSales.Models
         public DateTime CostsDate { get; set; }
         public double Price { get; set; }
         public string Comment { get; set; }
-
-        [ScaffoldColumn(false)]
-        public int? AdmissionId { get; set; }
-        public virtual Admission Admission { get; set; }
+        /// <summary>
+        /// Показывает, что расход был создан при создании поступления
+        /// </summary>
+        public bool Admission { get; set; }
     }
 }
