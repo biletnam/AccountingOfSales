@@ -1,23 +1,34 @@
-﻿@using AccountingOfSales.Models;
-@model PagedList.IPagedList<Admission>
+﻿@using AccountingOfSales.Models.ViewModel;
+@model AdmissionCreateViewModels
 
 @{
     ViewBag.Title = "Создание поступления";
+    DateTime dateNow = DateTime.Now;
 }
 
 <h2>Создание поступления</h2>
-
-@using (Html.BeginForm("Create", "Admission", FormMethod.Post))
+@*(Html.BeginForm("Create", "Admission", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))*@
+@using (Ajax.BeginForm("ListAddAdmissions", "Admission", new AjaxOptions { UpdateTargetId = "results" }, new { @class = "form-horizontal", role = "form" }))
 {
-    @Html.AntiForgeryToken()
-
-    <h3>Выберите поставщика</h3>
-    @Html.DropDownList("ProviderId", ViewBag.Providers as SelectList, new { @class = "form-control", id = "provider" })
-
-    <h3>Выберите товар</h3>
-    @Html.DropDownList("ProductId", ViewBag.Products as SelectList, new { @class = "form-control", id = "product" })
-    <input type="submit" value="Создать" class="btn btn-primary" />
+    @Html.AntiForgeryToken()    
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("Выберите поставщика", new { @class = "col-md-2 control-label" })
+        @Html.DropDownList("ProviderId", ViewBag.Providers as SelectList, new { @class = "form-control", id = "provider" })
+    </div>
+    
+    <div class="form-inline">
+        @Html.TextBox("AdmissionDate", dateNow.ToShortDateString(), htmlAttributes: new { @class = "form-control datepicker", style="width:150px", placeholder = "Дата поступления" })
+        @Html.DropDownList("ProductId", ViewBag.Products as SelectList, new { @class = "form-control", id = "product" })
+        @Html.TextBoxFor(model => model.TradePrice, dateNow.ToShortDateString(), htmlAttributes: new { @class = "form-control", placeholder = "Оптовая цена" })
+        @Html.TextBoxFor(model => model.Count, dateNow.ToShortDateString(), htmlAttributes: new { @class = "form-control", placeholder = "Количество" })
+    </div>
+    <br />
+    <input type="submit" value="Добавить" class="btn btn-primary" />
 }
+<br />
+<div id="results"></div>
 
 @section scripts{
 <script type="text/javascript">
@@ -37,5 +48,12 @@
                 });
             });
         })
+
+    $('.datepicker').datepicker({
+        format: "dd.mm.yyyy",
+        language: "ru",
+        autoclose: true,
+        todayHighlight: true
+    });
 </script>
 }
