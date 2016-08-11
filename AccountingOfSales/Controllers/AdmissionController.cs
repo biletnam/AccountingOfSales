@@ -69,7 +69,13 @@ namespace AccountingOfSales.Controllers
 
             createdAdmissions.Add(admission);
 
-            return PartialView(createdAdmissions);
+            if (Session["CreatedAdmissions"] == null)
+                Session["CreatedAdmissions"] = createdAdmissions;
+            else
+                (Session["CreatedAdmissions"] as List<Admission>).Add(admission);
+            
+
+            return PartialView(Session["CreatedAdmissions"]);
         }
         
         public ActionResult GetProducts(int id)
