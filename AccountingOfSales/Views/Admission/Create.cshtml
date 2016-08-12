@@ -12,7 +12,9 @@
 {
     @Html.AntiForgeryToken()    
     <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <p>@Html.ValidationMessageFor(model => model.TradePrice, "", new { @class = "text-danger" })</p>
+    <p>@Html.ValidationMessageFor(model => model.Count, "", new { @class = "text-danger" })</p>
+
     <div class="form-group">
         @Html.Label("Выберите поставщика", new { @class = "col-md-2 control-label" })
         @Html.DropDownList("ProviderId", ViewBag.Providers as SelectList, new { @class = "form-control", id = "provider" })
@@ -33,9 +35,10 @@
 @using (Html.BeginForm("Create", "Admission", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <p>@Html.ValidationMessageFor(model => model.PriceOtherCosts, "", new { @class = "text-danger" })</p>
+    <p>@Html.ValidationMessageFor(model => model.CommentOtherCosts, "", new { @class = "text-danger" })</p>
     <div class="form-inline">
-        @Html.TextBoxFor(model => model.PriceOtherCosts, "", htmlAttributes: new { @class = "form-control", placeholder = "Цена прочих расходов" })
+        @Html.TextBoxFor(model => model.PriceOtherCosts, "", htmlAttributes: new { @class = "form-control", placeholder = "Сумма прочих расходов" })
         @Html.TextBoxFor(model => model.CommentOtherCosts, "", htmlAttributes: new { @class = "form-control", placeholder = "Комментарий" })
     </div>
     <br />
