@@ -13,7 +13,6 @@ namespace AccountingOfSales.Controllers
     public class AdmissionController : Controller
     {
         SalesDbContext db = new SalesDbContext();
-        List<Admission> createdAdmissions = new List<Admission>();
         public ActionResult Index(int? page, DateTime? filterDateAdmissionFrom, DateTime? filterDateAdmissionTo, int? filterUser, int? filterProvider)
         {
             int pageSize = 20;
@@ -50,14 +49,22 @@ namespace AccountingOfSales.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AdmissionDate, ProviderId, AdditionalCosts, TradePrice, ProductId, Count")] AdmissionCreateViewModels newAdmission)
+        public ActionResult Create([Bind(Include = "PriceOtherCosts, CommentOtherCosts")] AdmissionCreateViewModels newAdmission)
         {
+            if (ModelState.IsValid)
+            {
+
+            }
+
             return View();
         }
 
         [HttpPost]
         public ActionResult ListAddAdmissions([Bind(Include = "AdmissionDate, ProviderId, AdditionalCosts, TradePrice, ProductId, Count")] AdmissionCreateViewModels newAdmission)
         {
+            
+            List<Admission> createdAdmissions = new List<Admission>();
+
             Admission admission = new Admission();
             admission.CreateDate = DateTime.Now;
             admission.AdmissionDate = newAdmission.AdmissionDate;
