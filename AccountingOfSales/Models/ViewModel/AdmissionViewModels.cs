@@ -59,7 +59,7 @@ namespace AccountingOfSales.Models.ViewModel
         [Display(Name = "Сумма")]
         [RegularExpression(@"[\d.]*", ErrorMessage = "Поле Сумма содержит запрещающие символы")]
         [Range(0, 1000000000, ErrorMessage = "В поле Сумма содержится недопустимое число")]
-        public double PriceOtherCosts { get; set; }
+        public double? PriceOtherCosts { get; set; }
 
         [Display(Name = "Комментарий")]
         [StringLength(150, ErrorMessage = "В поле Комментарий количество символов не должно превышать 150")]
