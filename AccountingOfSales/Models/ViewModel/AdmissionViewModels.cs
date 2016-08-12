@@ -47,7 +47,7 @@ namespace AccountingOfSales.Models.ViewModel
 
         [Required(ErrorMessage = "Поле количества не должно быть пустым")]
         [Display(Name = "Количество")]
-        [RegularExpression(@"[\d]*", ErrorMessage = "В поле количества вводить разрешено только целые числа")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "В поле Количество вводить разрешено только целые числа")]
         public int Count { get; set; }
 
         [ScaffoldColumn(false)]
@@ -55,5 +55,15 @@ namespace AccountingOfSales.Models.ViewModel
 
         [ScaffoldColumn(false)]
         public int ProviderId { get; set; }
+
+        [Display(Name = "Сумма")]
+        [RegularExpression(@"[\d.]*", ErrorMessage = "Поле Сумма содержит запрещающие символы")]
+        [Range(0, 1000000000, ErrorMessage = "В поле Сумма содержится недопустимое число")]
+        public double PriceOtherCosts { get; set; }
+
+        [Display(Name = "Комментарий")]
+        [StringLength(150, ErrorMessage = "В поле Комментарий количество символов не должно превышать 150")]
+        [RegularExpression(@"[\w\d\sА-яёЁ:!?,.()%-]*", ErrorMessage = "В поле Комментарий, текст содержит запрещающие символы")]
+        public string CommentOtherCosts { get; set; }
     }
 }
