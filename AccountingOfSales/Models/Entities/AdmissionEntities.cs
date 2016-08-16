@@ -21,9 +21,9 @@ namespace AccountingOfSales.Models.Entities
                 filterDateAdmissionTo = filterDateAdmissionTo.Value.AddDays(1); //прибавляем к "дате по" 1 день, чтобы дата была включительно
 
             if (filterDateAdmissionFrom != null && filterDateAdmissionTo != null)
-                admissions = db.Admissions.Where(d => d.AdmissionDate > filterDateAdmissionFrom).Where(d => d.AdmissionDate < filterDateAdmissionTo).ToList();
+                admissions = db.Admissions.Where(d => d.AdmissionDate >= filterDateAdmissionFrom).Where(d => d.AdmissionDate < filterDateAdmissionTo).ToList();
             else if (filterDateAdmissionFrom != null && filterDateAdmissionTo == null)
-                admissions = db.Admissions.Where(d => d.AdmissionDate > filterDateAdmissionFrom).ToList();
+                admissions = db.Admissions.Where(d => d.AdmissionDate >= filterDateAdmissionFrom).ToList();
             else if (filterDateAdmissionFrom == null && filterDateAdmissionTo != null)
             {
                 //находим дату последних 3 месяцев, от "даты по", чтобы опять же ограничить 3 месяцами
