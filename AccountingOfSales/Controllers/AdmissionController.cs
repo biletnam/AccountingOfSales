@@ -31,11 +31,13 @@ namespace AccountingOfSales.Controllers
             ViewBag.Providers = new SelectList(providers, "Id", "Name");
             ViewBag.Users = new SelectList(users, "Id", "Login");
 
-            return View(admissions.OrderByDescending(d => d.AdmissionDate).ToPagedList(pageNumber, pageSize));
+            return View(admissions.OrderByDescending(d => d.AdmissionDate).ThenByDescending(d => d.CreateDate).ToPagedList(pageNumber, pageSize));
         }
         [Authorize]
         public ActionResult Create()
         {
+            Session["CreatedAdmissions"] = null;
+
             List<Provider> providers = db.Providers.Where(a => a.Archive == false).OrderBy(n => n.Name).ToList();
 
             int? selectedValue = null; //нал, чтобы списки были пустыми
@@ -49,40 +51,95 @@ namespace AccountingOfSales.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PriceOtherCosts, CommentOtherCosts")] AdmissionCreateViewModels newAdmission)
+        public ActionResult Create([Bind(Include = "PriceOtherCosts, CommentOtherCosts")] AdmissionCreateViewModels model)
         {
             if (ModelState.IsValid)
             {
+                if (Session["CreatedAdmissions"] != null)
+                {
+                    int summCount = (Session["CreatedAdmissions"] as List<Admission>).Sum(c => c.Count);
 
+                    foreach (var newAdmission in (Session["CreatedAdmissions"] as List<Admission>))
+                    {
+                        //создать поступление
+                        Admission admission = new Admission();
+
+                        admission.AdmissionDate = newAdmission.AdmissionDate;
+                        admission.CreateDate = newAdmission.CreateDate;
+                        admission.ProviderId = newAdmission.ProviderId;
+                        admission.UserId = newAdmission.UserId;
+                        admission.TradePrice = newAdmission.TradePrice;
+                        admission.ProductId = newAdmission.ProductId;
+                        admission.Count = newAdmission.Count;
+
+                        //если есть прочие расходы вычислить доп. расходы
+                        if (model.PriceOtherCosts != null)
+                            admission.AdditionalCosts = Math.Round((double)model.PriceOtherCosts / summCount);
+
+                        db.Admissions.Add(admission);
+
+                        //изменить количество у товара
+                        Product product = db.Products.Where(i => i.Id == newAdmission.ProductId).FirstOrDefault();
+                        if(product != null)
+                        {
+                            int newCount = product.Count + newAdmission.Count;
+                            product.Count = newCount;
+                        }
+                    }
+
+                    //создать прочие расходы
+                    if (model.PriceOtherCosts != null)
+                    {
+                        OtherCosts otherCosts = new OtherCosts();
+                        otherCosts.CreateDate = DateTime.Now;
+                        otherCosts.CostsDate = (Session["CreatedAdmissions"] as List<Admission>).First().AdmissionDate;
+                        otherCosts.Price = (double)model.PriceOtherCosts;
+                        otherCosts.Comment = model.CommentOtherCosts != null ? model.CommentOtherCosts : null;
+                        otherCosts.Admission = true;
+                        db.OtherCosts.Add(otherCosts);
+                    }
+                    db.SaveChanges();
+                }
+                else
+                    return RedirectToAction("Create");
+
+                return RedirectToAction("Index");
             }
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult ListAddAdmissions([Bind(Include = "AdmissionDate, ProviderId, AdditionalCosts, TradePrice, ProductId, Count")] AdmissionCreateViewModels newAdmission)
+        public ActionResult ListAddAdmissions([Bind(Include = "AdmissionDate, ProviderId, AdditionalCosts, TradePrice, ProductId, Count")] Admission newAdmission)
         {
-            
-            List<Admission> createdAdmissions = new List<Admission>();
+            if (ModelState.IsValid)
+            {
+                List<Admission> createdAdmissions = new List<Admission>();
+                User user = db.Users.Where(n => n.Login == User.Identity.Name).FirstOrDefault();
 
-            Admission admission = new Admission();
-            admission.CreateDate = DateTime.Now;
-            admission.AdmissionDate = newAdmission.AdmissionDate;
-            admission.Provider = db.Providers.Where(i => i.Id == newAdmission.ProviderId).FirstOrDefault();
-            admission.User = db.Users.Where(n => n.Login == User.Identity.Name).FirstOrDefault();
-            admission.TradePrice = newAdmission.TradePrice;
-            admission.Product = db.Products.Where(i => i.Id == newAdmission.ProductId).FirstOrDefault();
-            admission.Count = newAdmission.Count;
+                Admission admission = new Admission();
+                admission.AdmissionDate = newAdmission.AdmissionDate;
+                admission.CreateDate = DateTime.Now;
+                admission.ProviderId = newAdmission.ProviderId;
+                admission.UserId = user.Id;
+                admission.TradePrice = newAdmission.TradePrice;
+                admission.ProductId = newAdmission.ProductId;
+                admission.Product = db.Products.Where(i => i.Id == newAdmission.ProductId).FirstOrDefault();
+                admission.Count = newAdmission.Count;                
 
-            createdAdmissions.Add(admission);
+                if (Session["CreatedAdmissions"] == null)
+                {
+                    createdAdmissions.Add(admission);
+                    Session["CreatedAdmissions"] = createdAdmissions;
+                }
+                else
+                    (Session["CreatedAdmissions"] as List<Admission>).Add(admission);
 
-            if (Session["CreatedAdmissions"] == null)
-                Session["CreatedAdmissions"] = createdAdmissions;
-            else
-                (Session["CreatedAdmissions"] as List<Admission>).Add(admission);
-            
 
-            return PartialView(Session["CreatedAdmissions"]);
+                return PartialView(Session["CreatedAdmissions"]);
+            }
+
+            return View(newAdmission);
         }
         
         public ActionResult GetProducts(int id)
