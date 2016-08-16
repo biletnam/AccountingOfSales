@@ -8,9 +8,9 @@
 
 <h2>Создание поступления</h2>
 @*(Html.BeginForm("Create", "Admission", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))*@
+@*Ajax.BeginForm("ListAddAdmissions", "Admission", new AjaxOptions { UpdateTargetId = "results" }, new { @class = "form-horizontal", role = "form" })*@
 @using (Ajax.BeginForm("ListAddAdmissions", "Admission", new AjaxOptions { UpdateTargetId = "results" }, new { @class = "form-horizontal", role = "form" }))
 {
-    @Html.AntiForgeryToken()    
     <hr />
     <p>@Html.ValidationMessageFor(model => model.TradePrice, "", new { @class = "text-danger" })</p>
     <p>@Html.ValidationMessageFor(model => model.Count, "", new { @class = "text-danger" })</p>
@@ -49,22 +49,22 @@
 @section scripts{
 <script type="text/javascript">
     //при выборе значения одного списка заполняется другой список
-        $(function () {
+    $(function () {
 
-            $('#provider').change(function () {
-                // получаем выбранный id
-                var id = $(this).val();
-                $.ajax({
-                    type: 'GET',
-                    url: '@Url.Action("GetProducts")/' + id,
-                    success: function (data) {
+        $('#provider').change(function () {
+            // получаем выбранный id
+            var id = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetProducts")/' + id,
+                success: function (data) {
 
-                        // заменяем содержимое присланным частичным представлением
-                        $('#product').replaceWith(data);
-                    }
-                });
+                    // заменяем содержимое присланным частичным представлением
+                    $('#product').replaceWith(data);
+                }
             });
-        })
+        });
+    })
 
     $('.datepicker').datepicker({
         format: "dd.mm.yyyy",
