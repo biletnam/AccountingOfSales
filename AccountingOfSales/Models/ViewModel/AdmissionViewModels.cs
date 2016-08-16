@@ -22,12 +22,12 @@ namespace AccountingOfSales.Models.ViewModel
         public DateTime CreateDate { get; set; }
 
         [Display(Name = "Дата поступления")]
-        [Required(ErrorMessage = "Дата поступления не может быть пустым")]
+        [Required(ErrorMessage = "Дата поступления не может быть пустой")]
         /// <summary>
         /// Дата поступления
         /// </summary>
         public DateTime AdmissionDate { get; set; }
-
+        
         [Display(Name = "Дополнительные расходы")]
         [RegularExpression(@"[\d.]*", ErrorMessage = "Поле дополнительных расходов содержит запрещающие символы")]
         [Range(0, 1000000000, ErrorMessage = "В поле дополнительных расходов содержится недопустимое число")]
@@ -56,7 +56,7 @@ namespace AccountingOfSales.Models.ViewModel
         [ScaffoldColumn(false)]
         public int ProviderId { get; set; }
 
-        [Display(Name = "Сумма")]
+        [Display(Name = "Сумма прочих расходов")]
         [RegularExpression(@"[\d.]*", ErrorMessage = "Поле Сумма содержит запрещающие символы")]
         [Range(0, 1000000000, ErrorMessage = "В поле Сумма содержится недопустимое число")]
         public double? PriceOtherCosts { get; set; }
