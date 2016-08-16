@@ -89,7 +89,11 @@ namespace AccountingOfSales.Controllers
 
                 if(image != null)
                 {
-                    System.IO.File.Delete(Server.MapPath("~/Images/" + product.Image.Name));
+                    if(product.Image != null)
+                    {
+                        System.IO.File.Delete(Server.MapPath("~/Images/" + product.Image.Name));
+                        db.Images.Remove(product.Image);
+                    }
                     product.Image = SaveAsImage(image);
                 }
 
