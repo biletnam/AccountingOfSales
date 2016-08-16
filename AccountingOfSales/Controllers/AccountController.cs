@@ -64,7 +64,7 @@ namespace AccountingOfSales.Controllers
                 db.SaveChanges();
 
                 newUser = db.Users.Where(u => u.Login == model.Login && u.Password == hashPassword).FirstOrDefault();
-                // если пользователь удачно добавлен в бд
+                // если пользователь удачно добавлен в бд, то создаем куки
                 if (newUser != null)
                 {
                     FormsAuthentication.SetAuthCookie(model.Login, true);
