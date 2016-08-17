@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdmissionController.cs" />
+    <Compile Include="Controllers\OtherCostsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\TypeProductController.cs" />
@@ -189,10 +190,19 @@
     <Compile Include="Migrations\201608100608163_EditAdmission..Designer.cs">
       <DependentUpon>201608100608163_EditAdmission..cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608171749481_UpdateAttribute.cs" />
+    <Compile Include="Migrations\201608171749481_UpdateAttribute.Designer.cs">
+      <DependentUpon>201608171749481_UpdateAttribute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608171759423_UpdateAttribute2.cs" />
+    <Compile Include="Migrations\201608171759423_UpdateAttribute2.Designer.cs">
+      <DependentUpon>201608171759423_UpdateAttribute2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\CryptHelper.cs" />
     <Compile Include="Models\Entities\AdmissionEntities.cs" />
+    <Compile Include="Models\Entities\OtherCostsEntities.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\OtherCosts.cs" />
@@ -362,6 +372,7 @@
     <Content Include="Views\Admission\Create.cshtml" />
     <Content Include="Views\Admission\GetProducts.cshtml" />
     <Content Include="Views\Admission\ListAddAdmissions.cshtml" />
+    <Content Include="Views\OtherCosts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
@@ -396,6 +407,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608100608163_EditAdmission..resx">
       <DependentUpon>201608100608163_EditAdmission..cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608171749481_UpdateAttribute.resx">
+      <DependentUpon>201608171749481_UpdateAttribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608171759423_UpdateAttribute2.resx">
+      <DependentUpon>201608171759423_UpdateAttribute2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
