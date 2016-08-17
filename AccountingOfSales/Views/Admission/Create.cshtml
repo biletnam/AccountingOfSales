@@ -39,11 +39,11 @@
     <p>@Html.ValidationMessageFor(model => model.CommentOtherCosts, "", new { @class = "text-danger" })</p>
     <div class="form-inline">
         @Html.TextBoxFor(model => model.PriceOtherCosts, "", htmlAttributes: new { @class = "form-control", placeholder = "Сумма прочих расходов" })
-        @Html.TextBoxFor(model => model.CommentOtherCosts, "", htmlAttributes: new { @class = "form-control", placeholder = "Комментарий" })
+        @Html.TextBoxFor(model => model.CommentOtherCosts, "", htmlAttributes: new { @class = "form-control", style = "width:600px", placeholder = "Комментарий" })
     </div>
     <br />
     <input type="submit" value="Оформить" class="btn btn-primary" />
-    @Html.ActionLink("Отмена", "Create", "Admission", htmlAttributes: new { @class = "btn btn-default" })
+    @Html.ActionLink("Отмена", "Create", "Admission", new { @class = "btn btn-default" })
 }
 
 @section scripts{
