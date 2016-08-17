@@ -22,11 +22,11 @@ namespace AccountingOfSales.Models.ViewModel
         public DateTime CreateDate { get; set; }
 
         [Display(Name = "Дата поступления")]
-        [Required(ErrorMessage = "Дата поступления не может быть пустой")]
+        [DisplayFormat(DataFormatString = "{0:dd'.'mm'.'yyyy}")]
         /// <summary>
-        /// Дата поступления
+        /// Дата поступления. String, потому как иначе не работает валидация. При нажатии на "Оформить" валидация ругается на то, что дата поступления не может быть пустой        /// 
         /// </summary>
-        public DateTime AdmissionDate { get; set; }
+        public string AdmissionDate { get; set; }
         
         [Display(Name = "Дополнительные расходы")]
         [RegularExpression(@"[\d.]*", ErrorMessage = "Поле дополнительных расходов содержит запрещающие символы")]
