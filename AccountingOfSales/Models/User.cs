@@ -11,8 +11,23 @@ namespace AccountingOfSales.Models
     {
         [ScaffoldColumn(false)]
         public int Id { get; set; }
+
+        [Required]
+        [Display(Name = "Логин")]
+        [RegularExpression(@"[\w\d]*", ErrorMessage = "Логин должен содержать только латинские алфавитно-цифровые символы.")]
+        [StringLength(150, ErrorMessage = "Количество символов не должно превышать 150")]
         public string Login { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Пароль")]
+        [StringLength(150, ErrorMessage = "Количество символов не должно превышать 150")]
         public string Password { get; set; }
+
+        [Required]
+        [Display(Name = "ФИО")]
+        [RegularExpression(@"[\w\dА-яёЁ]*", ErrorMessage = "В ФИО должны содержаться только алфавитно-цифровые символы.")]
+        [StringLength(150, ErrorMessage = "Количество символов не должно превышать 150")]
         public string FIO { get; set; }
         public virtual ICollection<Role> Roles { get; set; } = new List<Role>();
         public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
