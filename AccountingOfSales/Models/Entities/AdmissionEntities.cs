@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AccountingOfSales.Models.Entities
 {
-    public partial class AdmissionEntities
+    public class AdmissionEntities
     {
         static SalesDbContext db = new SalesDbContext();
 
@@ -28,10 +28,10 @@ namespace AccountingOfSales.Models.Entities
             {
                 //находим дату последних 3 месяцев, от "даты по", чтобы опять же ограничить 3 месяцами
                 DateTime last3MonthsDateTo = new DateTime(filterDateAdmissionTo.Value.Year, filterDateAdmissionTo.Value.Month, filterDateAdmissionTo.Value.Day).AddMonths(-3);
-                admissions = db.Admissions.Where(d => d.AdmissionDate > last3MonthsDateTo).Where(d => d.AdmissionDate < filterDateAdmissionTo).ToList();
+                admissions = db.Admissions.Where(d => d.AdmissionDate >= last3MonthsDateTo).Where(d => d.AdmissionDate < filterDateAdmissionTo).ToList();
             }
             else
-                admissions = db.Admissions.Where(d => d.AdmissionDate > last3Months).ToList();
+                admissions = db.Admissions.Where(d => d.AdmissionDate >= last3Months).ToList();
 
             if (filterProvider != null && filterProvider != 0)
                 admissions = admissions.Where(u => u.ProviderId == filterProvider).ToList();
