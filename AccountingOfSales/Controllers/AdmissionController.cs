@@ -51,7 +51,7 @@ namespace AccountingOfSales.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PriceOtherCosts, CommentOtherCosts")] AdmissionCreateViewModels model)
+        public ActionResult Create([Bind(Include = "AdmissionDate, PriceOtherCosts, CommentOtherCosts")]AdmissionCreateViewModels model)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace AccountingOfSales.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View();
+            return RedirectToAction("Create");
         }
 
         [HttpPost]
@@ -139,7 +139,7 @@ namespace AccountingOfSales.Controllers
                 return PartialView(Session["CreatedAdmissions"]);
             }
 
-            return View(newAdmission);
+            return RedirectToAction("Create");
         }
         
         public ActionResult GetProducts(int id)
