@@ -12,7 +12,7 @@ namespace AccountingOfSales.Models.ViewModel
     {
         [Required]
         [Display(Name = "Логин")]
-        [RegularExpression(@"[\w\d]*", ErrorMessage = "Логин должен содержать только алфавитно-цифровые символы.")]
+        [RegularExpression(@"[\w\d]*", ErrorMessage = "Логин должен содержать только латинские алфавитно-цифровые символы.")]
         public string Login { get; set; }
 
         [Display(Name = "Запомнить меня")]
@@ -29,14 +29,14 @@ namespace AccountingOfSales.Models.ViewModel
     {
         [Required]
         [Display(Name = "Логин")]
-        [RegularExpression(@"[\w\d]*", ErrorMessage = "Логин должен содержать только алфавитно-цифровые символы.")]
+        [RegularExpression(@"[\w\d]*", ErrorMessage = "Логин должен содержать только латинские алфавитно-цифровые символы.")]
         [Remote("CheckLogin", "Account", ErrorMessage = "Пользователь с таким логином уже имеется", AdditionalFields = "Id")]
         public string Login { get; set; }
 
         [Required]
         [Display(Name = "ФИО")]
         [RegularExpression(@"[\w\dА-яёЁ]*", ErrorMessage = "В ФИО должны содержаться только алфавитно-цифровые символы.")]
-
+        [StringLength(150, ErrorMessage = "Количество символов не должно превышать 150")]
         public string FIO { get; set; }
 
         [Required]
