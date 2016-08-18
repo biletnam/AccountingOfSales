@@ -21,13 +21,13 @@ namespace AccountingOfSales.Models
         /// </summary>
         public int RetailPrice { get; set; }
 
-        [Display(Name = "Скидка")]
+        [Display(Name = "Сумма скидки")]
         [RegularExpression(@"[\d]*", ErrorMessage = "Скидка должна содержать только целое число")]
         [Range(0, 1000000000, ErrorMessage = "Недопустимое число")]
         /// <summary>
         /// Скидка
         /// </summary>
-        public int Discount { get; set; }
+        public int? Discount { get; set; }
 
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         [Display(Name = "Цена продажи")]
