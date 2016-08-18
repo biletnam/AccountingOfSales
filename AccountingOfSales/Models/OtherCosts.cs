@@ -16,21 +16,21 @@ namespace AccountingOfSales.Models
         public DateTime CreateDate { get; set; }
 
         [Display(Name = "Дата расхода")]
-        [Required(ErrorMessage = "\"Дата расхода\" не может быть пустой")]
+        [Required(ErrorMessage = "Дата расхода не может быть пустой")]
         public DateTime CostsDate { get; set; }
 
         [Display(Name = "Сумма")]
-        [Required(ErrorMessage = "\"Сумма\" не может быть пустой")]
-        [RegularExpression(@"[\d.]*", ErrorMessage = "\"Сумма\" содержит запрещающие символы")]
+        [Required(ErrorMessage = "Сумма не может быть пустой")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "Сумма должна содержать только целое число")]
         [Range(0, 1000000000, ErrorMessage = "Недопустимое число")]
-        public double Price { get; set; }
+        public int Price { get; set; }
 
         [Display(Name = "Комментарий")]
         [StringLength(150, ErrorMessage = "Количество символов не должно превышать 150")]
         [RegularExpression(@"[\w\d\sА-яёЁ:!?,.()%-]*", ErrorMessage = "Текст содержит запрещающие символы")]
         public string Comment { get; set; }
         /// <summary>
-        /// Показывает, что расход был создан при создании поступления
+        /// Показывает, что расход был создан при создании поступления 
         /// </summary>
         public bool Admission { get; set; }
     }
