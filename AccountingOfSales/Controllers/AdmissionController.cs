@@ -51,7 +51,7 @@ namespace AccountingOfSales.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AdmissionDate, PriceOtherCosts, CommentOtherCosts")]AdmissionCreateViewModels model)
+        public ActionResult Create([Bind(Include = "PriceOtherCosts, CommentOtherCosts")]AdmissionCreateViewModels model)
         {
             if (ModelState.IsValid)
             {
