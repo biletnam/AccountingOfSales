@@ -28,21 +28,21 @@ namespace AccountingOfSales.Models.ViewModel
         public DateTime AdmissionDate { get; set; }
         
         [Display(Name = "Дополнительные расходы")]
-        [RegularExpression(@"[\d.]*", ErrorMessage = "Поле дополнительных расходов содержит запрещающие символы")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "Дополнительные расходы должны содержать только целое число")]
         [Range(0, 1000000000, ErrorMessage = "В поле дополнительных расходов содержится недопустимое число")]
         /// <summary>
         /// Дополнительные расходы
         /// </summary>
-        public double? AdditionalCosts { get; set; }
+        public int? AdditionalCosts { get; set; }
 
         [Required(ErrorMessage = "Поле оптовой цены не может быть пустым")]
         [Display(Name = "Оптовая цена")]
-        [RegularExpression(@"[\d.]*", ErrorMessage = "Поле оптовой цены содержит запрещающие символы")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "Оптовая цена должна содержать только целое число")]
         [Range(0, 1000000000, ErrorMessage = "В поле оптовой цены содержится недопустимое число")]
         /// <summary>
         /// Оптовая цена
         /// </summary>
-        public double TradePrice { get; set; }
+        public int TradePrice { get; set; }
 
         [Required(ErrorMessage = "Поле количества не должно быть пустым")]
         [Display(Name = "Количество")]
@@ -56,9 +56,9 @@ namespace AccountingOfSales.Models.ViewModel
         public int ProviderId { get; set; }
 
         [Display(Name = "Сумма прочих расходов")]
-        [RegularExpression(@"[\d.]*", ErrorMessage = "Поле Сумма содержит запрещающие символы")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "Сумма доп. расходов должна содержать только целое число")]
         [Range(0, 1000000000, ErrorMessage = "В поле Сумма содержится недопустимое число")]
-        public double? PriceOtherCosts { get; set; }
+        public int? PriceOtherCosts { get; set; }
 
         [Display(Name = "Комментарий")]
         [StringLength(150, ErrorMessage = "В поле Комментарий количество символов не должно превышать 150")]
