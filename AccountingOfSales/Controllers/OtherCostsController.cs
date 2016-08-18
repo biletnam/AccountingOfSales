@@ -22,5 +22,24 @@ namespace AccountingOfSales.Controllers
 
             return View(otherCosts.OrderByDescending(d => d.CostsDate).ThenByDescending(d => d.CreateDate).ToPagedList(pageNumber, pageSize));
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "CostsDate, Price, Comment")] OtherCosts newOtherCost)
+        {
+            if (ModelState.IsValid)
+            {
+                newOtherCost.CreateDate = DateTime.Now;
+                db.OtherCosts.Add(newOtherCost);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(newOtherCost);
+        }
     }
 }
