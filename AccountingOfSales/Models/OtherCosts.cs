@@ -15,12 +15,13 @@ namespace AccountingOfSales.Models
         [Required]
         public DateTime CreateDate { get; set; }
 
-        [Required(ErrorMessage = "Поле \"Дата расхода\" не может быть пустым")]
+        [Display(Name = "Дата расхода")]
+        [Required(ErrorMessage = "\"Дата расхода\" не может быть пустой")]
         public DateTime CostsDate { get; set; }
 
         [Display(Name = "Сумма")]
-        [Required(ErrorMessage = "Поле \"Сумма\" не может быть пустым")]
-        [RegularExpression(@"[\d.]*", ErrorMessage = "Сумма содержит запрещающие символы")]
+        [Required(ErrorMessage = "\"Сумма\" не может быть пустой")]
+        [RegularExpression(@"[\d.]*", ErrorMessage = "\"Сумма\" содержит запрещающие символы")]
         [Range(0, 1000000000, ErrorMessage = "Недопустимое число")]
         public double Price { get; set; }
 
