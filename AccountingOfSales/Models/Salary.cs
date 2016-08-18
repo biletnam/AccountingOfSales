@@ -17,7 +17,7 @@ namespace AccountingOfSales.Models
         /// Дата получения
         /// </summary>
         public DateTime DateOfReceipt { get; set; }
-        public double Price { get; set; }
+        public int Price { get; set; }
 
         [ScaffoldColumn(false)]
         public int UserId { get; set; }
