@@ -21,7 +21,7 @@ namespace AccountingOfSales.Controllers
             
             //добавляем нового пустого поставщика, чтобы был выбор НЕ поставщика
             List<Provider> providers = new List<Provider>();
-            providers.Add(new Provider() {Id=0, Name="Выберите поставщика", City="", Archive=false });
+            providers.Add(new Provider() {Id=0, Name="Выберите поставщика" });
             providers.AddRange(db.Providers.OrderBy(n => n.Name));
 
             List<User> users = new List<User>();
