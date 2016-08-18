@@ -33,13 +33,18 @@ namespace AccountingOfSales.Controllers
         {
             if (ModelState.IsValid)
             {
-                newOtherCost.CreateDate = DateTime.Now;
+                newOtherCost.CreateDate = DateTime.Now;                
                 db.OtherCosts.Add(newOtherCost);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(newOtherCost);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
