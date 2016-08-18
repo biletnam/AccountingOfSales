@@ -72,5 +72,6 @@
         autoclose: true,
         todayHighlight: true
     });
+    $('.datepicker').removeAttr("data-val-date"); //отключаем валидацию на стороне клиента, валидируется на стороне сервера. Иначе не проходит русский формат даты dd.mm.yyyy, должен быть dd,mm,yyyy
 </script>
 }
