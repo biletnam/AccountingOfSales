@@ -8,6 +8,8 @@
 
 <h2>Прочие расходы</h2>
 <br />
+@Html.ActionLink("Создать", "Create", "OtherCosts", htmlAttributes: new { @class = "btn btn-default" })
+<br /><br />
 @using (Html.BeginForm("Index", "OtherCosts", FormMethod.Post))
 {
     <div class="form-inline">
@@ -21,7 +23,7 @@
     <tr>
         <th>Дата расхода</th>
         <th>Дата создания</th>
-        <th>Цена</th>
+        <th>Сумма</th>
         <th>Комментарий</th>
         <th>Создано из пост.</th>
     </tr>
