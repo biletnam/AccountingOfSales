@@ -78,9 +78,12 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Создать" class="btn btn-primary" />
-                @Html.ActionLink("Отмена", "Index", "Product", htmlAttributes: new { @class = "btn btn-default" })
+                @Html.ActionLink("Отмена", "Create", "Product", htmlAttributes: new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
 }
 
+<div>
+    @Html.ActionLink("Вернуться на главную", "Index")
+</div>
