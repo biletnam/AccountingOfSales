@@ -198,6 +198,14 @@
     <Compile Include="Migrations\201608171759423_UpdateAttribute2.Designer.cs">
       <DependentUpon>201608171759423_UpdateAttribute2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608181512507_UpdateSales.cs" />
+    <Compile Include="Migrations\201608181512507_UpdateSales.Designer.cs">
+      <DependentUpon>201608181512507_UpdateSales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608181529222_UpdateDoubleOnInt.cs" />
+    <Compile Include="Migrations\201608181529222_UpdateDoubleOnInt.Designer.cs">
+      <DependentUpon>201608181529222_UpdateDoubleOnInt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\CryptHelper.cs" />
@@ -414,6 +422,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608171759423_UpdateAttribute2.resx">
       <DependentUpon>201608171759423_UpdateAttribute2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608181512507_UpdateSales.resx">
+      <DependentUpon>201608181512507_UpdateSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608181529222_UpdateDoubleOnInt.resx">
+      <DependentUpon>201608181529222_UpdateDoubleOnInt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
