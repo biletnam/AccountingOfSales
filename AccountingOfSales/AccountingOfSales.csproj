@@ -373,6 +373,7 @@
     <Content Include="Views\Admission\GetProducts.cshtml" />
     <Content Include="Views\Admission\ListAddAdmissions.cshtml" />
     <Content Include="Views\OtherCosts\Index.cshtml" />
+    <Content Include="Views\OtherCosts\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
