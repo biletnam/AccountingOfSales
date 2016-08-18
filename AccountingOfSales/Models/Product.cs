@@ -45,16 +45,17 @@ namespace AccountingOfSales.Models
         public DateTime? EditDate { get; set; }
 
         [Display(Name = "Количество")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "Количество должно содержать только целое число")]
         public int Count { get; set; }
 
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         [Display(Name = "Розничная цена")]
-        [RegularExpression(@"[\d.]*", ErrorMessage = "Текст содержит запрещающие символы")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "Розничная цена должна содержать только целое число")]
         [Range(0, 1000000000, ErrorMessage = "Недопустимое число")]
         /// <summary>
         /// Розничная цена
         /// </summary>
-        public double RetailPrice { get; set; }
+        public int RetailPrice { get; set; }
         public bool Archive { get; set; } = false;
 
         [ScaffoldColumn(false)]
@@ -70,5 +71,6 @@ namespace AccountingOfSales.Models
         public virtual Image Image { get; set; }
         public virtual ICollection<Admission> Admissions { get; set; } = new List<Admission>();
         public virtual ICollection<Return> Returns { get; set; } = new List<Return>();
+        public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
     }
 }
