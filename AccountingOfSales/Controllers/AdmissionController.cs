@@ -74,7 +74,7 @@ namespace AccountingOfSales.Controllers
 
                         //если есть прочие расходы вычислить доп. расходы
                         if (model.PriceOtherCosts != null)
-                            admission.AdditionalCosts = Math.Round((double)model.PriceOtherCosts / summCount);
+                            admission.AdditionalCosts = model.PriceOtherCosts / summCount;
 
                         db.Admissions.Add(admission);
 
@@ -93,7 +93,7 @@ namespace AccountingOfSales.Controllers
                         OtherCosts otherCosts = new OtherCosts();
                         otherCosts.CreateDate = DateTime.Now;
                         otherCosts.CostsDate = (Session["CreatedAdmissions"] as List<Admission>).First().AdmissionDate;
-                        otherCosts.Price = (double)model.PriceOtherCosts;
+                        otherCosts.Price = (int)model.PriceOtherCosts;
                         otherCosts.Comment = model.CommentOtherCosts != null ? model.CommentOtherCosts : null;
                         otherCosts.Admission = true;
                         db.OtherCosts.Add(otherCosts);
