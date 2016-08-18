@@ -142,6 +142,7 @@
     <Compile Include="Controllers\OtherCostsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
+    <Compile Include="Controllers\SalesController.cs" />
     <Compile Include="Controllers\TypeProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -206,11 +207,16 @@
     <Compile Include="Migrations\201608181529222_UpdateDoubleOnInt.Designer.cs">
       <DependentUpon>201608181529222_UpdateDoubleOnInt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608181634446_UpdateNULLForDiscount.cs" />
+    <Compile Include="Migrations\201608181634446_UpdateNULLForDiscount.Designer.cs">
+      <DependentUpon>201608181634446_UpdateNULLForDiscount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\CryptHelper.cs" />
     <Compile Include="Models\Entities\AdmissionEntities.cs" />
     <Compile Include="Models\Entities\OtherCostsEntities.cs" />
+    <Compile Include="Models\Entities\SalesEntities.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\OtherCosts.cs" />
@@ -382,6 +388,7 @@
     <Content Include="Views\Admission\ListAddAdmissions.cshtml" />
     <Content Include="Views\OtherCosts\Index.cshtml" />
     <Content Include="Views\OtherCosts\Create.cshtml" />
+    <Content Include="Views\Sales\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
@@ -428,6 +435,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608181529222_UpdateDoubleOnInt.resx">
       <DependentUpon>201608181529222_UpdateDoubleOnInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608181634446_UpdateNULLForDiscount.resx">
+      <DependentUpon>201608181634446_UpdateNULLForDiscount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
