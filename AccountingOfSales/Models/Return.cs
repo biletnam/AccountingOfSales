@@ -13,7 +13,7 @@ namespace AccountingOfSales.Models
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime ReturnDate { get; set; }
-        public double Price { get; set; }
+        public int Price { get; set; }
 
         [ScaffoldColumn(false)]
         public int ProductId { get; set; }
