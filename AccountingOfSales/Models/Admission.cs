@@ -22,21 +22,21 @@ namespace AccountingOfSales.Models
         public DateTime AdmissionDate { get; set; }
 
         [Display(Name = "Дополнительные расходы")]
-        [RegularExpression(@"[\d.]*", ErrorMessage = "Текст содержит запрещающие символы")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "Дополнительные расходы должны содержать только целое число")]
         [Range(0, 1000000000, ErrorMessage = "Недопустимое число")]
         /// <summary>
         /// Дополнительные расходы
         /// </summary>
-        public double? AdditionalCosts { get; set; }
+        public int? AdditionalCosts { get; set; }
 
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         [Display(Name = "Оптовая цена")]
-        [RegularExpression(@"[\d.]*", ErrorMessage = "Текст содержит запрещающие символы")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "Оптовая цена должна содержать только целое число")]
         [Range(0, 1000000000, ErrorMessage = "Недопустимое число")]
         /// <summary>
         /// Оптовая цена
         /// </summary>
-        public double TradePrice { get; set; }
+        public int TradePrice { get; set; }
 
         [Required(ErrorMessage = "Поле не должно быть пустым")]
         [Display(Name = "Количество")]
