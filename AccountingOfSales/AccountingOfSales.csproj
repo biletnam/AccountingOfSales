@@ -389,6 +389,8 @@
     <Content Include="Views\OtherCosts\Index.cshtml" />
     <Content Include="Views\OtherCosts\Create.cshtml" />
     <Content Include="Views\Sales\Index.cshtml" />
+    <Content Include="Views\Sales\Create.cshtml" />
+    <Content Include="Views\Sales\GetRetailPrice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
