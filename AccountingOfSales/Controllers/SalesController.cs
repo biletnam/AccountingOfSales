@@ -36,6 +36,11 @@ namespace AccountingOfSales.Controllers
 
         public ActionResult Create()
         {
+            List<Product> products = db.Products.Where(a => a.Archive == false).OrderBy(n => n.Name).ToList();
+
+            ViewBag.Products = new SelectList(products, "Id", "Name");
+            ViewBag.RetailPrice = products.First().RetailPrice;
+
             return View();
         }
         [HttpPost]
@@ -43,6 +48,11 @@ namespace AccountingOfSales.Controllers
         public ActionResult Create([Bind(Include = "RetailPrice, Discount, SaleDate, ProductId")] Sale sale)
         {
             return View();
+        }
+
+        public ActionResult GetRetailPrice(int id)
+        {
+            return PartialView(db.Products.Where(i => i.Id == id).FirstOrDefault());
         }
 
         protected override void Dispose(bool disposing)
