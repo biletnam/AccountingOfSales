@@ -217,6 +217,7 @@
     <Compile Include="Models\Entities\AdmissionEntities.cs" />
     <Compile Include="Models\Entities\OtherCostsEntities.cs" />
     <Compile Include="Models\Entities\SalesEntities.cs" />
+    <Compile Include="Models\Entities\UserEntities.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\OtherCosts.cs" />
@@ -391,6 +392,7 @@
     <Content Include="Views\Sales\Index.cshtml" />
     <Content Include="Views\Sales\Create.cshtml" />
     <Content Include="Views\Sales\GetRetailPrice.cshtml" />
+    <Content Include="Views\Sales\GetImageProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
