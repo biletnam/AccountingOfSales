@@ -1,3 +1,7 @@
 ﻿@model AccountingOfSales.Models.Product
 
-@Html.TextBox("RetailPrice", Model.RetailPrice, new { @class = "form-control", id = "retailPrice", disabled = true })
+@*@Html.TextBox("RetailPrice", Model.RetailPrice, new { @class = "form-control", id = "retailPrice", disabled = true })*@
+<div class="col-md-7" id="retailPrice">
+    @Html.Hidden("RetailPrice", Model.RetailPrice)
+    @Html.TextBox("Price", Model.RetailPrice, new { @class = "form-control", disabled = true })
+</div>
