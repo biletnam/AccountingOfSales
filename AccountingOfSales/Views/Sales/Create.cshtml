@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Создание продажи";
+    DateTime dateNow = DateTime.Now;
 }
 
 <h2>Создание продажи</h2>
@@ -25,15 +26,16 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.SaleDate, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-7">
-                        @Html.TextBox("SaleDate", "", htmlAttributes: new { @class = "form-control datepicker" })
+                        @Html.TextBox("SaleDate", dateNow.ToShortDateString(), htmlAttributes: new { @class = "form-control datepicker" })
                         @Html.ValidationMessageFor(model => model.SaleDate, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.RetailPrice, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <div class="col-md-7">
-                        @Html.TextBox("RetailPrice", (int)ViewBag.RetailPrice, new { @class = "form-control", id = "retailPrice", disabled = true })
+                    <div class="col-md-7" id = "retailPrice">
+                        @Html.Hidden("RetailPrice", (int)ViewBag.RetailPrice)
+                        @Html.TextBox("Price", (int)ViewBag.RetailPrice, new { @class = "form-control", disabled=true })
                         @Html.ValidationMessageFor(model => model.RetailPrice, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -57,8 +59,11 @@
                 </div>
             </div>            
         </div>
-        <div class="col-md-2">
-                <img src="~/Images/1.jpg" height="300" class="img-rounded" />
+        <div class="col-md-2" id="imgProduct">
+            @if (ViewBag.ImageProduct != null)
+            {
+                <img src="~/Images/@ViewBag.ImageProduct" height="300" class="img-rounded" />
+            }
         </div>
     </div>
 }
@@ -81,6 +86,24 @@
                 });
             });
         })
+
+        //получаем фото, для выбранного продукта
+        $(function () {
+            $('#product').change(function () {
+                // получаем выбранный id
+                var id = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetImageProduct")/' + id,
+                    success: function (data) {
+
+                        // заменяем содержимое присланным частичным представлением
+                        $('#imgProduct').replaceWith(data);
+                    }
+                });
+            });
+        })
+
         $('.datepicker').datepicker({
             format: "dd.mm.yyyy",
             language: "ru",
