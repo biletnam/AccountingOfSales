@@ -9,6 +9,7 @@ using AccountingOfSales.Models.Entities;
 
 namespace AccountingOfSales.Controllers
 {
+    [Authorize]
     public class SalesController : Controller
     {
         SalesDbContext db = new SalesDbContext();
@@ -31,7 +32,7 @@ namespace AccountingOfSales.Controllers
             ViewBag.Products = new SelectList(products, "Id", "Name");
             ViewBag.Users = new SelectList(users, "Id", "Login");
 
-            return View(sales.OrderByDescending(d => d.SaleDate).ToPagedList(pageNumber, pageSize));
+            return View(sales.OrderByDescending(d => d.SaleDate).ThenByDescending(d => d.CreateDate).ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Create()
@@ -41,16 +42,40 @@ namespace AccountingOfSales.Controllers
             ViewBag.Products = new SelectList(products, "Id", "Name");
             ViewBag.RetailPrice = products.First().RetailPrice;
 
+            if(products.First().Image != null)
+                ViewBag.ImageProduct = products.First().Image.Name;
+
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "RetailPrice, Discount, SaleDate, ProductId")] Sale sale)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                User user = UserEntities.GetUserByName(User.Identity.Name);
+
+                sale.CreateDate = DateTime.Now;
+                if (sale.Discount != null)
+                    sale.SalePrice = sale.RetailPrice - (int)sale.Discount;
+                else
+                    sale.SalePrice = sale.RetailPrice;
+                if (user != null)
+                    sale.UserId = user.Id;
+
+                db.Sales.Add(sale);
+                db.SaveChanges();
+                return RedirectToAction("Create");
+            }
+
+            return View(sale);
         }
 
         public ActionResult GetRetailPrice(int id)
+        {
+            return PartialView(db.Products.Where(i => i.Id == id).FirstOrDefault());
+        }
+        public ActionResult GetImageProduct(int id)
         {
             return PartialView(db.Products.Where(i => i.Id == id).FirstOrDefault());
         }
