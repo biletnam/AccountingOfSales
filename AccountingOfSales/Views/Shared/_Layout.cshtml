@@ -42,8 +42,18 @@
                             <li>@Html.ActionLink("Создать", "Create", "Admission")</li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("Прочие расходы", "Index", "OtherCosts")</li>
-                    <li>@Html.ActionLink("Продажи", "Index", "Sales")</li>
+                    <li>
+                        @Html.ActionLink("Прочие расходы", "Index", "OtherCosts")
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Создать", "Create", "OtherCosts")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Продажи", "Index", "Sales")
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Создать", "Create", "Sales")</li>
+                        </ul>
+                    </li>
                 </ul>
                 @if (Request.IsAuthenticated)
                 {
