@@ -216,6 +216,7 @@
     <Compile Include="Models\CryptHelper.cs" />
     <Compile Include="Models\Entities\AdmissionEntities.cs" />
     <Compile Include="Models\Entities\OtherCostsEntities.cs" />
+    <Compile Include="Models\Entities\ProductEntities.cs" />
     <Compile Include="Models\Entities\SalesEntities.cs" />
     <Compile Include="Models\Entities\UserEntities.cs" />
     <Compile Include="Models\IdentityModels.cs" />
