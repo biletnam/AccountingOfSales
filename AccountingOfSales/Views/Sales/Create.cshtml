@@ -34,7 +34,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.RetailPrice, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-7" id = "retailPrice">
-                        @Html.Hidden("RetailPrice", (int)ViewBag.RetailPrice)
+                        @Html.Hidden("RetailPrice", (int)ViewBag.RetailPrice)    @*скрытое поле необходимо, чтобы значение передавалось в POST действие*@
                         @Html.TextBox("Price", (int)ViewBag.RetailPrice, new { @class = "form-control", disabled=true })
                         @Html.ValidationMessageFor(model => model.RetailPrice, "", new { @class = "text-danger" })
                     </div>
