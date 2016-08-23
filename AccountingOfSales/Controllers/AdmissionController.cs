@@ -85,6 +85,8 @@ namespace AccountingOfSales.Controllers
                             int newCount = product.Count + newAdmission.Count;
                             product.Count = newCount;
                         }
+                        else
+                            return HttpNotFound();
                     }
 
                     //создать прочие расходы
