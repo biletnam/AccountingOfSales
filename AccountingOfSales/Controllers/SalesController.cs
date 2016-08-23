@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using AccountingOfSales.Models.Entities;
+using System.Web.UI;
 
 namespace AccountingOfSales.Controllers
 {
@@ -53,6 +54,7 @@ namespace AccountingOfSales.Controllers
         {
             if (ModelState.IsValid)
             {
+                //если 0 товара не создаем
                 User user = UserEntities.GetUserByName(User.Identity.Name);
 
                 sale.CreateDate = DateTime.Now;
@@ -62,8 +64,32 @@ namespace AccountingOfSales.Controllers
                     sale.SalePrice = sale.RetailPrice;
                 if (user != null)
                     sale.UserId = user.Id;
+                else
+                    return HttpNotFound();
 
                 db.Sales.Add(sale);
+
+                Product product = db.Products.Where(i => i.Id == sale.ProductId).FirstOrDefault();
+                if (product != null)
+                {
+                    //if(product.Count == 0)
+                    //{
+                    //    //ModelState.AddModelError("", "Нельзя создать продажу для товара, количество у которого равно 0");
+                    //    string script =
+                    //        "<script type='text/javascript'> " +
+                    //        "alert('Нельзя создать продажу для товара, количество у которого равно 0');" + 
+                    //        "</script> ";
+
+                    //    string str = Server.HtmlEncode(script);
+
+                    //    return RedirectToAction("Create");
+                    //}
+
+                    product.Count = product.Count - 1;
+                }
+                else
+                    return HttpNotFound();
+
                 db.SaveChanges();
                 return RedirectToAction("Create");
             }
