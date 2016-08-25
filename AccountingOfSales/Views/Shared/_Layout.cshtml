@@ -27,6 +27,7 @@
                         <ul class="submenu">
                             <li>@Html.ActionLink("Создать", "Create", "Product")</li>
                             <li>@Html.ActionLink("Архив", "Index", "Product", new { archive = true }, "")</li>
+                            <li>@Html.ActionLink("Типы продуктов", "Index", "TypeProduct")</li>
                         </ul>
                     </li>
                     <li>
@@ -76,7 +77,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p style="text-align:center">&copy; @DateTime.Now.Year – Штылев Александр Александрович</p>
+            <p class="footer">&copy; @DateTime.Now.Year – Штылев Александр Александрович</p>
         </footer>
     </div>
 
