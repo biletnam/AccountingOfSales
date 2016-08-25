@@ -15,9 +15,6 @@ else
     <h2>Архив продуктов</h2>
 }
 
-<div>
-    @Html.ActionLink("Типы продуктов", "Index", "TypeProduct", "", new { @class = "btn btn-default" })
-</div>
 <br />
 @using (Html.BeginForm("Index", "Product", new { archive = ViewBag.Archive }, FormMethod.Post))
 {
