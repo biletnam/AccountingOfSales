@@ -36,7 +36,7 @@ namespace AccountingOfSales.Controllers
             return View(sales.OrderByDescending(d => d.SaleDate).ThenByDescending(d => d.CreateDate).ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult Create()
+        public ActionResult Create(bool? createSale, bool? countZeroProduct)
         {
             List<Product> products = db.Products.Where(a => a.Archive == false).OrderBy(n => n.Name).ToList();
 
@@ -46,6 +46,9 @@ namespace AccountingOfSales.Controllers
             if(products.First().Image != null)
                 ViewBag.ImageProduct = products.First().Image.Name;
 
+            ViewBag.CreateSale = createSale;
+            ViewBag.CountZeroProduct = countZeroProduct;
+
             return View();
         }
         [HttpPost]
@@ -54,7 +57,6 @@ namespace AccountingOfSales.Controllers
         {
             if (ModelState.IsValid)
             {
-                //если 0 товара не создаем
                 User user = UserEntities.GetUserByName(User.Identity.Name);
 
                 sale.CreateDate = DateTime.Now;
@@ -72,18 +74,8 @@ namespace AccountingOfSales.Controllers
                 Product product = db.Products.Where(i => i.Id == sale.ProductId).FirstOrDefault();
                 if (product != null)
                 {
-                    //if(product.Count == 0)
-                    //{
-                    //    //ModelState.AddModelError("", "Нельзя создать продажу для товара, количество у которого равно 0");
-                    //    string script =
-                    //        "<script type='text/javascript'> " +
-                    //        "alert('Нельзя создать продажу для товара, количество у которого равно 0');" + 
-                    //        "</script> ";
-
-                    //    string str = Server.HtmlEncode(script);
-
-                    //    return RedirectToAction("Create");
-                    //}
+                    if (product.Count == 0)
+                        return RedirectToAction("Create", new { countZeroProduct = true });
 
                     product.Count = product.Count - 1;
                 }
@@ -91,7 +83,7 @@ namespace AccountingOfSales.Controllers
                     return HttpNotFound();
 
                 db.SaveChanges();
-                return RedirectToAction("Create");
+                return RedirectToAction("Create", new { createSale = true });
             }
 
             return View(sale);
