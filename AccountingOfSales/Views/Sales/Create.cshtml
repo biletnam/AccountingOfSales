@@ -70,6 +70,15 @@
 
 @section scripts {
     <script type="text/javascript">
+        @if(ViewBag.CreateSale != null)
+        {
+            <text>alert("Продажа успешно создана!");</text>
+        }
+        @if(ViewBag.CountZeroProduct != null)
+        {
+            <text>alert("Нельзя создать продажу для продукта, количество у которого равно 0!");</text>
+        }
+
         //получаем розничную цену, для выбранного продукта
         $(function () {
             $('#product').change(function () {
