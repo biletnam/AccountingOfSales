@@ -20,7 +20,7 @@ namespace AccountingOfSales.Controllers
             List<Provider> providers = new List<Provider>();
 
             ViewBag.Archive = archive;
-            providers = (archive == false) ? db.Providers.Where(f => f.Archive == false).ToList() : db.Providers.Where(f => f.Archive == true).ToList();
+            providers = db.Providers.Where(f => f.Archive == archive).ToList();
 
             if (filterName != "")
             {
