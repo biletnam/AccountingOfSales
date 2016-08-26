@@ -21,7 +21,7 @@ namespace AccountingOfSales.Controllers
             List<TypeProduct> typeProduct = new List<TypeProduct>();
 
             ViewBag.Archive = archive;
-            typeProduct = (archive == false) ? db.TypeProducts.Where(f => f.Archive == false).ToList() : db.TypeProducts.Where(f => f.Archive == true).ToList();
+            typeProduct = db.TypeProducts.Where(f => f.Archive == archive).ToList();
 
             if (filterName != "")
             {
@@ -45,7 +45,7 @@ namespace AccountingOfSales.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(typeProduct);
+            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int? id)
