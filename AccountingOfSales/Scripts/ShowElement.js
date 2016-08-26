@@ -1,5 +1,5 @@
 ﻿//Отображаем/скрываем элемент
-function visibilityReply(idName) {
+function visibilityForm(idName) {
     if (document.getElementById(idName).style.display == 'none') {
         document.getElementById(idName).style.display = '';
     } else {
