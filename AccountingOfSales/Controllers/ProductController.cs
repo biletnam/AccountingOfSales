@@ -21,7 +21,7 @@ namespace AccountingOfSales.Controllers
             List<Product> products = new List<Product>();
 
             ViewBag.Archive = archive;
-            products = (archive == false) ? db.Products.Where(f => f.Archive == false).ToList() : db.Products.Where(f => f.Archive == true).ToList();
+            products = db.Products.Where(f => f.Archive == archive).ToList();
 
             if (filterName != "")
             {
