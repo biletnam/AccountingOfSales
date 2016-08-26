@@ -27,7 +27,7 @@
                         <ul class="submenu">
                             <li>@Html.ActionLink("Создать", "Create", "Product")</li>
                             <li>@Html.ActionLink("Архив", "Index", "Product", new { archive = true }, "")</li>
-                            <li>@Html.ActionLink("Типы продуктов", "Index", "TypeProduct")</li>
+                            <li>@Html.ActionLink("Типы продукта", "Index", "TypeProduct")</li>
                         </ul>
                     </li>
                     <li>
@@ -53,6 +53,12 @@
                         @Html.ActionLink("Продажи", "Index", "Sales")
                         <ul class="submenu">
                             <li>@Html.ActionLink("Создать", "Create", "Sales")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Возвраты", "Index", "Return")
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Типы возврата", "Index", "TypeReturn")</li>
                         </ul>
                     </li>
                 </ul>
