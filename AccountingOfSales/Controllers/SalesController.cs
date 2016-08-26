@@ -36,7 +36,7 @@ namespace AccountingOfSales.Controllers
             return View(sales.OrderByDescending(d => d.SaleDate).ThenByDescending(d => d.CreateDate).ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult Create(bool? createSale, bool? countZeroProduct)
+        public ActionResult Create(bool? createSale)
         {
             List<Product> products = db.Products.Where(a => a.Archive == false).OrderBy(n => n.Name).ToList();
 
@@ -47,7 +47,6 @@ namespace AccountingOfSales.Controllers
                 ViewBag.ImageProduct = products.First().Image.Name;
 
             ViewBag.CreateSale = createSale;
-            ViewBag.CountZeroProduct = countZeroProduct;
 
             return View();
         }
@@ -73,12 +72,7 @@ namespace AccountingOfSales.Controllers
 
                 Product product = db.Products.Where(i => i.Id == sale.ProductId).FirstOrDefault();
                 if (product != null)
-                {
-                    if (product.Count == 0)
-                        return RedirectToAction("Create", new { countZeroProduct = true });
-
                     product.Count = product.Count - 1;
-                }
                 else
                     return HttpNotFound();
 
@@ -96,6 +90,15 @@ namespace AccountingOfSales.Controllers
         public ActionResult GetImageProduct(int id)
         {
             return PartialView(db.Products.Where(i => i.Id == id).FirstOrDefault());
+        }
+
+        public JsonResult CheckCountProduct(int ProductId)
+        {
+            Product product = db.Products.Where(i => i.Id == ProductId).FirstOrDefault();
+            if(product.Count == 0)
+                return Json(false, JsonRequestBehavior.AllowGet);
+            else
+                return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
