@@ -20,6 +20,7 @@
                     @Html.Label("Продукт", htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-7">
                         @Html.DropDownList("ProductId", ViewBag.Products as SelectList, new { @class = "form-control", id = "product" })
+                        @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -73,10 +74,6 @@
         @if(ViewBag.CreateSale != null)
         {
             <text>alert("Продажа успешно создана!");</text>
-        }
-        @if(ViewBag.CountZeroProduct != null)
-        {
-            <text>alert("Нельзя создать продажу для продукта, количество которого равно 0!");</text>
         }
 
         //получаем розничную цену, для выбранного продукта
