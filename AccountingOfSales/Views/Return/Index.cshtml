@@ -1,0 +1,60 @@
+﻿@using PagedList.Mvc;
+@using AccountingOfSales.Models;
+@model PagedList.IPagedList<Return>
+
+@{
+    ViewBag.Title = "Возвраты";
+}
+
+<h2>Возвраты</h2>
+<br />
+@using (Html.BeginForm("Index", "Return", FormMethod.Post))
+{
+    <div class="form-inline">
+        @Html.TextBox("filterDateReturnFrom", "", htmlAttributes: new { @class = "form-control datepicker", placeholder = "Дата возврата С" })
+        @Html.TextBox("filterDateReturnTo", "", htmlAttributes: new { @class = "form-control datepicker", placeholder = "Дата возврата По" })
+        @Html.DropDownList("filterProduct", ViewBag.Products as SelectList, new { @class = "form-control" })
+        @Html.DropDownList("filterTypesReturn", ViewBag.TypesReturn as SelectList, new { @class = "form-control" })
+        @Html.DropDownList("filterUser", ViewBag.Users as SelectList, new { @class = "form-control" })
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+    </div>
+}
+<br />
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Дата возврата</th>
+        <th>Продукт</th>
+        <th>Сумма</th>
+        <th>Тип возврата</th>
+        <th>Пользователь</th>
+        <th>Дата создания</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ReturnDate.ToShortDateString()</td>
+            <td>@item.Product.Name</td>
+            <td>@item.Price</td>
+            <td>@item.TypeReturn.Name</td>
+            <td>@item.User.Login</td>
+            <td>@item.CreateDate</td>
+        </tr>
+    }
+
+</table>
+
+<label class="control-label">Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount</label>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+@section scripts {
+    <script type="text/javascript">
+    $('.datepicker').datepicker({
+        format: "dd.mm.yyyy",
+        language: "ru",
+        autoclose: true,
+        todayHighlight: true
+    });
+
+    </script>
+}
