@@ -17,18 +17,18 @@ namespace AccountingOfSales.Models.Entities
             //находим дату последних 3 месяцев, от текущей, чтобы ограничить поступления 3 последними месяцами
             DateTime last3Months = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).AddMonths(-3);
 
-            if (filterDateAdmissionTo != null)
-                filterDateAdmissionTo = filterDateAdmissionTo.Value.AddDays(1); //прибавляем к "дате по" 1 день, чтобы дата была включительно
+            //if (filterDateAdmissionTo != null)
+            //    filterDateAdmissionTo = filterDateAdmissionTo.Value.AddDays(1); //прибавляем к "дате по" 1 день, чтобы дата была включительно
 
             if (filterDateAdmissionFrom != null && filterDateAdmissionTo != null)
-                admissions = db.Admissions.Where(d => d.AdmissionDate >= filterDateAdmissionFrom).Where(d => d.AdmissionDate < filterDateAdmissionTo).ToList();
+                admissions = db.Admissions.Where(d => d.AdmissionDate >= filterDateAdmissionFrom).Where(d => d.AdmissionDate <= filterDateAdmissionTo).ToList();
             else if (filterDateAdmissionFrom != null && filterDateAdmissionTo == null)
                 admissions = db.Admissions.Where(d => d.AdmissionDate >= filterDateAdmissionFrom).ToList();
             else if (filterDateAdmissionFrom == null && filterDateAdmissionTo != null)
             {
                 //находим дату последних 3 месяцев, от "даты по", чтобы опять же ограничить 3 месяцами
                 DateTime last3MonthsDateTo = new DateTime(filterDateAdmissionTo.Value.Year, filterDateAdmissionTo.Value.Month, filterDateAdmissionTo.Value.Day).AddMonths(-3);
-                admissions = db.Admissions.Where(d => d.AdmissionDate >= last3MonthsDateTo).Where(d => d.AdmissionDate < filterDateAdmissionTo).ToList();
+                admissions = db.Admissions.Where(d => d.AdmissionDate >= last3MonthsDateTo).Where(d => d.AdmissionDate <= filterDateAdmissionTo).ToList();
             }
             else
                 admissions = db.Admissions.Where(d => d.AdmissionDate >= last3Months).ToList();
