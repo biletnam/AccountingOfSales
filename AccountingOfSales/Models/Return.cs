@@ -11,8 +11,18 @@ namespace AccountingOfSales.Models
     {
         [ScaffoldColumn(false)]
         public int Id { get; set; }
+
+        [Display(Name = "Дата создания")]
         public DateTime CreateDate { get; set; }
+
+        [Required(ErrorMessage = "Поле не должно быть пустым")]
+        [Display(Name = "Дата возврата")]
         public DateTime ReturnDate { get; set; }
+
+        [Required(ErrorMessage = "Поле не должно быть пустым")]
+        [Display(Name = "Сумма")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "Сумма должна содержать только целое число")]
+        [Range(0, 1000000000, ErrorMessage = "Недопустимое число")]
         public int Price { get; set; }
 
         [ScaffoldColumn(false)]
