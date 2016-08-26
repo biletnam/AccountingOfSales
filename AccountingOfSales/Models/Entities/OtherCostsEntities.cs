@@ -17,18 +17,15 @@ namespace AccountingOfSales.Models.Entities
             //находим дату последних 3 месяцев, от текущей, чтобы ограничить расходы 3 последними месяцами
             DateTime last3Months = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).AddMonths(-3);
 
-            if (filterDateCostTo != null)
-                filterDateCostTo = filterDateCostTo.Value.AddDays(1); //прибавляем к "дате по" 1 день, чтобы дата была включительно
-
             if (filterDateCostFrom != null && filterDateCostTo != null)
-                otherCosts = db.OtherCosts.Where(d => d.CostsDate >= filterDateCostFrom).Where(d => d.CostsDate < filterDateCostTo).ToList();
+                otherCosts = db.OtherCosts.Where(d => d.CostsDate >= filterDateCostFrom).Where(d => d.CostsDate <= filterDateCostTo).ToList();
             else if (filterDateCostFrom != null && filterDateCostTo == null)
                 otherCosts = db.OtherCosts.Where(d => d.CostsDate >= filterDateCostFrom).ToList();
             else if (filterDateCostFrom == null && filterDateCostTo != null)
             {
                 //находим дату последних 3 месяцев, от "даты по", чтобы опять же ограничить 3 месяцами
                 DateTime last3MonthsDateTo = new DateTime(filterDateCostTo.Value.Year, filterDateCostTo.Value.Month, filterDateCostTo.Value.Day).AddMonths(-3);
-                otherCosts = db.OtherCosts.Where(d => d.CostsDate >= last3MonthsDateTo).Where(d => d.CostsDate < filterDateCostTo).ToList();
+                otherCosts = db.OtherCosts.Where(d => d.CostsDate >= last3MonthsDateTo).Where(d => d.CostsDate <= filterDateCostTo).ToList();
             }
             else
                 otherCosts = db.OtherCosts.Where(d => d.CostsDate >= last3Months).ToList();
