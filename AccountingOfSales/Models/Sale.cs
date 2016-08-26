@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace AccountingOfSales.Models
 {
@@ -54,6 +55,7 @@ namespace AccountingOfSales.Models
         public virtual User User { get; set; }
 
         [ScaffoldColumn(false)]
+        [Remote("CheckCountProduct", "Sales", ErrorMessage = "Остаток равен 0")]
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
     }
