@@ -80,7 +80,7 @@ namespace AccountingOfSales.Controllers
                 return RedirectToAction("Create", new { createSale = true });
             }
 
-            return View(sale);
+            return RedirectToAction("Create");
         }
 
         public ActionResult GetRetailPrice(int id)
