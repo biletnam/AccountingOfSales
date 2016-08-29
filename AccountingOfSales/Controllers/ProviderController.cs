@@ -24,7 +24,7 @@ namespace AccountingOfSales.Controllers
 
             if (filterName != "")
             {
-                providers = providers.Where(n => n.Name.Contains(filterName)).ToList();
+                providers = providers.Where(n => n.Name.ToLower().Contains(filterName.ToLower())).ToList();
             }
 
             return View(providers.OrderBy(c => c.Name).ToPagedList(pageNumber, pageSize));
