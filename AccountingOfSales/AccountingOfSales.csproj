@@ -409,6 +409,8 @@
     <Content Include="Views\TypeReturn\Create.cshtml" />
     <Content Include="Views\TypeReturn\Edit.cshtml" />
     <Content Include="Views\Return\Index.cshtml" />
+    <Content Include="Views\Return\GetImageProduct.cshtml" />
+    <Content Include="Views\Return\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
