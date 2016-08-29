@@ -25,7 +25,7 @@ namespace AccountingOfSales.Controllers
 
             if (filterName != "")
             {
-                products = products.Where(n => n.Name.Contains(filterName)).ToList();
+                products = products.Where(n => n.Name.ToLower().Contains(filterName.ToLower())).ToList();
             }
 
             return View(products.OrderByDescending(n => n.Count).ThenBy(c => c.Name).ToPagedList(pageNumber, pageSize));
