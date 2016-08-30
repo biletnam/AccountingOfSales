@@ -62,6 +62,12 @@
                             <li>@Html.ActionLink("Типы возврата", "Index", "TypeReturn")</li>
                         </ul>
                     </li>
+                    <li>
+                        @Html.ActionLink("Начисления", "Index", "Salary")
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Создать", "Create", "Salary")</li>
+                        </ul>
+                    </li>
                 </ul>
                 @if (Request.IsAuthenticated)
                 {
