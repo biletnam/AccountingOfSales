@@ -27,6 +27,7 @@
         <th>Скидка</th>
         <th>Продукт</th>
         <th>Пользователь</th>
+        <th>Начислено</th>
         <th>Дата создания</th>
     </tr>
 
@@ -39,6 +40,16 @@
             <td>@item.Discount</td>
             <td>@item.Product.Name</td>
             <td>@item.User.Login</td>
+            <td>
+                @if (item.ACC)
+                {
+                    <span>&#10004;</span>
+                }
+                else
+                {
+                    <span>&#8212;</span>
+                }
+            </td>
             <td>@item.CreateDate</td>
         </tr>
     }
