@@ -221,6 +221,10 @@
     <Compile Include="Migrations\201608261702173_AddAttributeForReturn.Designer.cs">
       <DependentUpon>201608261702173_AddAttributeForReturn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608300610245_AddACCForSale.cs" />
+    <Compile Include="Migrations\201608300610245_AddACCForSale.Designer.cs">
+      <DependentUpon>201608300610245_AddACCForSale.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\CryptHelper.cs" />
@@ -466,6 +470,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608261702173_AddAttributeForReturn.resx">
       <DependentUpon>201608261702173_AddAttributeForReturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608300610245_AddACCForSale.resx">
+      <DependentUpon>201608300610245_AddACCForSale.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
