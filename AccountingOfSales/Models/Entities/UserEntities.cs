@@ -14,5 +14,15 @@ namespace AccountingOfSales.Models.Entities
         {
             return db.Users.Where(n => n.Login == name).FirstOrDefault();
         }
+        public static bool IsInRole(string userLogin, string userRole)
+        {
+            User user = db.Users.Where(l => l.Login == userLogin).FirstOrDefault();
+            Role role = db.Roles.Where(n => n.Name == userRole).FirstOrDefault();
+            
+            if (user.Roles.Contains(role))
+                return true;
+            else
+                return false;
+        }
     }
 }
