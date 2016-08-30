@@ -143,6 +143,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
     <Compile Include="Controllers\ReturnController.cs" />
+    <Compile Include="Controllers\SalaryController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
     <Compile Include="Controllers\TypeProductController.cs" />
     <Compile Include="Controllers\TypeReturnController.cs" />
@@ -225,6 +226,10 @@
     <Compile Include="Migrations\201608300610245_AddACCForSale.Designer.cs">
       <DependentUpon>201608300610245_AddACCForSale.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608301459264_RenameCreateDate.cs" />
+    <Compile Include="Migrations\201608301459264_RenameCreateDate.Designer.cs">
+      <DependentUpon>201608301459264_RenameCreateDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\CryptHelper.cs" />
@@ -232,6 +237,7 @@
     <Compile Include="Models\Entities\OtherCostsEntities.cs" />
     <Compile Include="Models\Entities\ProductEntities.cs" />
     <Compile Include="Models\Entities\ReturnEntities.cs" />
+    <Compile Include="Models\Entities\SalaryEntities.cs" />
     <Compile Include="Models\Entities\SalesEntities.cs" />
     <Compile Include="Models\Entities\UserEntities.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -415,6 +421,7 @@
     <Content Include="Views\Return\Index.cshtml" />
     <Content Include="Views\Return\GetImageProduct.cshtml" />
     <Content Include="Views\Return\Create.cshtml" />
+    <Content Include="Views\Salary\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
@@ -473,6 +480,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608300610245_AddACCForSale.resx">
       <DependentUpon>201608300610245_AddACCForSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608301459264_RenameCreateDate.resx">
+      <DependentUpon>201608301459264_RenameCreateDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
