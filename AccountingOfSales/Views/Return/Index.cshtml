@@ -12,7 +12,7 @@
 {
     <div class="form-inline">
         @Html.TextBox("filterDateReturnFrom", "", htmlAttributes: new { @class = "form-control datepicker", placeholder = "Дата возврата С" })
-        @Html.TextBox("filterDateReturnTo", "", htmlAttributes: new { @class = "form-control datepicker", placeholder = "Дата возврата По" })
+        @Html.TextBox("filterDateReturnTo", "", htmlAttributes: new { @class = "form-control datepicker", placeholder = "Дата возврата До" })
         @Html.DropDownList("filterProduct", ViewBag.Products as SelectList, new { @class = "form-control" })
         @Html.DropDownList("filterTypesReturn", ViewBag.TypesReturn as SelectList, new { @class = "form-control" })
         @Html.DropDownList("filterUser", ViewBag.Users as SelectList, new { @class = "form-control" })
