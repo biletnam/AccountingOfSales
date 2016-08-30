@@ -50,6 +50,12 @@ namespace AccountingOfSales.Models
         /// </summary>
         public DateTime SaleDate { get; set; }
 
+        [Display(Name = "Начислено")]
+        /// <summary>
+        /// Показывает, было ли начисление зп, по этой продаже
+        /// </summary>
+        public bool ACC { get; set; } = false;
+        
         [ScaffoldColumn(false)]
         public int UserId { get; set; }
         public virtual User User { get; set; }
