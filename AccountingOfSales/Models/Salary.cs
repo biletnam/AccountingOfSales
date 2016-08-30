@@ -11,12 +11,17 @@ namespace AccountingOfSales.Models
     {
         [ScaffoldColumn(false)]
         public int Id { get; set; }
+
+        [Display(Name = "Дата С")]
         public DateTime StartDate { get; set; }
+
+        [Display(Name = "Дата До")]
         public DateTime EndDate { get; set; }
-        /// <summary>
-        /// Дата получения
-        /// </summary>
-        public DateTime DateOfReceipt { get; set; }
+
+        [Display(Name = "Дата создания")]
+        public DateTime CreateDate { get; set; }
+
+        [Display(Name = "Сумма")]
         public int Price { get; set; }
 
         [ScaffoldColumn(false)]
