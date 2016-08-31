@@ -37,6 +37,7 @@ namespace AccountingOfSales.Controllers
                 if(filterUserLogin != "" && filterUserLogin != "Выберите пользователя")
                 {
                     salaries = SalaryEntities.GetSalaries(filterCreateDateFrom, filterCreateDateTo, filterUserLogin);
+                    return View(salaries.OrderByDescending(c => c.CreateDate).ToPagedList(pageNumber, pageSize));
                 }
                 salaries = SalaryEntities.GetSalaries(filterCreateDateFrom, filterCreateDateTo);
             }
@@ -44,6 +45,29 @@ namespace AccountingOfSales.Controllers
                 salaries = SalaryEntities.GetSalaries(filterCreateDateFrom, filterCreateDateTo, User.Identity.Name);
 
             return View(salaries.OrderByDescending(c => c.CreateDate).ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "EndDate")] Salary newSalary)
+        {
+            List<IGrouping<DateTime, Sale>> sales = db.Sales.Where(d => d.SaleDate <= newSalary.EndDate).Where(a => a.ACC == false).
+                Where(u => u.User.Login == User.Identity.Name).GroupBy(d => d.SaleDate).ToList();
+            if(sales.Count == 0)
+                ModelState.AddModelError("", "За данный период не было продаж");
+            
+            //коллекция Group и дата Key
+            foreach(var group in sales)
+            {
+                //totalSumm
+                string bla = "";
+            }
+
+            return View();
         }
     }
 }
