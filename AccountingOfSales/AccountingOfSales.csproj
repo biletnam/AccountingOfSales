@@ -245,6 +245,11 @@
     <Compile Include="Models\OtherCosts.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Provider.cs" />
+    <Compile Include="Models\Reference.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.resx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Return.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Salary.cs" />
@@ -422,6 +427,7 @@
     <Content Include="Views\Return\GetImageProduct.cshtml" />
     <Content Include="Views\Return\Create.cshtml" />
     <Content Include="Views\Salary\Index.cshtml" />
+    <Content Include="Views\Salary\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
@@ -483,6 +489,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608301459264_RenameCreateDate.resx">
       <DependentUpon>201608301459264_RenameCreateDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Reference.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Reference.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
