@@ -25,6 +25,12 @@ namespace AccountingOfSales.Models
         [Range(0, 1000000000, ErrorMessage = "Недопустимое число")]
         public int Price { get; set; }
 
+        [Display(Name = "Начислено")]
+        /// <summary>
+        /// Показывает, было ли начисление, по этому возврату
+        /// </summary>
+        public bool ACC { get; set; } = false;
+
         [ScaffoldColumn(false)]
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
