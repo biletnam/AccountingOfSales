@@ -38,8 +38,8 @@
     {
         <tr>
             <td>@item.CreateDate</td>
-            <td>@item.StartDate</td>
-            <td>@item.EndDate</td>
+            <td>@item.StartDate.ToShortDateString()</td>
+            <td>@item.EndDate.ToShortDateString()</td>
             <td>@item.Price</td>
             @if (UserEntities.IsInRole(User.Identity.Name, "admin"))
             {
