@@ -26,7 +26,8 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ReturnDate, htmlAttributes: new { @class = "control-label col-md-4" })
                     <div class="col-md-7">
-                        @Html.TextBox("ReturnDate", dateNow.ToShortDateString(), htmlAttributes: new { @class = "form-control datepicker" })
+                        @Html.Hidden("ReturnDate", dateNow.ToShortDateString())
+                        @Html.TextBox("ReturnDate2", dateNow.ToShortDateString(), htmlAttributes: new { @class = "form-control", disabled = true })
                         @Html.ValidationMessageFor(model => model.ReturnDate, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -85,13 +86,5 @@
             });
         })
 
-        $('.datepicker').datepicker({
-            format: "dd.mm.yyyy",
-            language: "ru",
-            autoclose: true,
-            todayHighlight: true
-        });
-
-        $('.datepicker').removeAttr("data-val-date");
     </script>
 }
