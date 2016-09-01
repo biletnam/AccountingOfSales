@@ -52,7 +52,7 @@ namespace AccountingOfSales.Models
 
         [Display(Name = "Начислено")]
         /// <summary>
-        /// Показывает, было ли начисление зп, по этой продаже
+        /// Показывает, было ли начисление, по этой продаже
         /// </summary>
         public bool ACC { get; set; } = false;
         
