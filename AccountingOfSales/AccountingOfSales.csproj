@@ -230,6 +230,10 @@
     <Compile Include="Migrations\201608301459264_RenameCreateDate.Designer.cs">
       <DependentUpon>201608301459264_RenameCreateDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609011142290_AddACCReturn.cs" />
+    <Compile Include="Migrations\201609011142290_AddACCReturn.Designer.cs">
+      <DependentUpon>201609011142290_AddACCReturn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\CryptHelper.cs" />
@@ -489,6 +493,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608301459264_RenameCreateDate.resx">
       <DependentUpon>201608301459264_RenameCreateDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609011142290_AddACCReturn.resx">
+      <DependentUpon>201609011142290_AddACCReturn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Models\Reference.resx">
       <Generator>ResXFileCodeGenerator</Generator>
