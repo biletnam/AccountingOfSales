@@ -10,7 +10,7 @@ namespace AccountingOfSales.Models.Entities
     {
         static SalesDbContext db = new SalesDbContext();
 
-        public static List<Return> GetReturns(DateTime? filterDateReturnFrom, DateTime? filterDateReturnTo, int? filterUser, int? filterProduct, int? filterTypesReturn)
+        public static List<Return> GetReturns(DateTime? filterDateReturnFrom, DateTime? filterDateReturnTo, int? filterUser, int? filterProduct, int? filterTypesReturn, int? filterSalary)
         {
             List<Return> returns = new List<Return>();
 
@@ -38,6 +38,14 @@ namespace AccountingOfSales.Models.Entities
 
             if (filterTypesReturn != null && filterTypesReturn != 0)
                 returns = returns.Where(t => t.TypeReturnId == filterTypesReturn).ToList();
+
+            if (filterSalary != null && filterSalary != -1)
+            {
+                if (filterSalary == 1)
+                    returns = returns.Where(s => s.SalaryId != null).ToList();
+                else
+                    returns = returns.Where(s => s.SalaryId == null).ToList();
+            }
 
             return returns;
         }
