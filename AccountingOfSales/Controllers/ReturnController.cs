@@ -14,11 +14,11 @@ namespace AccountingOfSales.Controllers
     {
         SalesDbContext db = new SalesDbContext();
 
-        public ActionResult Index(int? page, DateTime? filterDateReturnFrom, DateTime? filterDateReturnTo, int? filterUser, int? filterProduct, int? filterTypesReturn)
+        public ActionResult Index(int? page, DateTime? filterDateReturnFrom, DateTime? filterDateReturnTo, int? filterUser, int? filterProduct, int? filterTypesReturn, int? filterSalary)
         {
             int pageSize = 20;
             int pageNumber = (page ?? 1);
-            List<Return> returns = ReturnEntities.GetReturns(filterDateReturnFrom, filterDateReturnTo, filterUser, filterProduct, filterTypesReturn);
+            List<Return> returns = ReturnEntities.GetReturns(filterDateReturnFrom, filterDateReturnTo, filterUser, filterProduct, filterTypesReturn, filterSalary);
 
             //добавляем новый пустой продукт, чтобы был выбор НЕ продукта
             List<Product> products = new List<Product>();
@@ -33,9 +33,15 @@ namespace AccountingOfSales.Controllers
             typesReturn.Add(new TypeReturn() { Id=0, Name = "Выберите тип возврата" });
             typesReturn.AddRange(db.TypeReturns.OrderBy(n => n.Name));
 
+            List<SelectListItem> acc = new List<SelectListItem>();
+            acc.Add(new SelectListItem() { Text = "Начислено", Value = "-1" });
+            acc.Add(new SelectListItem() { Text = "Да", Value = "1" });
+            acc.Add(new SelectListItem() { Text = "Нет", Value = "0" });
+
             ViewBag.Products = new SelectList(products, "Id", "Name");
             ViewBag.Users = new SelectList(users, "Id", "Login");
             ViewBag.TypesReturn = new SelectList(typesReturn, "Id", "Name");
+            ViewBag.ACC = new SelectList(acc, "Value", "Text");
 
             return View(returns.OrderByDescending(d => d.ReturnDate).ThenByDescending(d => d.CreateDate).ToPagedList(pageNumber, pageSize));
         }
