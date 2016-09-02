@@ -23,10 +23,10 @@ namespace AccountingOfSales.Controllers
             bool roleAdmin = UserEntities.IsInRole(User.Identity.Name, "admin");
 
             DateTime last3Months = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).AddMonths(-3);
-
+            
             List<User> users = new List<User>();
             users.Add(new User() { Login = "Выберите пользователя" });
-            users.AddRange(db.Users.OrderBy(n => n.Login));
+            users.AddRange(db.Users.OrderBy(n => n.Login));            
 
             ViewBag.Last3Months = last3Months.ToShortDateString();
             ViewBag.TodayDate = DateTime.Now.ToShortDateString();
