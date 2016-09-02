@@ -49,13 +49,7 @@ namespace AccountingOfSales.Models
         /// Дата продажи
         /// </summary>
         public DateTime SaleDate { get; set; }
-
-        [Display(Name = "Начислено")]
-        /// <summary>
-        /// Показывает, было ли начисление, по этой продаже
-        /// </summary>
-        public bool ACC { get; set; } = false;
-        
+       
         [ScaffoldColumn(false)]
         public int UserId { get; set; }
         public virtual User User { get; set; }
@@ -64,5 +58,9 @@ namespace AccountingOfSales.Models
         [Remote("CheckCountProduct", "Sales", ErrorMessage = "Остаток равен 0")]
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
+
+        [ScaffoldColumn(false)]
+        public int? SalaryId { get; set; }
+        public virtual Salary Salary { get; set; }
     }
 }
