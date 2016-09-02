@@ -15,11 +15,11 @@ namespace AccountingOfSales.Controllers
     {
         SalesDbContext db = new SalesDbContext();
 
-        public ActionResult Index(int? page, DateTime? filterDateSaleFrom, DateTime? filterDateSaleTo, int? filterUser, int? filterProduct)
+        public ActionResult Index(int? page, DateTime? filterDateSaleFrom, DateTime? filterDateSaleTo, int? filterUser, int? filterProduct, int? filterSalary)
         {
             int pageSize = 20;
             int pageNumber = (page ?? 1);
-            List<Sale> sales = SalesEntities.GetSales(filterDateSaleFrom, filterDateSaleTo, filterUser, filterProduct);
+            List<Sale> sales = SalesEntities.GetSales(filterDateSaleFrom, filterDateSaleTo, filterUser, filterProduct, filterSalary);
 
             //добавляем новый пустой продукт, чтобы был выбор НЕ продукта
             List<Product> products = new List<Product>();
@@ -30,8 +30,14 @@ namespace AccountingOfSales.Controllers
             users.Add(new User() { Id = 0, Login = "Выберите пользователя" });
             users.AddRange(db.Users.OrderBy(n => n.Login));
 
+            List<SelectListItem> acc = new List<SelectListItem>();
+            acc.Add(new SelectListItem() { Text = "Начислено", Value = "-1" });
+            acc.Add(new SelectListItem() { Text = "Да", Value = "1" });
+            acc.Add(new SelectListItem() { Text = "Нет", Value = "0" });
+
             ViewBag.Products = new SelectList(products, "Id", "Name");
             ViewBag.Users = new SelectList(users, "Id", "Login");
+            ViewBag.ACC = new SelectList(acc, "Value", "Text");
 
             return View(sales.OrderByDescending(d => d.SaleDate).ThenByDescending(d => d.CreateDate).ToPagedList(pageNumber, pageSize));
         }
