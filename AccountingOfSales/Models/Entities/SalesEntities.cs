@@ -10,7 +10,7 @@ namespace AccountingOfSales.Models.Entities
     {
         static SalesDbContext db = new SalesDbContext();
 
-        public static List<Sale> GetSales(DateTime? filterDateSaleFrom, DateTime? filterDateSaleTo, int? filterUser, int? filterProduct)
+        public static List<Sale> GetSales(DateTime? filterDateSaleFrom, DateTime? filterDateSaleTo, int? filterUser, int? filterProduct, int? filterSalary)
         {
             List<Sale> sales = new List<Sale>();
 
@@ -35,6 +35,14 @@ namespace AccountingOfSales.Models.Entities
 
             if (filterUser != null && filterUser != 0)
                 sales = sales.Where(u => u.User.Id == filterUser).ToList();
+
+            if(filterSalary != null && filterSalary != -1)
+            {
+                if (filterSalary == 1)
+                    sales = sales.Where(s => s.SalaryId != null).ToList();
+                else
+                    sales = sales.Where(s => s.SalaryId == null).ToList();
+            }
 
             return sales;
         }
