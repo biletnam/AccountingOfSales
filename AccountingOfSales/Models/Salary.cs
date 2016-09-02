@@ -27,5 +27,8 @@ namespace AccountingOfSales.Models
         [ScaffoldColumn(false)]
         public int UserId { get; set; }
         public virtual User User { get; set; }
+
+        public virtual ICollection<Return> Returns { get; set; } = new List<Return>();
+        public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
     }
 }
