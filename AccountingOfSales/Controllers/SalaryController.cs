@@ -57,10 +57,9 @@ namespace AccountingOfSales.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<IGrouping<DateTime, Sale>> sales = db.Sales.Where(d => d.SaleDate <= newSalary.EndDate).Where(a => a.ACC == false).
+                //добавить условие для продажи без начисления
+                List<IGrouping<DateTime, Sale>> sales = db.Sales.Where(d => d.SaleDate <= newSalary.EndDate).Where(si => si.SalaryId == null).
                 Where(u => u.User.Login == User.Identity.Name).GroupBy(d => d.SaleDate).ToList();
-                //List<Sale> sales = db.Sales.Where(d => d.SaleDate <= newSalary.EndDate).Where(a => a.ACC == false).
-                //    Where(u => u.User.Login == User.Identity.Name).ToList();
 
                 if (sales.Count == 0)
                     ModelState.AddModelError("", "За данный период не было продаж");
@@ -70,7 +69,7 @@ namespace AccountingOfSales.Controllers
                 var firstSale = sales.First();  //получаем дату с
 
                 List<Return> returns = db.Returns.Where(d => d.ReturnDate >= firstSale.Key).Where(d => d.ReturnDate <= newSalary.EndDate).
-                    Where(u => u.User.Login == User.Identity.Name).Where(a => a.ACC == false).ToList();
+                    Where(u => u.User.Login == User.Identity.Name).Where(si => si.SalaryId == null).ToList();
 
                 int totalPrice = 0; //общая сумма продаж
                 int totalReturnPrice = 0;   //общая сумма возвратов     
@@ -82,32 +81,38 @@ namespace AccountingOfSales.Controllers
                 foreach (var groupSales in sales)
                 {
                     totalPrice += groupSales.Sum(p => p.SalePrice);
-
-                    foreach(var sale in groupSales)
-                    {
-                        sale.ACC = true;
-                        db.SaveChanges();
-                    }
-                }
-
-                foreach (var ret in returns)
-                {
-                    ret.ACC = true;
-                    db.SaveChanges();
                 }
 
                 newSalary.CreateDate = DateTime.Now;
                 newSalary.StartDate = firstSale.Key;
                 newSalary.UserId = user.Id;
-                newSalary.Price = (totalPrice - totalReturnPrice) * Convert.ToInt32(Reference.PercentageOfSales) + (Convert.ToInt32(Reference.RateForOutput) * sales.Count);
+                newSalary.Price = (totalPrice - totalReturnPrice) * Convert.ToInt32(Reference.PercentageOfSales) / 100 + (Convert.ToInt32(Reference.RateForOutput) * sales.Count);
 
                 db.Salaries.Add(newSalary);
                 db.SaveChanges();
 
+                foreach (var groupSales in sales)
+                {
+                    foreach (var sale in groupSales)
+                    {
+                        sale.SalaryId = newSalary.Id;
+                        db.SaveChanges();
+                    }
+                }
+
+                if (returns.Count != 0)
+                {
+                    foreach (var ret in returns)
+                    {
+                        ret.SalaryId = newSalary.Id;
+                        db.SaveChanges();
+                    }
+                }
+
                 return RedirectToAction("Index");
             }
 
-            return View(newSalary);
+            return View();
         }
         protected override void Dispose(bool disposing)
         {
