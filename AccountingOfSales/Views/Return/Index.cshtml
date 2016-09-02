@@ -16,6 +16,7 @@
         @Html.DropDownList("filterProduct", ViewBag.Products as SelectList, new { @class = "form-control" })
         @Html.DropDownList("filterTypesReturn", ViewBag.TypesReturn as SelectList, new { @class = "form-control" })
         @Html.DropDownList("filterUser", ViewBag.Users as SelectList, new { @class = "form-control" })
+        @Html.DropDownList("filterSalary", ViewBag.ACC as SelectList, new { @class = "form-control" })
         <input type="submit" value="Фильтр" class="btn btn-default" />
     </div>
 }
