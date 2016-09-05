@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using AccountingOfSales.Models.Entities;
+using AccountingOfSales.Models.DAL;
 using AccountingOfSales.Models.ViewModel;
 
 namespace AccountingOfSales.Controllers
@@ -19,17 +19,8 @@ namespace AccountingOfSales.Controllers
             int pageNumber = (page ?? 1);
             List<Admission> admissions = AdmissionEntities.GetAdmissions(filterDateAdmissionFrom, filterDateAdmissionTo, filterUser, filterProvider);
             
-            //добавляем нового пустого поставщика, чтобы был выбор НЕ поставщика
-            List<Provider> providers = new List<Provider>();
-            providers.Add(new Provider() {Id=0, Name="Выберите поставщика" });
-            providers.AddRange(db.Providers.OrderBy(n => n.Name));
-
-            List<User> users = new List<User>();
-            users.Add(new User() { Id=0, Login="Выберите пользователя" });
-            users.AddRange(db.Users.OrderBy(n => n.Login));
-
-            ViewBag.Providers = new SelectList(providers, "Id", "Name");
-            ViewBag.Users = new SelectList(users, "Id", "Login");
+            ViewBag.Providers = new SelectList(ListsForFilters.Providers, "Id", "Name");
+            ViewBag.Users = new SelectList(ListsForFilters.Users, "Id", "Login");
 
             return View(admissions.OrderByDescending(d => d.AdmissionDate).ThenByDescending(d => d.CreateDate).ToPagedList(pageNumber, pageSize));
         }
