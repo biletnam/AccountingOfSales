@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
-using AccountingOfSales.Models.Entities;
+using AccountingOfSales.Models.DAL;
 
 namespace AccountingOfSales.Controllers
 {
@@ -24,13 +24,9 @@ namespace AccountingOfSales.Controllers
 
             DateTime last3Months = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).AddMonths(-3);
             
-            List<User> users = new List<User>();
-            users.Add(new User() { Login = "Выберите пользователя" });
-            users.AddRange(db.Users.OrderBy(n => n.Login));            
-
             ViewBag.Last3Months = last3Months.ToShortDateString();
             ViewBag.TodayDate = DateTime.Now.ToShortDateString();
-            ViewBag.Users = new SelectList(users, "Login", "Login");
+            ViewBag.Users = new SelectList(ListsForFilters.Users, "Login", "Login");
 
             if(roleAdmin)
             {
