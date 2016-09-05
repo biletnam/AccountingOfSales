@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AccountingOfSales.Models.Entities
+namespace AccountingOfSales.Models.DAL
 {
     public class SalesEntities
     {
