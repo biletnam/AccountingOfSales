@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using AccountingOfSales.Models.Entities;
+using AccountingOfSales.Models.DAL;
 
 namespace AccountingOfSales.Controllers
 {
@@ -20,28 +20,10 @@ namespace AccountingOfSales.Controllers
             int pageNumber = (page ?? 1);
             List<Return> returns = ReturnEntities.GetReturns(filterDateReturnFrom, filterDateReturnTo, filterUser, filterProduct, filterTypesReturn, filterSalary);
 
-            //добавляем новый пустой продукт, чтобы был выбор НЕ продукта
-            List<Product> products = new List<Product>();
-            products.Add(new Product() { Id = 0, Name = "Выберите продукт" });
-            products.AddRange(db.Products.OrderBy(n => n.Name));
-
-            List<User> users = new List<User>();
-            users.Add(new User() { Id = 0, Login = "Выберите пользователя" });
-            users.AddRange(db.Users.OrderBy(n => n.Login));
-
-            List<TypeReturn> typesReturn = new List<TypeReturn>();
-            typesReturn.Add(new TypeReturn() { Id=0, Name = "Выберите тип возврата" });
-            typesReturn.AddRange(db.TypeReturns.OrderBy(n => n.Name));
-
-            List<SelectListItem> acc = new List<SelectListItem>();
-            acc.Add(new SelectListItem() { Text = "Начислено", Value = "-1" });
-            acc.Add(new SelectListItem() { Text = "Да", Value = "1" });
-            acc.Add(new SelectListItem() { Text = "Нет", Value = "0" });
-
-            ViewBag.Products = new SelectList(products, "Id", "Name");
-            ViewBag.Users = new SelectList(users, "Id", "Login");
-            ViewBag.TypesReturn = new SelectList(typesReturn, "Id", "Name");
-            ViewBag.ACC = new SelectList(acc, "Value", "Text");
+            ViewBag.Products = new SelectList(ListsForFilters.Products, "Id", "Name");
+            ViewBag.Users = new SelectList(ListsForFilters.Users, "Id", "Login");
+            ViewBag.TypesReturn = new SelectList(ListsForFilters.TypeReturns, "Id", "Name");
+            ViewBag.ACC = new SelectList(ListsForFilters.ACC, "Value", "Text");
 
             return View(returns.OrderByDescending(d => d.ReturnDate).ThenByDescending(d => d.CreateDate).ToPagedList(pageNumber, pageSize));
         }
