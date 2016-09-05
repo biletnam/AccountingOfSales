@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using AccountingOfSales.Models;
-using AccountingOfSales.Models.Entities;
+using AccountingOfSales.Models.DAL;
 
 namespace AccountingOfSales.Controllers
 {
