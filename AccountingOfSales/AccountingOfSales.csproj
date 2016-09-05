@@ -242,6 +242,10 @@
     <Compile Include="Migrations\201609021128097_AddSalaryId.Designer.cs">
       <DependentUpon>201609021128097_AddSalaryId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609050656191_NullForProductId.cs" />
+    <Compile Include="Migrations\201609050656191_NullForProductId.Designer.cs">
+      <DependentUpon>201609050656191_NullForProductId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\CryptHelper.cs" />
@@ -511,6 +515,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609021128097_AddSalaryId.resx">
       <DependentUpon>201609021128097_AddSalaryId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609050656191_NullForProductId.resx">
+      <DependentUpon>201609050656191_NullForProductId.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Models\Reference.resx">
       <Generator>ResXFileCodeGenerator</Generator>
