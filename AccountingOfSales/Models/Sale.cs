@@ -56,7 +56,7 @@ namespace AccountingOfSales.Models
 
         [ScaffoldColumn(false)]
         [Remote("CheckCountProduct", "Sales", ErrorMessage = "Остаток равен 0")]
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
         public virtual Product Product { get; set; }
 
         [ScaffoldColumn(false)]
