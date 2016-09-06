@@ -44,30 +44,37 @@ namespace AccountingOfSales.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RetailPrice, Discount, SaleDate, ProductId")] Sale sale)
+        public ActionResult Create([Bind(Include = "RetailPrice, Discount, SaleDate, ProductId")] Sale sale, bool? emptingSale)
         {
             if (ModelState.IsValid)
             {
                 User user = UserEntities.GetUserByName(User.Identity.Name);
 
                 sale.CreateDate = DateTime.Now;
-                if (sale.Discount != null)
-                    sale.SalePrice = sale.RetailPrice - (int)sale.Discount;
-                else
-                    sale.SalePrice = sale.RetailPrice;
                 if (user != null)
                     sale.UserId = user.Id;
                 else
                     return HttpNotFound();
 
-                db.Sales.Add(sale);
-
-                Product product = db.Products.Where(i => i.Id == sale.ProductId).FirstOrDefault();
-                if (product != null)
-                    product.Count = product.Count - 1;
+                if (emptingSale != null && emptingSale == true)
+                {
+                    sale.SaleDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+                }
                 else
-                    return HttpNotFound();
+                {
+                    if (sale.Discount != null)
+                        sale.SalePrice = sale.RetailPrice - (int)sale.Discount;
+                    else
+                        sale.SalePrice = sale.RetailPrice; 
 
+                    Product product = db.Products.Where(i => i.Id == sale.ProductId).FirstOrDefault();
+                    if (product != null)
+                        product.Count = product.Count - 1;
+                    else
+                        return HttpNotFound();
+                }
+
+                db.Sales.Add(sale);
                 db.SaveChanges();
                 return RedirectToAction("Create", new { createSale = true });
             }
