@@ -7,7 +7,7 @@
 
 <h2>Создание продажи</h2>
 <br />
-@using (Html.BeginForm("Create", "Sales", FormMethod.Post)) 
+@using (Html.BeginForm("Create", "Sales", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="row">
@@ -56,9 +56,6 @@
                         @Html.ActionLink("Отмена", "Create", "Sales", htmlAttributes: new { @class = "btn btn-default" })
                     </div>
                 </div>
-                <div>
-                    @Html.ActionLink("Вернуться на главную", "Index")
-                </div>
             </div>            
         </div>
         <div class="col-md-2" id="imgProduct">
@@ -69,6 +66,13 @@
         </div>
     </div>
 }
+@using (Html.BeginForm("Create", "Sales", new { emptingSale = true }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ActionLink("Вернуться на главную", "Index", "Sales", htmlAttributes: new { @class = "btn btn-default" })
+    <input type="submit" value="Создать пустую продажу" class="btn btn-default" />
+}
+
 
 @section scripts {
     <script type="text/javascript">
