@@ -320,6 +320,7 @@
     <Content Include="Images\icons\archive.png" />
     <Content Include="Images\icons\delete.png" />
     <Content Include="Images\icons\edit.png" />
+    <Content Include="Images\icons\info.jpg" />
     <Content Include="Images\icons\unarchive.png" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
