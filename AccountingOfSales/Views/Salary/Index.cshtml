@@ -32,6 +32,7 @@
         {
             <th>Пользователь</th>
         }
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -45,6 +46,7 @@
             {
                 <td>@item.User.Login</td>
             }
+            <td><a href="@Url.Action("Details", "Salary", new { id = item.Id })" title="Подробности"><img src="~/Images/icons/info.jpg" width="30" /></a></td>
         </tr>
     }
 
