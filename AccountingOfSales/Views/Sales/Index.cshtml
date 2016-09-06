@@ -39,7 +39,14 @@
             <td>@item.SalePrice</td>
             <td>@item.RetailPrice</td>
             <td>@item.Discount</td>
-            <td>@item.Product.Name</td>
+            @if (item.Product != null)
+            {
+                <td>@item.Product.Name</td>
+            }
+            else
+            {
+                <td></td>
+            }
             <td>@item.User.Login</td>
             <td>
                 @if (item.SalaryId != null)
