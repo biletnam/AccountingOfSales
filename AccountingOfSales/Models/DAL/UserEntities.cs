@@ -14,10 +14,9 @@ namespace AccountingOfSales.Models.DAL
         }
         public static bool IsInRole(string userLogin, string userRole)
         {
-            User user = Config.db.Users.Where(l => l.Login == userLogin).FirstOrDefault();
-            Role role = Config.db.Roles.Where(n => n.Name == userRole).FirstOrDefault();
-            
-            if (user.Roles.Contains(role))
+            Role role = Config.db.Users.Where(l => l.Login == userLogin).SelectMany(r => r.Roles).Where(r => r.Name == userRole).FirstOrDefault();
+
+            if (role != null)
                 return true;
             else
                 return false;
