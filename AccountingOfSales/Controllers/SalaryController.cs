@@ -53,7 +53,6 @@ namespace AccountingOfSales.Controllers
         {
             if (ModelState.IsValid)
             {
-                //добавить условие для продажи без начисления
                 List<IGrouping<DateTime, Sale>> sales = db.Sales.Where(d => d.SaleDate <= newSalary.EndDate).Where(si => si.SalaryId == null).
                 Where(u => u.User.Login == User.Identity.Name).GroupBy(d => d.SaleDate).ToList();
 
@@ -89,22 +88,21 @@ namespace AccountingOfSales.Controllers
 
                 foreach (var groupSales in sales)
                 {
-                    foreach (var sale in groupSales)
+                    foreach (var saleInGroup in groupSales)
                     {
-                        sale.SalaryId = newSalary.Id;
-                        db.SaveChanges();
+                        saleInGroup.SalaryId = newSalary.Id;
                     }
                 }
 
                 if (returns.Count != 0)
                 {
-                    foreach (var ret in returns)
+                    foreach (var returnInGroup in returns)
                     {
-                        ret.SalaryId = newSalary.Id;
-                        db.SaveChanges();
+                        returnInGroup.SalaryId = newSalary.Id;
                     }
                 }
 
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
