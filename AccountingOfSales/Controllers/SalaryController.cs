@@ -19,7 +19,7 @@ namespace AccountingOfSales.Controllers
             int pageSize = 20;
             int pageNumber = (page ?? 1);
             List<Salary> salaries = new List<Salary>();
-
+            
             bool roleAdmin = UserEntities.IsInRole(User.Identity.Name, "admin");
 
             DateTime last3Months = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).AddMonths(-3);
@@ -65,7 +65,7 @@ namespace AccountingOfSales.Controllers
 
                 List<Return> returns = db.Returns.Where(d => d.ReturnDate >= firstSale.Key).Where(d => d.ReturnDate <= newSalary.EndDate).
                     Where(u => u.User.Login == User.Identity.Name).Where(si => si.SalaryId == null).ToList();
-
+                
                 int totalPrice = 0; //общая сумма продаж
                 int totalReturnPrice = 0;   //общая сумма возвратов     
 
@@ -108,6 +108,17 @@ namespace AccountingOfSales.Controllers
 
             return View();
         }
+
+        public ActionResult Details(int id)
+        {
+            Salary salary = db.Salaries.Where(i => i.Id == id).FirstOrDefault();
+
+            if (salary != null)
+                return View(salary);
+            else
+                return HttpNotFound();
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
