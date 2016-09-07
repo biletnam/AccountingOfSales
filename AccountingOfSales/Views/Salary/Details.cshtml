@@ -1,0 +1,62 @@
+﻿@model AccountingOfSales.Models.Salary
+
+@{
+    ViewBag.Title = "Подробности начисления";
+}
+
+<h2>Продажи</h2>
+<br />
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Дата продажи</th>
+        <th>Цена продажи</th>
+        <th>Розничная цена</th>
+        <th>Скидка</th>
+        <th>Продукт</th>
+        <th>Дата создания</th>
+    </tr>
+
+    @foreach (var item in Model.Sales.OrderByDescending(d => d.SaleDate).ThenByDescending(d => d.CreateDate))
+    {
+        <tr>
+            <td>@item.SaleDate.ToShortDateString()</td>
+            <td>@item.SalePrice</td>
+            <td>@item.RetailPrice</td>
+            <td>@item.Discount</td>
+            @if (item.Product != null)
+            {
+                <td>@item.Product.Name</td>
+            }
+            else
+            {
+                <td></td>
+            }
+            <td>@item.CreateDate</td>
+        </tr>
+    }
+</table>
+<br />
+
+<h2>Возвраты</h2>
+<br />
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Дата возврата</th>
+        <th>Продукт</th>
+        <th>Сумма</th>
+        <th>Тип возврата</th>
+        <th>Дата создания</th>
+    </tr>
+
+    @foreach (var item in Model.Returns.OrderByDescending(d => d.ReturnDate).ThenByDescending(d => d.CreateDate))
+    {
+        <tr>
+            <td>@item.ReturnDate.ToShortDateString()</td>
+            <td>@item.Product.Name</td>
+            <td>@item.Price</td>
+            <td>@item.TypeReturn.Name</td>
+            <td>@item.CreateDate</td>
+        </tr>
+    }
+
+</table>
