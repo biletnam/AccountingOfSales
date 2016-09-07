@@ -8,11 +8,9 @@ namespace AccountingOfSales.Models.DAL
 {
     public class ProductEntities
     {
-        static SalesDbContext db = new SalesDbContext();
-
         public static Product GetProductById(int id)
         {
-            return db.Products.Where(i => i.Id == id).FirstOrDefault();
+            return Config.db.Products.Where(i => i.Id == id).FirstOrDefault();
         }
     }
 }

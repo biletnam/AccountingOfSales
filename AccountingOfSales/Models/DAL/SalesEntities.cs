@@ -8,7 +8,6 @@ namespace AccountingOfSales.Models.DAL
 {
     public class SalesEntities
     {
-        static SalesDbContext db = new SalesDbContext();
 
         public static List<Sale> GetSales(DateTime? filterDateSaleFrom, DateTime? filterDateSaleTo, int? filterUser, int? filterProduct, int? filterSalary)
         {
@@ -18,17 +17,17 @@ namespace AccountingOfSales.Models.DAL
             DateTime last3Months = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).AddMonths(-3);
 
             if (filterDateSaleFrom != null && filterDateSaleTo != null)
-                sales = db.Sales.Where(d => d.SaleDate >= filterDateSaleFrom).Where(d => d.SaleDate <= filterDateSaleTo).ToList();
+                sales = Config.db.Sales.Where(d => d.SaleDate >= filterDateSaleFrom).Where(d => d.SaleDate <= filterDateSaleTo).ToList();
             else if (filterDateSaleFrom != null && filterDateSaleTo == null)
-                sales = db.Sales.Where(d => d.SaleDate >= filterDateSaleFrom).ToList();
+                sales = Config.db.Sales.Where(d => d.SaleDate >= filterDateSaleFrom).ToList();
             else if (filterDateSaleFrom == null && filterDateSaleTo != null)
             {
                 //находим дату последних 3 месяцев, от "даты по", чтобы опять же ограничить 3 месяцами
                 DateTime last3MonthsDateTo = new DateTime(filterDateSaleTo.Value.Year, filterDateSaleTo.Value.Month, filterDateSaleTo.Value.Day).AddMonths(-3);
-                sales = db.Sales.Where(d => d.SaleDate >= last3MonthsDateTo).Where(d => d.SaleDate <= filterDateSaleTo).ToList();
+                sales = Config.db.Sales.Where(d => d.SaleDate >= last3MonthsDateTo).Where(d => d.SaleDate <= filterDateSaleTo).ToList();
             }
             else
-                sales = db.Sales.Where(d => d.SaleDate >= last3Months).ToList();
+                sales = Config.db.Sales.Where(d => d.SaleDate >= last3Months).ToList();
 
             if (filterProduct != null && filterProduct != 0)
                 sales = sales.Where(u => u.ProductId == filterProduct).ToList();

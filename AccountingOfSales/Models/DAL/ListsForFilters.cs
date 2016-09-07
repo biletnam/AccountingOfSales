@@ -9,7 +9,6 @@ namespace AccountingOfSales.Models.DAL
 {
     public class ListsForFilters
     {
-        static SalesDbContext db = new SalesDbContext();
         static List<SelectListItem> acc;
         static List<User> users;
         static List<Product> products;
@@ -32,7 +31,7 @@ namespace AccountingOfSales.Models.DAL
             {
                 users = new List<User>();
                 users.Add(new User() { Id = 0, Login = "Выберите пользователя" });
-                users.AddRange(db.Users.OrderBy(n => n.Login));
+                users.AddRange(Config.db.Users.OrderBy(n => n.Login));
                 return users;
             }
         }
@@ -42,7 +41,7 @@ namespace AccountingOfSales.Models.DAL
             {
                 products = new List<Product>();
                 products.Add(new Product() { Id = 0, Name = "Выберите продукт" });
-                products.AddRange(db.Products.OrderBy(n => n.Name));
+                products.AddRange(Config.db.Products.OrderBy(n => n.Name));
                 return products;
             }
         }
@@ -52,7 +51,7 @@ namespace AccountingOfSales.Models.DAL
             {
                 typesReturn = new List<TypeReturn>();
                 typesReturn.Add(new TypeReturn() { Id = 0, Name = "Выберите тип возврата" });
-                typesReturn.AddRange(db.TypeReturns.OrderBy(n => n.Name));
+                typesReturn.AddRange(Config.db.TypeReturns.OrderBy(n => n.Name));
                 return typesReturn;
             }
         }
@@ -62,7 +61,7 @@ namespace AccountingOfSales.Models.DAL
             {
                 providers = new List<Provider>();
                 providers.Add(new Provider() { Id = 0, Name = "Выберите поставщика" });
-                providers.AddRange(db.Providers.OrderBy(n => n.Name));
+                providers.AddRange(Config.db.Providers.OrderBy(n => n.Name));
                 return providers;
             }
         }
