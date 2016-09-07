@@ -250,6 +250,7 @@
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\CryptHelper.cs" />
     <Compile Include="Models\DAL\AdmissionEntities.cs" />
+    <Compile Include="Models\DAL\Config.cs" />
     <Compile Include="Models\DAL\ListsForFilters.cs" />
     <Compile Include="Models\DAL\OtherCostsEntities.cs" />
     <Compile Include="Models\DAL\ProductEntities.cs" />
