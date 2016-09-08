@@ -6,6 +6,20 @@
 
 <h2>Продажи</h2>
 <br />
+<dl class="dl-horizontal">
+    <dt>
+        Сумма:
+    </dt>
+    <dd>
+        @Model.Sales.Sum(s => s.SalePrice)
+    </dd>
+    <dt>
+        Количество:
+    </dt>
+    <dd>
+        @Model.Sales.Count
+    </dd>
+</dl>
 <table class="table table-striped table-hover">
     <tr>
         <th>Дата продажи</th>
@@ -39,6 +53,20 @@
 
 <h2>Возвраты</h2>
 <br />
+<dl class="dl-horizontal">
+    <dt>
+        Сумма:
+    </dt>
+    <dd>
+        @Model.Returns.Sum(s => s.Price)
+    </dd>
+    <dt>
+        Количество:
+    </dt>
+    <dd>
+        @Model.Returns.Count
+    </dd>
+</dl>
 <table class="table table-striped table-hover">
     <tr>
         <th>Дата возврата</th>
