@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace AccountingOfSales.Controllers
 {
+    [Authorize]
     public class TypeProductController : Controller
     {
         SalesDbContext db = new SalesDbContext();
