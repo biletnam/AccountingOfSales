@@ -10,6 +10,7 @@ using AccountingOfSales.Models.ViewModel;
 
 namespace AccountingOfSales.Controllers
 {
+    [Authorize]
     public class AdmissionController : Controller
     {
         SalesDbContext db = new SalesDbContext();
@@ -24,7 +25,7 @@ namespace AccountingOfSales.Controllers
 
             return View(admissions.OrderByDescending(d => d.AdmissionDate).ThenByDescending(d => d.CreateDate).ToPagedList(pageNumber, pageSize));
         }
-        [Authorize]
+        
         public ActionResult Create()
         {
             Session["CreatedAdmissions"] = null;
