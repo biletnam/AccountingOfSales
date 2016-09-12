@@ -11,6 +11,7 @@ using System.Net;
 
 namespace AccountingOfSales.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         SalesDbContext db = new SalesDbContext();
