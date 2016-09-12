@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using AccountingOfSales.Models.DAL;
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -30,13 +31,16 @@
                             <li>@Html.ActionLink("Типы продукта", "Index", "TypeProduct")</li>
                         </ul>
                     </li>
-                    <li>
-                        @Html.ActionLink("Поставщики", "Index", "Provider")
-                        <ul class="submenu">
-                            <li>@Html.ActionLink("Создать", "Create", "Provider")</li>
-                            <li>@Html.ActionLink("Архив", "Index", "Provider", new { archive = true }, "")</li>
-                        </ul>
-                    </li>
+                    @if (UserEntities.IsInRole(User.Identity.Name, "admin"))
+                    {
+                        <li>
+                            @Html.ActionLink("Поставщики", "Index", "Provider")
+                            <ul class="submenu">
+                                <li>@Html.ActionLink("Создать", "Create", "Provider")</li>
+                                <li>@Html.ActionLink("Архив", "Index", "Provider", new { archive = true }, "")</li>
+                            </ul>
+                        </li>
+                    }
                     <li>
                         @Html.ActionLink("Поступления", "Index", "Admission")
                         <ul class="submenu">
