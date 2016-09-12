@@ -1,4 +1,5 @@
 ﻿using AccountingOfSales.Models;
+using AccountingOfSales.Models.DAL;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace AccountingOfSales.Controllers
 {
+    [Auth (Roles = "admin")]
     public class ProviderController : Controller
     {
         SalesDbContext db = new SalesDbContext();
