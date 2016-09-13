@@ -30,7 +30,7 @@ namespace AccountingOfSales.Models.ViewModel
         [Required]
         [Display(Name = "Логин")]
         [RegularExpression(@"[\w\d]*", ErrorMessage = "Логин должен содержать только латинские алфавитно-цифровые символы.")]
-        [Remote("CheckLogin", "Account", ErrorMessage = "Пользователь с таким логином уже имеется", AdditionalFields = "Id")]
+        [Remote("CheckLogin", "Account", ErrorMessage = "Пользователь с таким логином уже имеется")]
         public string Login { get; set; }
 
         [Required]
