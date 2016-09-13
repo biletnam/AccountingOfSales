@@ -452,6 +452,7 @@
     <Content Include="Views\Salary\Create.cshtml" />
     <Content Include="Views\Salary\Details.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
