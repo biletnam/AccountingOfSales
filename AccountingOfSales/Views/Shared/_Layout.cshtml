@@ -84,7 +84,7 @@
                 {
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            @Html.ActionLink(User.Identity.Name, "EditUser", "Manage")
+                            @Html.ActionLink(User.Identity.Name, "EditUser", "Manage", new { Login = User.Identity.Name }, null)
                             <ul class="submenu">
                                 @if (UserEntities.IsInRole(User.Identity.Name, "admin"))
                                 {
