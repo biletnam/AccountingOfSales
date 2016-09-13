@@ -40,19 +40,23 @@
                                 <li>@Html.ActionLink("Архив", "Index", "Provider", new { archive = true }, "")</li>
                             </ul>
                         </li>
+                        <li>
+                            @Html.ActionLink("Поступления", "Index", "Admission")
+                            <ul class="submenu">
+                                <li>@Html.ActionLink("Создать", "Create", "Admission")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink("Прочие расходы", "Index", "OtherCosts")
+                            <ul class="submenu">
+                                <li>@Html.ActionLink("Создать", "Create", "OtherCosts")</li>
+                            </ul>
+                        </li>
                     }
-                    <li>
-                        @Html.ActionLink("Поступления", "Index", "Admission")
-                        <ul class="submenu">
-                            <li>@Html.ActionLink("Создать", "Create", "Admission")</li>
-                        </ul>
-                    </li>
-                    <li>
-                        @Html.ActionLink("Прочие расходы", "Index", "OtherCosts")
-                        <ul class="submenu">
-                            <li>@Html.ActionLink("Создать", "Create", "OtherCosts")</li>
-                        </ul>
-                    </li>
+                    else
+                    {
+                        <li>@Html.ActionLink("Создать поступление", "Create", "Admission")</li>
+                    }                    
                     <li>
                         @Html.ActionLink("Продажи", "Index", "Sales")
                         <ul class="submenu">
@@ -63,7 +67,10 @@
                         @Html.ActionLink("Возвраты", "Index", "Return")
                         <ul class="submenu">
                             <li>@Html.ActionLink("Создать", "Create", "Return")</li>
-                            <li>@Html.ActionLink("Типы возврата", "Index", "TypeReturn")</li>
+                            @if (UserEntities.IsInRole(User.Identity.Name, "admin"))
+                            {
+                                <li>@Html.ActionLink("Типы возврата", "Index", "TypeReturn")</li>
+                            }
                         </ul>
                     </li>
                     <li>
@@ -76,14 +83,23 @@
                 @if (Request.IsAuthenticated)
                 {
                     <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink(User.Identity.Name, "LogOff", "Account")</li>
-                        <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+                        <li>
+                            @Html.ActionLink(User.Identity.Name, "EditUser", "Manage")
+                            <ul class="submenu">
+                                @if (UserEntities.IsInRole(User.Identity.Name, "admin"))
+                                {
+                                    <li>@Html.ActionLink("Создать пользователя", "Register", "Account")</li>
+                                    <li>@Html.ActionLink("Пользователи", "Manager", "Manage")</li>
+                                }
+                                <li>@Html.ActionLink("Изменить пароль", "ChangePassword", "Manage")</li>
+                                <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+                            </ul>
+                        </li>
                     </ul>
                 }
                 else
                 {
                     <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink("Регистрация", "Register", "Account")</li>
                         <li>@Html.ActionLink("Выполнить вход", "Login", "Account")</li>
                     </ul>
                 }                
