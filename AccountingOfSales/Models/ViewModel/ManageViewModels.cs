@@ -28,6 +28,19 @@ namespace AccountingOfSales.Models.ViewModel
 
     public class EditUserViewModel
     {
+        [ScaffoldColumn(false)]
+        public int Id { get; set; }
 
+        [Required]
+        [Display(Name = "Логин")]
+        [RegularExpression(@"[\w\d]*", ErrorMessage = "Логин должен содержать только латинские алфавитно-цифровые символы.")]
+        [Remote("CheckLogin", "Manage", ErrorMessage = "Пользователь с таким логином уже имеется", AdditionalFields = "Id")]
+        public string Login { get; set; }
+
+        [Required]
+        [Display(Name = "ФИО")]
+        [RegularExpression(@"[\w\dА-яёЁ]*", ErrorMessage = "В ФИО должны содержаться только алфавитно-цифровые символы.")]
+        [StringLength(150, ErrorMessage = "Количество символов не должно превышать 150")]
+        public string FIO { get; set; }
     }
 }
