@@ -14,6 +14,8 @@ namespace AccountingOfSales.Controllers
     public class AdmissionController : Controller
     {
         SalesDbContext db = new SalesDbContext();
+
+        [Auth (Roles = "admin")]
         public ActionResult Index(int? page, DateTime? filterDateAdmissionFrom, DateTime? filterDateAdmissionTo, int? filterUser, int? filterProvider)
         {
             int pageSize = 20;
