@@ -9,7 +9,7 @@ using AccountingOfSales.Models.DAL;
 
 namespace AccountingOfSales.Controllers
 {
-    [Authorize]
+    [Auth (Roles = "admin")]
     public class OtherCostsController : Controller
     {
         SalesDbContext db = new SalesDbContext();
