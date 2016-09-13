@@ -6,9 +6,10 @@ using System.Web.Mvc;
 using AccountingOfSales.Models.ViewModel;
 using AccountingOfSales.Models;
 using System.Web.Security;
+using AccountingOfSales.Models.DAL;
 
 namespace AccountingOfSales.Controllers
-{
+{    
     public class AccountController : Controller
     {
         SalesDbContext db = new SalesDbContext();
@@ -39,6 +40,8 @@ namespace AccountingOfSales.Controllers
 
             return View(model);
         }
+
+        [Auth (Roles = "admin")]
         public ActionResult Register()
         {
             return View();
