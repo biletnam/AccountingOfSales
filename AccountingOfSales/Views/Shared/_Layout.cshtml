@@ -84,14 +84,14 @@
                 {
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            @Html.ActionLink(User.Identity.Name, "EditUser", "Manage", new { Login = User.Identity.Name }, null)
+                            @Html.ActionLink(User.Identity.Name, "EditUser", "Manage", new { login = User.Identity.Name }, null)
                             <ul class="submenu">
                                 @if (UserEntities.IsInRole(User.Identity.Name, "admin"))
                                 {
                                     <li>@Html.ActionLink("Создать пользователя", "Register", "Account")</li>
-                                    <li>@Html.ActionLink("Пользователи", "Manager", "Manage")</li>
+                                    <li>@Html.ActionLink("Пользователи", "Index", "Manage")</li>
                                 }
-                                <li>@Html.ActionLink("Изменить пароль", "ChangePassword", "Manage")</li>
+                                <li>@Html.ActionLink("Изменить пароль", "ChangePassword", "Manage", new { login = User.Identity.Name }, null)</li>
                                 <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
                             </ul>
                         </li>
