@@ -25,7 +25,7 @@ namespace AccountingOfSales.Controllers
             if (ModelState.IsValid)
             {
                 string hashPassword = CryptHelper.CreateHashMD5(model.Password);
-                User user = db.Users.FirstOrDefault(u => u.Login == model.Login && u.Password == hashPassword);
+                User user = db.Users.FirstOrDefault(u => u.Login == model.Login && u.Password == hashPassword && u.Archive == false);
 
                 if (user != null)
                 {
@@ -48,7 +48,6 @@ namespace AccountingOfSales.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel model)
         {
@@ -80,6 +79,7 @@ namespace AccountingOfSales.Controllers
         }
         public ActionResult LogOff()
         {
+            Session["UserAdminFromIndex"] = null;    //из ManageController, Index
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Product");
         }
