@@ -247,6 +247,10 @@
     <Compile Include="Migrations\201609050656191_NullForProductId.Designer.cs">
       <DependentUpon>201609050656191_NullForProductId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609140837426_AddArchiveUser.cs" />
+    <Compile Include="Migrations\201609140837426_AddArchiveUser.Designer.cs">
+      <DependentUpon>201609140837426_AddArchiveUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\CryptHelper.cs" />
@@ -322,6 +326,7 @@
     <Content Include="Content\bootstrap-datepicker.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\icons\archive.png" />
+    <Content Include="Images\icons\changePassword.png" />
     <Content Include="Images\icons\delete.png" />
     <Content Include="Images\icons\edit.png" />
     <Content Include="Images\icons\info.jpg" />
@@ -453,6 +458,7 @@
     <Content Include="Views\Salary\Details.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\EditUser.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
@@ -526,6 +532,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609050656191_NullForProductId.resx">
       <DependentUpon>201609050656191_NullForProductId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609140837426_AddArchiveUser.resx">
+      <DependentUpon>201609140837426_AddArchiveUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Models\Reference.resx">
       <Generator>ResXFileCodeGenerator</Generator>
