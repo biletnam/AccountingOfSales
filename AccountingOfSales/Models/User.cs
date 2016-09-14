@@ -29,6 +29,7 @@ namespace AccountingOfSales.Models
         [RegularExpression(@"[\w\dА-яёЁ]*", ErrorMessage = "В ФИО должны содержаться только алфавитно-цифровые символы.")]
         [StringLength(150, ErrorMessage = "Количество символов не должно превышать 150")]
         public string FIO { get; set; }
+        public bool Archive { get; set; } = false;
         public virtual ICollection<Role> Roles { get; set; } = new List<Role>();
         public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
         public virtual ICollection<Return> Returns { get; set; } = new List<Return>();
