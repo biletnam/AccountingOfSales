@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using AccountingOfSales.Models.ViewModel;
 using System.Net;
 using System.Web.Security;
+using AccountingOfSales.Models.DAL;
 
 namespace AccountingOfSales.Controllers
 {
@@ -15,16 +16,27 @@ namespace AccountingOfSales.Controllers
     {
         SalesDbContext db = new SalesDbContext();
 
-        public ActionResult Index()
+        [Auth(Roles = "admin")]
+        public ActionResult Index(bool archive = false)
         {
-            return View();
+            List<User> users = new List<User>();
+
+            Session["UserAdminFromIndex"] = true;    //чтобы админ перемещался к списку пользователей, а не на страницу с продуктами, после изменения пароля или редактирования пользователя
+
+            ViewBag.Archive = archive;
+
+            users = db.Users.Where(a => a.Archive == archive).OrderBy(l => l.Login).ToList();
+
+            return View(users);
         }
 
-        public ActionResult ChangePassword()
+        public ActionResult ChangePassword(string login)
         {
+            ViewBag.LoginUser = login;
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ChangePasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -36,7 +48,14 @@ namespace AccountingOfSales.Controllers
                     user.Password = hashPassword;
                     db.SaveChanges();
 
-                    return RedirectToAction("Index", "Product");
+                    var userAdmin = Session["UserAdminFromIndex"];
+                    if (userAdmin != null && (bool)userAdmin)
+                    {
+                        Session["UserAdminFromIndex"] = null;
+                        return RedirectToAction("Index");
+                    }
+                    else
+                        return RedirectToAction("Index", "Product");
                 }
                 else
                     return HttpNotFound();
@@ -45,12 +64,12 @@ namespace AccountingOfSales.Controllers
             return View(model);
         }
 
-        public ActionResult EditUser(string Login)
+        public ActionResult EditUser(string login)
         {
-            if(Login == "")
+            if(login == "")
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            User user = db.Users.FirstOrDefault(l => l.Login == Login);
+            User user = db.Users.FirstOrDefault(l => l.Login == login);
 
             if (user != null)
             {
@@ -61,6 +80,7 @@ namespace AccountingOfSales.Controllers
                 return HttpNotFound();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditUser(EditUserViewModel newUser)
         {
             if (ModelState.IsValid)
@@ -73,14 +93,44 @@ namespace AccountingOfSales.Controllers
                     user.Login = newUser.Login;
                     db.SaveChanges();
 
-                    FormsAuthentication.SetAuthCookie(user.Login, false);
-                    return RedirectToAction("Index", "Product");
+
+                    var userAdmin = Session["UserAdminFromIndex"];
+                    if (userAdmin != null && (bool)userAdmin)
+                    {
+                        Session["UserAdminFromIndex"] = null;
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        FormsAuthentication.SetAuthCookie(user.Login, false);
+                        return RedirectToAction("Index", "Product");
+                    }
                 }
                 else
                     return HttpNotFound();
             }
 
             return View(newUser);
+        }
+
+        public ActionResult Archive(int? id, bool unarchive = false)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            User user = db.Users.FirstOrDefault(i => i.Id == id);
+
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            user.Archive = (unarchive == false) ? true : false;
+            db.SaveChanges();
+
+            return (unarchive == false) ? RedirectToAction("Index") : RedirectToAction("Index", new { archive = true });
         }
 
         public JsonResult CheckLogin(string Login, int? Id)
