@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using AccountingOfSales.Models.DAL;
+using AccountingOfSales.Models.ViewModel;
 using System.Web.UI;
 
 namespace AccountingOfSales.Controllers
@@ -30,9 +31,14 @@ namespace AccountingOfSales.Controllers
 
         public ActionResult Create(bool? createSale)
         {
+            //ищем продажу сегодня, чтобы убрать кнопку "День без продаж"
+            DateTime nowDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            Sale toDaySale = db.Sales.FirstOrDefault(d => d.SaleDate == nowDate);
+            ViewBag.ToDaySales = toDaySale != null ? true : false;
+
             List<Product> products = db.Products.Where(a => a.Archive == false).OrderBy(n => n.Name).ToList();
 
-            ViewBag.Products = new SelectList(products, "Id", "Name");
+            ViewBag.Products = new SelectList(products, "Id", "DisplayNameSizeColor");
             ViewBag.RetailPrice = products.First().RetailPrice;
 
             if(products.First().Image != null)
