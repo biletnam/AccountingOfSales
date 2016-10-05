@@ -57,6 +57,10 @@ namespace AccountingOfSales.Models
         /// </summary>
         public int RetailPrice { get; set; }
         public bool Archive { get; set; } = false;
+        public string DisplayNameSizeColor
+        {
+            get { return Name + ", " + Size + ", " + Color; }
+        }
 
         [ScaffoldColumn(false)]
         public int? ProviderId { get; set; }
