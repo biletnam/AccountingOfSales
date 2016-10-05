@@ -57,7 +57,10 @@ namespace AccountingOfSales.Controllers
                 Where(u => u.User.Login == User.Identity.Name).GroupBy(d => d.SaleDate).ToList();
 
                 if (sales.Count == 0)
+                {
                     ModelState.AddModelError("", "За данный период не было продаж");
+                    return View();
+                }
 
                 User user = UserEntities.GetUserByName(User.Identity.Name);
 
