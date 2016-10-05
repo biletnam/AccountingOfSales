@@ -35,8 +35,8 @@ namespace AccountingOfSales.Controllers
         public ActionResult Create()
         {
             //для заполнения выпадающих списков
-            ViewBag.Providers = new SelectList(db.Providers.OrderBy(n => n.Name), "Id", "Name");
-            ViewBag.TypeProducts = new SelectList(db.TypeProducts.OrderBy(n => n.Name), "Id", "Name");
+            ViewBag.Providers = new SelectList(db.Providers.Where(a => a.Archive == false).OrderBy(n => n.Name), "Id", "Name");
+            ViewBag.TypeProducts = new SelectList(db.TypeProducts.Where(a => a.Archive == false).OrderBy(n => n.Name), "Id", "Name");
 
             return View();
         }
