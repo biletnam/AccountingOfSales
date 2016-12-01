@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AccountingOfSales.Models
 {
-    class SalesDbContext : DbContext
+    public class SalesDbContext : DbContext
     {
         public SalesDbContext(): base("DefaultConnection") { }
         public DbSet<Product> Products { get; set; }

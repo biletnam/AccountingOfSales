@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace AccountingOfSales.Controllers
 {
+    [Authorize]
     public class TypeProductController : Controller
     {
         SalesDbContext db = new SalesDbContext();
@@ -21,11 +22,11 @@ namespace AccountingOfSales.Controllers
             List<TypeProduct> typeProduct = new List<TypeProduct>();
 
             ViewBag.Archive = archive;
-            typeProduct = (archive == false) ? db.TypeProducts.Where(f => f.Archive == false).ToList() : db.TypeProducts.Where(f => f.Archive == true).ToList();
+            typeProduct = db.TypeProducts.Where(f => f.Archive == archive).ToList();
 
             if (filterName != "")
             {
-                typeProduct = typeProduct.Where(n => n.Name.Contains(filterName)).ToList();
+                typeProduct = typeProduct.Where(n => n.Name.ToLower().Contains(filterName.ToLower())).ToList();
             }
             return View(typeProduct.OrderBy(c => c.Name).ToPagedList(pageNumber, pageSize));
         }
@@ -45,7 +46,7 @@ namespace AccountingOfSales.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(typeProduct);
+            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int? id)

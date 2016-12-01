@@ -1,0 +1,64 @@
+﻿@using PagedList.Mvc;
+@using AccountingOfSales.Models;
+@model PagedList.IPagedList<OtherCosts>
+
+@{
+    ViewBag.Title = "Прочие расходы";
+}
+
+<h2>Прочие расходы</h2>
+<br />
+@using (Html.BeginForm("Index", "OtherCosts", FormMethod.Post))
+{
+    <div class="form-inline">
+        @Html.TextBox("filterDateCostFrom", "", htmlAttributes: new { @class = "form-control datepicker", placeholder = "Дата расхода С" })
+        @Html.TextBox("filterDateCostTo", "", htmlAttributes: new { @class = "form-control datepicker", placeholder = "Дата расхода До" })
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+    </div>
+}
+<br />
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Дата расхода</th>
+        <th>Дата создания</th>
+        <th>Сумма</th>
+        <th>Комментарий</th>
+        <th>Создано из пост.</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.CostsDate.ToShortDateString()</td>
+            <td>@item.CreateDate</td>
+            <td>@item.Price</td>
+            <td>@item.Comment</td>
+            <td>
+                @if (item.Admission)
+                {
+                    <span>&#10004;</span>
+                }
+                else
+                {
+                    <span>&#8212;</span>
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+<label class="control-label">Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount</label>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+@section scripts {
+    <script type="text/javascript">
+    $('.datepicker').datepicker({
+        format: "dd.mm.yyyy",
+        language: "ru",
+        autoclose: true,
+        todayHighlight: true
+    });
+
+    </script>
+}

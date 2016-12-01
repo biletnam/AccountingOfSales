@@ -1,4 +1,5 @@
 ﻿using AccountingOfSales.Models;
+using AccountingOfSales.Models.DAL;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace AccountingOfSales.Controllers
 {
+    [Auth (Roles = "admin")]
     public class ProviderController : Controller
     {
         SalesDbContext db = new SalesDbContext();
@@ -20,11 +22,11 @@ namespace AccountingOfSales.Controllers
             List<Provider> providers = new List<Provider>();
 
             ViewBag.Archive = archive;
-            providers = (archive == false) ? db.Providers.Where(f => f.Archive == false).ToList() : db.Providers.Where(f => f.Archive == true).ToList();
+            providers = db.Providers.Where(f => f.Archive == archive).ToList();
 
             if (filterName != "")
             {
-                providers = providers.Where(n => n.Name.Contains(filterName)).ToList();
+                providers = providers.Where(n => n.Name.ToLower().Contains(filterName.ToLower())).ToList();
             }
 
             return View(providers.OrderBy(c => c.Name).ToPagedList(pageNumber, pageSize));

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using AccountingOfSales.Models.DAL;
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -7,32 +8,101 @@
     <title>@ViewBag.Title – Учет продаж</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/PagedList.css")
+    @Styles.Render("~/Content/bootstrap-datepicker.css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/ShowElement.js")
-
+    @Scripts.Render("~/Scripts/bootstrap-datepicker.js")
+    @Scripts.Render("~/Scripts/locales/bootstrap-datepicker.ru.min.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>
-                    @Html.ActionLink("Продукты", "Index", "Product")
-                    <ul class="submenu">
-                        <li>@Html.ActionLink("Создать", "Create", "Product")</li>
-                        <li>@Html.ActionLink("Архив", "Index", "Product", new { archive = true }, "")</li>
-                    </ul>
-                </li>
-                <li>@Html.ActionLink("Поставщики", "Index", "Provider")
-                    <ul class="submenu">
-                        <li>@Html.ActionLink("Создать", "Create", "Provider")</li>
-                        <li>@Html.ActionLink("Архив", "Index", "Provider", new { archive = true }, "")</li>
-                    </ul>
-                </li>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        @Html.ActionLink("Продукты", "Index", "Product")
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Создать", "Create", "Product")</li>
+                            <li>@Html.ActionLink("Архив", "Index", "Product", new { archive = true }, "")</li>
+                            <li>@Html.ActionLink("Типы продукта", "Index", "TypeProduct")</li>
+                        </ul>
+                    </li>
+                    @if (UserEntities.IsInRole(User.Identity.Name, "admin"))
+                    {
+                        <li>
+                            @Html.ActionLink("Поставщики", "Index", "Provider")
+                            <ul class="submenu">
+                                <li>@Html.ActionLink("Создать", "Create", "Provider")</li>
+                                <li>@Html.ActionLink("Архив", "Index", "Provider", new { archive = true }, "")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink("Поступления", "Index", "Admission")
+                            <ul class="submenu">
+                                <li>@Html.ActionLink("Создать", "Create", "Admission")</li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink("Прочие расходы", "Index", "OtherCosts")
+                            <ul class="submenu">
+                                <li>@Html.ActionLink("Создать", "Create", "OtherCosts")</li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Создать поступление", "Create", "Admission")</li>
+                    }                    
+                    <li>
+                        @Html.ActionLink("Продажи", "Index", "Sales")
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Создать", "Create", "Sales")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Возвраты", "Index", "Return")
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Создать", "Create", "Return")</li>
+                            @if (UserEntities.IsInRole(User.Identity.Name, "admin"))
+                            {
+                                <li>@Html.ActionLink("Типы возврата", "Index", "TypeReturn")</li>
+                            }
+                        </ul>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Начисления", "Index", "Salary")
+                        <ul class="submenu">
+                            <li>@Html.ActionLink("Создать", "Create", "Salary")</li>
+                        </ul>
+                    </li>
                 </ul>
+                @if (Request.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            @Html.ActionLink(User.Identity.Name, "EditUser", "Manage", new { login = User.Identity.Name }, null)
+                            <ul class="submenu">
+                                @if (UserEntities.IsInRole(User.Identity.Name, "admin"))
+                                {
+                                    <li>@Html.ActionLink("Создать пользователя", "Register", "Account")</li>
+                                    <li>@Html.ActionLink("Пользователи", "Index", "Manage")</li>
+                                }
+                                <li>@Html.ActionLink("Изменить пароль", "ChangePassword", "Manage", new { login = User.Identity.Name }, null)</li>
+                                <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+                            </ul>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Выполнить вход", "Login", "Account")</li>
+                    </ul>
+                }                
             </div>
         </div>
     </div>
@@ -40,7 +110,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p style="text-align:center">&copy; @DateTime.Now.Year – Штылев Александр Александрович</p>
+            <p class="footer">&copy; @DateTime.Now.Year – Штылев Александр Александрович</p>
         </footer>
     </div>
 

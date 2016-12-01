@@ -70,3 +70,12 @@ textarea {
   -ms-transform: scaleY(1);
   transform: scaleY(1);
 }
+.footer{
+    text-align:center;
+    left: 0; bottom: 0;
+    position: fixed;
+    width: 100%;
+    background:#fff;
+    margin:0 0 0px;
+    font-size:12px;
+}

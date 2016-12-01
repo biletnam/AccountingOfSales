@@ -1,0 +1,21 @@
+﻿@using AccountingOfSales.Models;
+@model IEnumerable<Admission>
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Дата поступления</th>
+        <th>Продукт</th>
+        <th>Оптовая цена</th>
+        <th>Количество</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.AdmissionDate.ToShortDateString()</td>
+            <td>@item.Product.Name</td>
+            <td>@item.TradePrice</td>
+            <td>@item.Count</td>
+        </tr>
+    }
+</table>

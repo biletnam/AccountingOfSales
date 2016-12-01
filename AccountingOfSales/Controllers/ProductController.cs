@@ -11,6 +11,7 @@ using System.Net;
 
 namespace AccountingOfSales.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         SalesDbContext db = new SalesDbContext();
@@ -21,11 +22,11 @@ namespace AccountingOfSales.Controllers
             List<Product> products = new List<Product>();
 
             ViewBag.Archive = archive;
-            products = (archive == false) ? db.Products.Where(f => f.Archive == false).ToList() : db.Products.Where(f => f.Archive == true).ToList();
+            products = db.Products.Where(f => f.Archive == archive).ToList();
 
             if (filterName != "")
             {
-                products = products.Where(n => n.Name.Contains(filterName)).ToList();
+                products = products.Where(n => n.Name.ToLower().Contains(filterName.ToLower())).ToList();
             }
 
             return View(products.OrderByDescending(n => n.Count).ThenBy(c => c.Name).ToPagedList(pageNumber, pageSize));
@@ -34,8 +35,8 @@ namespace AccountingOfSales.Controllers
         public ActionResult Create()
         {
             //для заполнения выпадающих списков
-            ViewBag.Providers = new SelectList(db.Providers.OrderBy(n => n.Name), "Id", "Name");
-            ViewBag.TypeProducts = new SelectList(db.TypeProducts.OrderBy(n => n.Name), "Id", "Name");
+            ViewBag.Providers = new SelectList(db.Providers.Where(a => a.Archive == false).OrderBy(n => n.Name), "Id", "Name");
+            ViewBag.TypeProducts = new SelectList(db.TypeProducts.Where(a => a.Archive == false).OrderBy(n => n.Name), "Id", "Name");
 
             return View();
         }
@@ -89,7 +90,11 @@ namespace AccountingOfSales.Controllers
 
                 if(image != null)
                 {
-                    System.IO.File.Delete(Server.MapPath("~/Images/" + product.Image.Name));
+                    if(product.Image != null)
+                    {
+                        System.IO.File.Delete(Server.MapPath("~/Images/" + product.Image.Name));
+                        db.Images.Remove(product.Image);
+                    }
                     product.Image = SaveAsImage(image);
                 }
 

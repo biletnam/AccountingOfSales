@@ -1,0 +1,75 @@
+﻿@using AccountingOfSales.Models.ViewModel;
+@model AdmissionCreateViewModels
+
+@{
+    ViewBag.Title = "Создание поступления";
+    DateTime dateNow = DateTime.Now;
+}
+
+<h2>Создание поступления</h2>
+@using (Ajax.BeginForm("ListAddAdmissions", "Admission", new AjaxOptions { UpdateTargetId = "results" }, new { @class = "form-horizontal", role = "form" }))
+{
+    <hr />
+    <p>@Html.ValidationMessageFor(model => model.TradePrice, "", new { @class = "text-danger" })</p>
+    <p>@Html.ValidationMessageFor(model => model.Count, "", new { @class = "text-danger" })</p>
+
+    <div class="form-group">
+        @Html.Label("Выберите поставщика", new { @class = "col-md-2 control-label" })
+        @Html.DropDownList("ProviderId", ViewBag.Providers as SelectList, new { @class = "form-control", id = "provider" })
+    </div>
+    
+    <div class="form-inline">
+        @Html.TextBox("AdmissionDate", dateNow.ToShortDateString(), htmlAttributes: new { @class = "form-control datepicker", style = "width:150px", placeholder = "Дата поступления" })
+        @Html.DropDownList("ProductId", ViewBag.Products as SelectList, new { @class = "form-control", id = "product" })
+        @Html.TextBoxFor(model => model.TradePrice, dateNow.ToShortDateString(), htmlAttributes: new { @class = "form-control", placeholder = "Оптовая цена товара" })
+        @Html.TextBoxFor(model => model.Count, dateNow.ToShortDateString(), htmlAttributes: new { @class = "form-control", placeholder = "Количество товара" })
+    </div>
+    <br />
+    <input type="submit" value="Добавить" class="btn btn-primary" />
+}
+<br />
+<div id="results"></div>
+
+@using (Html.BeginForm("Create", "Admission", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <p>@Html.ValidationMessageFor(model => model.PriceOtherCosts, "", new { @class = "text-danger" })</p>
+    <p>@Html.ValidationMessageFor(model => model.CommentOtherCosts, "", new { @class = "text-danger" })</p>
+    <div class="form-inline">
+        @Html.TextBoxFor(model => model.PriceOtherCosts, "", htmlAttributes: new { @class = "form-control", placeholder = "Сумма прочих расходов" })
+        @Html.TextBoxFor(model => model.CommentOtherCosts, "", htmlAttributes: new { @class = "form-control", style = "width:600px", placeholder = "Комментарий" })
+    </div>
+    <br />
+    <input type="submit" value="Оформить" class="btn btn-primary" />
+    @Html.ActionLink("Отмена", "Create", "Admission", new { @class = "btn btn-default" })
+}
+
+@section scripts{
+<script type="text/javascript">
+    //при выборе значения одного списка заполняется другой список
+    $(function () {
+
+        $('#provider').change(function () {
+            // получаем выбранный id
+            var id = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetProducts")/' + id,
+                success: function (data) {
+
+                    // заменяем содержимое присланным частичным представлением
+                    $('#product').replaceWith(data);
+                }
+            });
+        });
+    })
+
+    $('.datepicker').datepicker({
+        format: "dd.mm.yyyy",
+        language: "ru",
+        autoclose: true,
+        todayHighlight: true
+    });
+    $('.datepicker').removeAttr("data-val-date"); //отключаем валидацию на стороне клиента, валидируется на стороне сервера. Иначе не проходит русский формат даты dd.mm.yyyy, должен быть dd,mm,yyyy
+</script>
+}

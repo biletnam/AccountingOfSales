@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace AccountingOfSales.Models
 {
@@ -11,26 +12,55 @@ namespace AccountingOfSales.Models
     {
         [ScaffoldColumn(false)]
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Поле не должно быть пустым")]
+        [Display(Name = "Розничная цена")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "Розничная цена должна содержать только целое число")]
+        [Range(0, 1000000000, ErrorMessage = "Недопустимое число")]
         /// <summary>
         /// Розничная цена
         /// </summary>
-        public double RetailPrice { get; set; }
+        public int RetailPrice { get; set; }
+
+        [Display(Name = "Сумма скидки")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "Скидка должна содержать только целое число")]
+        [Range(0, 1000000000, ErrorMessage = "Недопустимое число")]
         /// <summary>
         /// Скидка
         /// </summary>
-        public double Discount { get; set; }
+        public int? Discount { get; set; }
+
+        [Required(ErrorMessage = "Поле не должно быть пустым")]
+        [Display(Name = "Цена продажи")]
+        [RegularExpression(@"[\d]*", ErrorMessage = "Цена продажи должна содержать только целое число")]
+        [Range(0, 1000000000, ErrorMessage = "Недопустимое число")]
         /// <summary>
         /// Цена продажи
         /// </summary>
-        public double SalePrice { get; set; }
+        public int SalePrice { get; set; }
+
+        [Required]
+        [Display(Name = "Дата создания")]
         public DateTime CreateDate { get; set; }
+
+        [Required]
+        [Display(Name = "Дата продажи")]
         /// <summary>
         /// Дата продажи
         /// </summary>
         public DateTime SaleDate { get; set; }
-
+       
         [ScaffoldColumn(false)]
         public int UserId { get; set; }
         public virtual User User { get; set; }
+
+        [ScaffoldColumn(false)]
+        [Remote("CheckCountProduct", "Sales", ErrorMessage = "Остаток равен 0")]
+        public int? ProductId { get; set; }
+        public virtual Product Product { get; set; }
+
+        [ScaffoldColumn(false)]
+        public int? SalaryId { get; set; }
+        public virtual Salary Salary { get; set; }
     }
 }

@@ -1,0 +1,90 @@
+﻿@model AccountingOfSales.Models.Return
+
+@{
+    ViewBag.Title = "Создание возврата";
+    DateTime dateNow = DateTime.Now;
+}
+
+<h2>Создание возврата</h2>
+<br />
+@using (Html.BeginForm("Create", "Return", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-8" style="width:500px; margin-right:0px">
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.Label("Продукт", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-7">
+                        @Html.DropDownList("ProductId", ViewBag.Products as SelectList, new { @class = "form-control", id = "product" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ReturnDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-7">
+                        @Html.Hidden("ReturnDate", dateNow.ToShortDateString())
+                        @Html.TextBox("ReturnDate2", dateNow.ToShortDateString(), htmlAttributes: new { @class = "form-control", disabled = true })
+                        @Html.ValidationMessageFor(model => model.ReturnDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-7" id="retailPrice">
+                        @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Тип возврата", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-7">
+                        @Html.DropDownList("TypeReturnId", ViewBag.TypeReturns as SelectList, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-7">
+                        <input type="submit" value="Создать" class="btn btn-primary" />
+                        @Html.ActionLink("Отмена", "Create", "Return", htmlAttributes: new { @class = "btn btn-default" })
+                    </div>
+                </div>
+                <div>
+                    @Html.ActionLink("Вернуться на главную", "Index")
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2" id="imgProduct">
+            @if (ViewBag.ImageProduct != null)
+            {
+                <img src="~/Images/@ViewBag.ImageProduct" height="300" class="img-rounded" />
+            }
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        //получаем фото, для выбранного продукта
+        $(function () {
+            $('#product').change(function () {
+                // получаем выбранный id
+                var id = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetImageProduct")/' + id,
+                    success: function (data) {
+
+                        // заменяем содержимое присланным частичным представлением
+                        $('#imgProduct').replaceWith(data);
+                    }
+                });
+            });
+        })
+
+    </script>
+}

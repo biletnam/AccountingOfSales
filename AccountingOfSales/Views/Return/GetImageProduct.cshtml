@@ -1,0 +1,8 @@
+﻿@model AccountingOfSales.Models.Product
+
+<div class="col-md-2" id="imgProduct">
+    @if (Model.Image != null)
+    {
+        <img src="~/Images/@Model.Image.Name" height="300" class="img-rounded" />
+    }
+</div>

@@ -68,6 +68,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.DurableInstancing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -136,9 +137,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdmissionController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OtherCostsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProviderController.cs" />
+    <Compile Include="Controllers\ReturnController.cs" />
+    <Compile Include="Controllers\SalaryController.cs" />
+    <Compile Include="Controllers\SalesController.cs" />
     <Compile Include="Controllers\TypeProductController.cs" />
+    <Compile Include="Controllers\TypeReturnController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -174,13 +183,97 @@
     <Compile Include="Migrations\201607190818541_AddArchiveForTypeProduct.Designer.cs">
       <DependentUpon>201607190818541_AddArchiveForTypeProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607291430165_AddAtributeForAdmission.cs" />
+    <Compile Include="Migrations\201607291430165_AddAtributeForAdmission.Designer.cs">
+      <DependentUpon>201607291430165_AddAtributeForAdmission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607291439432_AddAtributeForAdmissionCount.cs" />
+    <Compile Include="Migrations\201607291439432_AddAtributeForAdmissionCount.Designer.cs">
+      <DependentUpon>201607291439432_AddAtributeForAdmissionCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608100608163_EditAdmission..cs" />
+    <Compile Include="Migrations\201608100608163_EditAdmission..Designer.cs">
+      <DependentUpon>201608100608163_EditAdmission..cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608171749481_UpdateAttribute.cs" />
+    <Compile Include="Migrations\201608171749481_UpdateAttribute.Designer.cs">
+      <DependentUpon>201608171749481_UpdateAttribute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608171759423_UpdateAttribute2.cs" />
+    <Compile Include="Migrations\201608171759423_UpdateAttribute2.Designer.cs">
+      <DependentUpon>201608171759423_UpdateAttribute2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608181512507_UpdateSales.cs" />
+    <Compile Include="Migrations\201608181512507_UpdateSales.Designer.cs">
+      <DependentUpon>201608181512507_UpdateSales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608181529222_UpdateDoubleOnInt.cs" />
+    <Compile Include="Migrations\201608181529222_UpdateDoubleOnInt.Designer.cs">
+      <DependentUpon>201608181529222_UpdateDoubleOnInt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608181634446_UpdateNULLForDiscount.cs" />
+    <Compile Include="Migrations\201608181634446_UpdateNULLForDiscount.Designer.cs">
+      <DependentUpon>201608181634446_UpdateNULLForDiscount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608261413152_ChangeTypeReturn.cs" />
+    <Compile Include="Migrations\201608261413152_ChangeTypeReturn.Designer.cs">
+      <DependentUpon>201608261413152_ChangeTypeReturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608261702173_AddAttributeForReturn.cs" />
+    <Compile Include="Migrations\201608261702173_AddAttributeForReturn.Designer.cs">
+      <DependentUpon>201608261702173_AddAttributeForReturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608300610245_AddACCForSale.cs" />
+    <Compile Include="Migrations\201608300610245_AddACCForSale.Designer.cs">
+      <DependentUpon>201608300610245_AddACCForSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608301459264_RenameCreateDate.cs" />
+    <Compile Include="Migrations\201608301459264_RenameCreateDate.Designer.cs">
+      <DependentUpon>201608301459264_RenameCreateDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609011142290_AddACCReturn.cs" />
+    <Compile Include="Migrations\201609011142290_AddACCReturn.Designer.cs">
+      <DependentUpon>201609011142290_AddACCReturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609021122522_DeleteACC.cs" />
+    <Compile Include="Migrations\201609021122522_DeleteACC.Designer.cs">
+      <DependentUpon>201609021122522_DeleteACC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609021128097_AddSalaryId.cs" />
+    <Compile Include="Migrations\201609021128097_AddSalaryId.Designer.cs">
+      <DependentUpon>201609021128097_AddSalaryId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609050656191_NullForProductId.cs" />
+    <Compile Include="Migrations\201609050656191_NullForProductId.Designer.cs">
+      <DependentUpon>201609050656191_NullForProductId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609140837426_AddArchiveUser.cs" />
+    <Compile Include="Migrations\201609140837426_AddArchiveUser.Designer.cs">
+      <DependentUpon>201609140837426_AddArchiveUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
+    <Compile Include="Models\CryptHelper.cs" />
+    <Compile Include="Models\DAL\AdmissionEntities.cs" />
+    <Compile Include="Models\DAL\AuthAttribute.cs" />
+    <Compile Include="Models\DAL\Config.cs" />
+    <Compile Include="Models\DAL\ListsForFilters.cs" />
+    <Compile Include="Models\DAL\OtherCostsEntities.cs" />
+    <Compile Include="Models\DAL\ProductEntities.cs" />
+    <Compile Include="Models\DAL\ReturnEntities.cs" />
+    <Compile Include="Models\DAL\SalaryEntities.cs" />
+    <Compile Include="Models\DAL\SalesEntities.cs" />
+    <Compile Include="Models\DAL\UserEntities.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\OtherCosts.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Provider.cs" />
+    <Compile Include="Models\Reference.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.resx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Return.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Salary.cs" />
@@ -188,6 +281,9 @@
     <Compile Include="Models\TypeProduct.cs" />
     <Compile Include="Models\TypeReturn.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ViewModel\AccountViewModels.cs" />
+    <Compile Include="Models\ViewModel\AdmissionViewModels.cs" />
+    <Compile Include="Models\ViewModel\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +291,14 @@
     <Content Include="App_Data\SalesDB_log.ldf">
       <DependentUpon>SalesDB.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-datepicker.css" />
+    <Content Include="Content\bootstrap-datepicker.min.css" />
+    <Content Include="Content\bootstrap-datepicker.standalone.css" />
+    <Content Include="Content\bootstrap-datepicker.standalone.min.css" />
+    <Content Include="Content\bootstrap-datepicker3.css" />
+    <Content Include="Content\bootstrap-datepicker3.min.css" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.css" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -212,20 +316,102 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.min.css.map" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.css.map" />
+    <Content Include="Content\bootstrap-datepicker3.min.css.map" />
+    <Content Include="Content\bootstrap-datepicker3.css.map" />
+    <Content Include="Content\bootstrap-datepicker.standalone.min.css.map" />
+    <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
+    <Content Include="Content\bootstrap-datepicker.min.css.map" />
+    <Content Include="Content\bootstrap-datepicker.css.map" />
+    <None Include="Properties\PublishProfiles\somee.com.pubxml" />
+    <None Include="Properties\PublishProfiles\smarterasp.net.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\icons\archive.png" />
+    <Content Include="Images\icons\changePassword.png" />
     <Content Include="Images\icons\delete.png" />
     <Content Include="Images\icons\edit.png" />
+    <Content Include="Images\icons\info.jpg" />
     <Content Include="Images\icons\unarchive.png" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ar.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.az.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.bg.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.bs.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ca.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.cs.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.cy.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.da.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.de.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.el.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.en-AU.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.en-GB.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.eo.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.es.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.et.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.eu.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fa.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fi.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fo.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fr-CH.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.gl.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.he.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.hr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.hu.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.hy.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.id.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.is.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.it-CH.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.it.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ja.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ka.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.kh.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.kk.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ko.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.kr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.lt.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.lv.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.me.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.mk.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.mn.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ms.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.nb.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.nl-BE.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.nl.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.no.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.pl.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.pt-BR.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.pt.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ro.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.rs-latin.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.rs.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ru.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sk.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sl.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sq.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sr-latin.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sv.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sw.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.th.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.tr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.uk.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.vi.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.zh-CN.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -251,6 +437,30 @@
     <Content Include="Views\TypeProduct\Index.cshtml" />
     <Content Include="Views\TypeProduct\Create.cshtml" />
     <Content Include="Views\TypeProduct\Edit.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Admission\Index.cshtml" />
+    <Content Include="Views\Admission\Create.cshtml" />
+    <Content Include="Views\Admission\GetProducts.cshtml" />
+    <Content Include="Views\Admission\ListAddAdmissions.cshtml" />
+    <Content Include="Views\OtherCosts\Index.cshtml" />
+    <Content Include="Views\OtherCosts\Create.cshtml" />
+    <Content Include="Views\Sales\Index.cshtml" />
+    <Content Include="Views\Sales\Create.cshtml" />
+    <Content Include="Views\Sales\GetRetailPrice.cshtml" />
+    <Content Include="Views\Sales\GetImageProduct.cshtml" />
+    <Content Include="Views\TypeReturn\Index.cshtml" />
+    <Content Include="Views\TypeReturn\Create.cshtml" />
+    <Content Include="Views\TypeReturn\Edit.cshtml" />
+    <Content Include="Views\Return\Index.cshtml" />
+    <Content Include="Views\Return\GetImageProduct.cshtml" />
+    <Content Include="Views\Return\Create.cshtml" />
+    <Content Include="Views\Salary\Index.cshtml" />
+    <Content Include="Views\Salary\Create.cshtml" />
+    <Content Include="Views\Salary\Details.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\EditUser.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607071635094_AddTables.resx">
@@ -277,15 +487,68 @@
     <EmbeddedResource Include="Migrations\201607190818541_AddArchiveForTypeProduct.resx">
       <DependentUpon>201607190818541_AddArchiveForTypeProduct.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607291430165_AddAtributeForAdmission.resx">
+      <DependentUpon>201607291430165_AddAtributeForAdmission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607291439432_AddAtributeForAdmissionCount.resx">
+      <DependentUpon>201607291439432_AddAtributeForAdmissionCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608100608163_EditAdmission..resx">
+      <DependentUpon>201608100608163_EditAdmission..cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608171749481_UpdateAttribute.resx">
+      <DependentUpon>201608171749481_UpdateAttribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608171759423_UpdateAttribute2.resx">
+      <DependentUpon>201608171759423_UpdateAttribute2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608181512507_UpdateSales.resx">
+      <DependentUpon>201608181512507_UpdateSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608181529222_UpdateDoubleOnInt.resx">
+      <DependentUpon>201608181529222_UpdateDoubleOnInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608181634446_UpdateNULLForDiscount.resx">
+      <DependentUpon>201608181634446_UpdateNULLForDiscount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608261413152_ChangeTypeReturn.resx">
+      <DependentUpon>201608261413152_ChangeTypeReturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608261702173_AddAttributeForReturn.resx">
+      <DependentUpon>201608261702173_AddAttributeForReturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608300610245_AddACCForSale.resx">
+      <DependentUpon>201608300610245_AddACCForSale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608301459264_RenameCreateDate.resx">
+      <DependentUpon>201608301459264_RenameCreateDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609011142290_AddACCReturn.resx">
+      <DependentUpon>201609011142290_AddACCReturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609021122522_DeleteACC.resx">
+      <DependentUpon>201609021122522_DeleteACC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609021128097_AddSalaryId.resx">
+      <DependentUpon>201609021128097_AddSalaryId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609050656191_NullForProductId.resx">
+      <DependentUpon>201609050656191_NullForProductId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609140837426_AddArchiveUser.resx">
+      <DependentUpon>201609140837426_AddArchiveUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Models\Reference.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Reference.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
